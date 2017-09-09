@@ -19,8 +19,6 @@ app.controller("loginCtrl", function ($scope, $rootScope, $window, $http, config
   });
 
   $scope.ensaluti = function() {
-    //farota
-    //how to handle rejectiyon
     $http.post(config.api_url + '/admin/ensaluti', $scope.uzanto).then(
         function(response) {
           $window.localStorage.setItem('token', response.data.token);
