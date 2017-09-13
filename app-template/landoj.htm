@@ -1,50 +1,94 @@
 <div class="enhavo">
-  <h2>
+  <h1>
     Landoj en la sistemo
+  </h1>
+
+  <h2>
     <a href="#!/landoj"
       ng-click="novaL = !novaL"
       ng-init="novaL = true">  + Aldoni novan landon</a>
   </h2>
 
+  <!--formularo por aldoni novan landon-->
   <form ng-submit="novaLando()" ng-hide="novaL">
     {{status}}
-    <div class="form-group col-sm-4">
-      <label for="landkodo">Landkodo por telefonado (ekz: +44)</label>
-      <input type="text" id="landkodo" ng-model="lando.landkodo" class="form-control">
-    </div>
-    <div class="form-group col-sm-8">
-      <label for="nomoLoka">Nomo en loka lingvo (ekz: Great Britain)</label>
-      <input type="text" id="nomoLoka" ng-model="lando.nomoLoka" class="form-control">
-    </div>
     <div class="form-group col-sm-8">
       <label for="radiko">Radiko en esperanto (ekz: Brit)</label>
-      <input type="text" id="radiko" ng-model="lando.radikoEo" class="form-control">
+      <input type="text"
+             id="radiko"
+             ng-model="lando.radikoEo"
+             class="form-control">
     </div>
     <div class="form-group col-sm-4">
       <label for="finajxo">Finaĵo en esperanto (ekz: "io" aŭ "o")</label>
-      <input type="text" id="finajxo" ng-model="lando.finajxoEo" class="form-control">
+      <input type="text"
+             id="finajxo"
+             ng-model="lando.finajxoEo"
+             class="form-control">
+    </div>
+    <div class="form-group col-sm-4">
+      <label for="landkodo">Landkodo por telefonado (ekz: +44)</label>
+      <input type="text"
+             id="landkodo"
+             ng-model="lando.landkodo"
+             class="form-control">
+    </div>
+    <div class="form-group col-sm-8">
+      <label for="nomoLoka">Nomo en loka lingvo (ekz: Great Britain)</label>
+      <input type="text"
+             id="nomoLoka"
+             ng-model="lando.nomoLoka"
+             class="form-control">
     </div>
     <button id="submit" type="submit" class="btn btn-primary col-sm-12">Aldoni</button>
   </form>
 
+  <h2>(klaku en la kampoj por redakti)</h2>
+
+  <!--Tabelo kun enhavo-->
   <table class="table">
     <thead>
       <tr>
-        <td><b>ID</b></td>
-        <td><b>Nomo en loka lingvo</b></td>
         <td><b>Radiko en Esperanto</b></td>
         <td><b>Finaĵo en Esperanto</b></td>
+        <td><b>Nomo en loka lingvo</b></td>
         <td><b>Landkodo</b></td>
-        <td>Forviŝi</td>
       </tr>
     </thead>
-    <tr ng-repeat="l in landoj">
-      <td>{{l.id}}</td>
-      <td>{{l.nomoLoka}}</td>
-      <td>{{l.radikoEo}}</td>
-      <td>{{l.finajxoEo}}</td>
-      <td>{{l.landkodo}}</td>
-      <td><i class="fa fa-trash" aria-hidden="true"></i> Forviŝi</td>
+    <tr ng-repeat="l in landoj | orderBy:'radikoEo'">
+      <td>
+        <a href="#"
+           editable-text="l.radikoEo"
+           onbeforesave="updateLando(l.id, $data, 'radikoEo')">
+              {{l.radikoEo}}
+        </a>
+      </td>
+      <td>
+        <a href="#"
+           editable-text="l.finajxoEo"
+           onbeforesave="updateLando(l.id, $data, 'finajxoEo')">
+           {{l.finajxoEo}}
+         </a>
+       </td>
+      <td>
+        <a href="#"
+           editable-text="l.nomoLoka"
+           onbeforesave="updateLando(l.id, $data, 'nomoLoka')">
+           {{l.nomoLoka}}
+         </a>
+       </td>
+      <td>
+        <a href="#"
+           editable-text="l.landkodo"
+           onbeforesave="updateLando(l.id, $data, 'landKodo')">
+           {{l.landkodo}}
+         </a>
+       </td>
+      <td>
+        <a href="" ng-click="deleteLando(l.id)">
+          <i class="fa fa-trash" aria-hidden="true"></i> Forviŝi
+        </a>
+      </td>
     </tr>
   </table>
 </div>

@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <!--bootstrap-->
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.css" rel="stylesheet"/>
     <!--Font-awesome-->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     <!--font montserrat-->
@@ -14,13 +15,13 @@
   </head>
 
   <body ng-app="admin">
-
     <!--java script-->
     <script src="app-content/js/script.js"></script>
 
     <!--angular-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.js"></script>
 
     <!--controllers-->
     <script src="app.js"></script>
@@ -36,8 +37,10 @@
     <script src="app-helper/util.js"></script>
 
     <!--view-->
-    <div ng-include="'app-template/menuo.htm'" ng-show="menuo" ng-controller="menuoCtrl"></div>
+    <div ng-include="'app-template/menuo.htm'"
+         ng-show="menuo"
+         ng-controller="menuoCtrl">
+    </div>
     <div ng-view></div>
-
   </body>
 </html>

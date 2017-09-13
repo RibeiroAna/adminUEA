@@ -1,6 +1,7 @@
 app.controller("landojCtrl", function ($scope, $rootScope, $window, $http, config) {
 
-  if (($window.localStorage.getItem('token') == null) || ($window.localStorage.getItem('token') == 0)) {
+  if (($window.localStorage.getItem('token') == null) ||
+      ($window.localStorage.getItem('token') == 0)) {
     $window.location.href = '#!/login';
   }
 
@@ -27,4 +28,39 @@ app.controller("landojCtrl", function ($scope, $rootScope, $window, $http, confi
       }
     );
   }
+
+  $scope.deleteLando = function(idLando) {
+    var req = {
+        method: 'DELETE',
+        url: config.api_url + '/landoj/' + idLando,
+        headers: {'x-access-token': $window.localStorage.getItem('token')}
+      }
+
+   $http(req).then(
+     function(response){
+       if(response.status == '204') {
+        $window.location.reload();
+      } else {
+        window.alert("Okazis eraro en la servilo." +
+                     " Provu elsaluti kaj ensaluti denove");
+      }
+   });
+  }
+
+  $scope.updateLando = function(id, valoro, kampo) {
+    var data = {valoro: valoro, kampo: kampo};
+    var req = {
+        method: 'PUT',
+        url: config.api_url + '/landoj/' + id,
+        headers: {'x-access-token': $window.localStorage.getItem('token')},
+        data: data
+      }
+      $http(req).then(
+        function(response){
+          if(response.status != '200') {
+            return "Okazis eraro! Provu denove poste";
+         }
+      });
+  }
+
 });

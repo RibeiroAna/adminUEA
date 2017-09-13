@@ -1,4 +1,5 @@
-var app = angular.module("admin", ["ngRoute"]);
+var app = angular.module("admin", ["ngRoute", "xeditable"]);
+
 app.config(function($routeProvider){
     $routeProvider
     .when("/admin", {
@@ -13,4 +14,8 @@ app.config(function($routeProvider){
       templateUrl: "app-template/landoj.htm",
       controller: "landojCtrl"
     });
+});
+
+app.run(function(editableOptions) {
+  editableOptions.theme = 'bs3';
 });
