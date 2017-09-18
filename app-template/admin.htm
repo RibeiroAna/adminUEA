@@ -1,3 +1,60 @@
 <div class="enhavo">
-  <h1>Bonvenon, kara UEA-laboranto!
+  <h1>
+    Administrantoj en la sistemo
+  </h1>
+
+  <h2>
+    <a href="#!/admin"
+      ng-click="novaL = !novaL"
+      ng-init="novaL = true">  + Aldoni novan administranton</a>
+  </h2>
+
+  <!--formularo por aldoni novan landon-->
+  <form ng-submit="novaAdmin()" ng-hide="novaL" class="form-inline">
+    <p>{{eraro}}</p>
+    <p class="col-sm-12">(En la dua versio, eblos aldoni administrantojn kun malsimlaj roloj)</p>
+    <div class="form-group">
+      <label for="radiko">Uzantnomo</label>
+      <input type="text"
+             id="radiko"
+             ng-model="admin.uzantnomo"
+             class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="finajxo">Pasvorto</label>
+      <input type="password"
+             id="finajxo"
+             onbeforesave="updateLando(a.id, $data, 'pasvorto')"
+             ng-model="admin.pasvorto"
+             class="form-control">
+    </div>
+    <button id="submit" type="submit" class="btn btn-primary">Aldoni</button>
+  </form>
+
+  <!--Tabelo kun enhavo-->
+  <table class="table">
+    <thead>
+      <tr>
+        <td><b>Uzantnomo</b></td>
+        <td><b>Pasvorto</b></td>
+        <td><b>Rolo</b></td>
+      </tr>
+    </thead>
+    <tr ng-repeat="a in administrantoj | orderBy:'uzantnomo'">
+      <td>{{a.uzantnomo}}</td>
+      <td>
+        <a href="#"
+           editable-password="a.pasvorto"
+           onbeforesave="updateAdmin(a.id, $data, 'pasvorto')">
+           Ŝanĝi pasvorton
+         </a>
+       </td>
+      <td>Administranto</td>
+      <td>
+        <a href="" ng-click="deleteAdmin(a.id)">
+          <i class="fa fa-trash" aria-hidden="true"></i> Forviŝi
+        </a>
+      </td>
+    </tr>
+  </table>
 </div>

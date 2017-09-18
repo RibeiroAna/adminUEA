@@ -25,8 +25,7 @@ app.controller("landojCtrl", function ($scope, $rootScope, $window, $http, confi
          window.alert("Okazis eraro en la servilo." +
                       " Provu elsaluti kaj ensaluti denove");
        }
-      }
-    );
+      });
   }
 
   $scope.deleteLando = function(idLando) {
@@ -55,12 +54,8 @@ app.controller("landojCtrl", function ($scope, $rootScope, $window, $http, confi
         headers: {'x-access-token': $window.localStorage.getItem('token')},
         data: data
       }
-      $http(req).then(
-        function(response){
-          if(response.status != '200') {
-            return "Okazis eraro! Provu denove poste";
-         }
-      });
+      // how to handle err (Google later)
+      $http(req);
   }
 
 });
