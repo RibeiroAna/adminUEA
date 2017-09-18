@@ -1,0 +1,79 @@
+<div class="enhavo">
+  <h2>Klaku por redakti la kotizojn de la membrectipoj:</h2>
+
+  <h4>Baza membrckategorio - <a href="#"> Redakti kotizojn >></a></h4>
+  </ul>
+
+  <h2>
+    Krommembrecoj kaj servoj:
+    <a href="#!/kotizoj" ng-click="nova = !nova" ng-init="nova = true">
+       + Aldoni novan krommembrecon aŭ servon
+    </a>
+  </h2>
+
+  <form ng-hide="nova" ng-submit="novaKrommebreco()" class="form-inline">
+    <div class="form-group">
+      <label for="mallogigilo">Mallongigilo (Ekz: PTEJO):</label>
+      <input type="text"
+             id="mallogigilo"
+             ng-model="grupo.mallongigilo"
+             class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="nomo">Nomo (Ekz: Patrono de TEJO):</label>
+      <input type="text"
+             id="nomo"
+             ng-model="grupo.nomo"
+             class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="priskribo">Priskribeto (Ekz: Ricevas tion):</label>
+      <input type="text"
+             id="priskribo"
+             ng-model="grupo.priskribo"
+             class="form-control">
+    </div>
+
+    <button id="submit" type="submit" class="btn btn-primary">Aldoni</button>
+
+  </form>
+
+  <h4>Klaku je la kampoj por redakti</h4>
+
+  <table class="table">
+    <thead>
+      <td>Mallongigilo</td>
+      <td>Nomo</td>
+      <td>Priskribo</td>
+    </thead>
+    <tr ng-repeat="k in krommembrecoj">
+      <td>
+        <a href="#"
+           editable-text="k.mallongigilo"
+           onbeforesave="update(k.id, $data, 'mallongigilo')">
+           {{k.mallongigilo}}
+        </a>
+      </td>
+      <td>
+        <a href="#"
+           editable-text="k.nomo"
+           onbeforesave="update(k.id, $data, 'nomo')">
+           {{k.nomo}}
+        </a>
+      </td>
+      <td>
+        <a href="#"
+           editable-text="k.priskribo"
+           onbeforesave="update(k.id, $data, 'priskribo')">
+           {{k.priskribo}}
+        </a>
+      </td>
+      <td><a href="" ng-click="delete(k.id)">  <i class="fa fa-trash" aria-hidden="true"></i>
+         Forviŝi</a>
+       </td>
+      <td><a href="#"> Redakti kotizojn >> </a></td>
+    </tr>
+  </table>
+</div>

@@ -13,6 +13,10 @@ app.config(function($routeProvider){
     .when("/landoj", {
       templateUrl: "app-template/landoj.htm",
       controller: "landojCtrl"
+    })
+    .when("/membrecoj", {
+      templateUrl:"app-template/membrecoj.htm",
+      controller: "membrecojCtrl"
     });
 });
 

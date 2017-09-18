@@ -4,36 +4,36 @@
   </h1>
 
   <h2>
-    <a href="#!/landoj"
-      ng-click="novaL = !novaL"
-      ng-init="novaL = true">  + Aldoni novan landon</a>
+    <a href="#!/landoj" ng-click="novaL = !novaL" ng-init="novaL = true">
+      + Aldoni novan landon
+    </a>
   </h2>
 
   <!--formularo por aldoni novan landon-->
-  <form ng-submit="novaLando()" ng-hide="novaL">
+  <form ng-submit="novaLando()" ng-hide="novaL" class="form-inline">
     {{status}}
-    <div class="form-group col-sm-8">
+    <div class="form-group">
       <label for="radiko">Radiko en esperanto (ekz: Brit)</label>
       <input type="text"
              id="radiko"
              ng-model="lando.radikoEo"
              class="form-control">
     </div>
-    <div class="form-group col-sm-4">
+    <div class="form-group">
       <label for="finajxo">Finaĵo en esperanto (ekz: "io" aŭ "o")</label>
       <input type="text"
              id="finajxo"
              ng-model="lando.finajxoEo"
              class="form-control">
     </div>
-    <div class="form-group col-sm-4">
+    <div class="form-group">
       <label for="landkodo">Landkodo por telefonado (ekz: +44)</label>
       <input type="text"
              id="landkodo"
              ng-model="lando.landkodo"
              class="form-control">
     </div>
-    <div class="form-group col-sm-8">
+    <div class="form-group">
       <label for="nomoLoka">Nomo en loka lingvo (ekz: Great Britain)</label>
       <input type="text"
              id="nomoLoka"

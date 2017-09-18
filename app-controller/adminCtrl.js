@@ -55,7 +55,6 @@ app.controller("adminCtrl", function ($scope, $rootScope, $window, $http, config
       url: config.api_url + '/admin/' + idAdmin,
       headers: {'x-access-token': $window.localStorage.getItem('token')}
     }
-
     $http(req).then(
       function(response){
         if(response.status == '204') {
@@ -75,7 +74,6 @@ app.controller("adminCtrl", function ($scope, $rootScope, $window, $http, config
         headers: {'x-access-token': $window.localStorage.getItem('token')},
         data: data
       };
-      console.log(req);
       // how to handle err (Google later)
       $http(req);
   }

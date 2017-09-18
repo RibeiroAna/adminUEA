@@ -4,13 +4,13 @@
   </h1>
 
   <h2>
-    <a href="#!/admin"
-      ng-click="novaL = !novaL"
-      ng-init="novaL = true">  + Aldoni novan administranton</a>
+    <a href="#!/admin" ng-click="nova = !nova" ng-init="nova = true">
+      + Aldoni novan administranton
+    </a>
   </h2>
 
   <!--formularo por aldoni novan landon-->
-  <form ng-submit="novaAdmin()" ng-hide="novaL" class="form-inline">
+  <form ng-submit="novaAdmin()" ng-hide="nova" class="form">
     <p>{{eraro}}</p>
     <p class="col-sm-12">(En la dua versio, eblos aldoni administrantojn kun malsimlaj roloj)</p>
     <div class="form-group">

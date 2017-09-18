@@ -1,7 +1,6 @@
 body {
  font-family: 'Montserrat';
  max-height: 2000px;
- max-width: 1700px;
 }
 
 h2 {
@@ -10,6 +9,7 @@ h2 {
 
 .menutitolo {
   color:white;
+  padding-left: 5px;
 }
 
 .nav-logoo {
@@ -86,8 +86,8 @@ h2 {
 }
 
 .menuero {
-    padding: 8px 8px 8px 32px;
-    font-size: 18px;
+    padding: 5px 5px 5px 32px;
+    font-size: 15px;
     display: block;
     transition: 0.3s;
 }
