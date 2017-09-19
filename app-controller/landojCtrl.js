@@ -54,7 +54,6 @@ app.controller("landojCtrl", function ($scope, $rootScope, $window, $http, confi
         headers: {'x-access-token': $window.localStorage.getItem('token')},
         data: data
       }
-      // how to handle err (Google later)
       $http(req);
   }
 

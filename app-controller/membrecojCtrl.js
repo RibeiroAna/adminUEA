@@ -5,6 +5,7 @@ app.controller("membrecojCtrl", function ($scope, $rootScope, $window, $http, co
     $window.location.href = '#!/login';
   }
 
+  $scope.bazaMembreco = config.idBazaMembreco;
   $rootScope.menuo = true;
 
   $http.get(config.api_url + "/grupoj/membrecoj/aldonoj").then(

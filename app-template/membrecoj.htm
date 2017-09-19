@@ -1,12 +1,12 @@
 <div class="enhavo">
   <h2>Klaku por redakti la kotizojn de la membrectipoj:</h2>
 
-  <h4>Baza membrckategorio - <a href="#"> Redakti kotizojn >></a></h4>
+  <h4>Baza membrckategorio - <a href="#!/kotizoj/{{bazaMembreco}}"> Redakti kotizojn >></a></h4>
   </ul>
 
   <h2>
     Krommembrecoj kaj servoj:
-    <a href="#!/kotizoj" ng-click="nova = !nova" ng-init="nova = true">
+    <a href="" ng-click="nova = !nova" ng-init="nova = true">
        + Aldoni novan krommembrecon aŭ servon
     </a>
   </h2>
@@ -73,7 +73,7 @@
       <td><a href="" ng-click="delete(k.id)">  <i class="fa fa-trash" aria-hidden="true"></i>
          Forviŝi</a>
        </td>
-      <td><a href="#"> Redakti kotizojn >> </a></td>
+      <td><a href="#!/kotizoj/{{k.id}}"> Redakti kotizojn >> </a></td>
     </tr>
   </table>
 </div>

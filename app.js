@@ -17,6 +17,10 @@ app.config(function($routeProvider){
     .when("/membrecoj", {
       templateUrl:"app-template/membrecoj.htm",
       controller: "membrecojCtrl"
+    })
+    .when("/kotizoj/:id", {
+      templateUrl:"app-template/kotizoj.htm",
+      controller: "kotizojCtrl"
     });
 });
 
