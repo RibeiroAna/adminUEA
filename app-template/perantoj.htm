@@ -1,0 +1,77 @@
+<div class="enhavo" data-ng-init="init()">
+  <h1>Perantoj</h1>
+
+  <h2>
+    <a href="" ng-init="nova = false" ng-click="nova = !nova">
+      Aldoni novan peranton +
+    </a>
+  </h2>
+
+  <form class="form-inline" ng-show="nova" ng-submit="novaPeranto()">
+    <p class="col-md-12">(En la dua versio eblos rekte ligi peranton al asocioj kaj homoj)</p>
+    <div class="form-group">
+      <label>Perantlando</label>
+      <select class="form-control"
+              ng-model="peranto.lando"
+              ng-options="(l.radikoEo + l.finajxoEo) for l in landoj | orderBy:'radikoEo'">
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Publika perantnomo</label>
+      <input type="text" class="form-control" ng-model="peranto.publikaNomo">
+    </div>
+
+    <div class="form-group">
+      <label>Perantretadreso</label>
+      <input type="email" class="form-control" ng-model="peranto.retadreso">
+    </div>
+
+    <button id="submit" type="submit" class="btn btn-primary">Aldoni</button>
+  </form>
+
+  <form class="form-inline">
+    <h2>Elektu landon por montri perantojn el tiu lando</h2>
+    <div class="form-group">
+      <label>Lando</label>
+      <select class="form-control"
+              ng-model="lando"
+              ng-change="getPerantoj()"
+              ng-options="(l.radikoEo + l.finajxoEo) for l in landoj | orderBy:'radikoEo'">
+      </select>
+    </div>
+  </form>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <td><b>Publika nomo de la Peranto</b></td>
+        <td><b>Retadereso por perantaj temoj</b></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="peranto in perantoj | orderBy:'publikaNomo'">
+        <td>
+          <a href=""
+             editable-text="peranto.publikaNomo"
+             onbeforesave="updatePeranto(peranto.id, $data, 'publikaNomo')">
+           {{peranto.publikaNomo}}
+         </a>
+       </td>
+        <td>
+          <a href=""
+             editable-text="peranto.retadreso"
+             onbeforesave="updatePeranto(peranto.id, $data, 'retadreso')">
+             {{peranto.retadreso}}</td>
+        <td>
+          <a href="" ng-click="deletePeranto(peranto.id)">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            Forviŝi
+          </a>
+        </td>
+      <tr>
+    </tbody>
+  </table>
+  <p>* klaku en la kampoj por redakti</p>
+</div>

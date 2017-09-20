@@ -18,13 +18,8 @@ app.controller("landojCtrl", function ($scope, $rootScope, $window, $http, confi
        data: $scope.lando
      }
     $http(req).then(
-      function(response){
-        if(response.status == '201') {
-         $window.location.reload();
-       } else {
-         window.alert("Okazis eraro en la servilo." +
-                      " Provu elsaluti kaj ensaluti denove");
-       }
+      function(sucess){
+          $window.location.reload();
       });
   }
 

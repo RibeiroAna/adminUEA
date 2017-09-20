@@ -43,16 +43,14 @@
     <button id="submit" type="submit" class="btn btn-primary col-sm-12">Aldoni</button>
   </form>
 
-  <h2>(klaku en la kampoj por redakti)</h2>
-
   <!--Tabelo kun enhavo-->
   <table class="table">
     <thead>
       <tr>
-        <td><b>Radiko en Esperanto</b></td>
-        <td><b>Finaĵo en Esperanto</b></td>
-        <td><b>Nomo en loka lingvo</b></td>
-        <td><b>Landkodo</b></td>
+        <td>Radiko en Esperanto</td>
+        <td>Finaĵo en Esperanto</td>
+        <td>Nomo en loka lingvo</td>
+        <td>Landkodo</td>
       </tr>
     </thead>
     <tr ng-repeat="l in landoj | orderBy:'radikoEo'">
@@ -91,4 +89,6 @@
       </td>
     </tr>
   </table>
+  <p>* klaku en la kampoj por redakti</p>
+
 </div>

@@ -21,6 +21,10 @@ app.config(function($routeProvider){
     .when("/kotizoj/:id", {
       templateUrl:"app-template/kotizoj.htm",
       controller: "kotizojCtrl"
+    })
+    .when("/perantoj", {
+      templateUrl:"app-template/perantoj.htm",
+      controller: "perantojCtrl"
     });
 });
 
