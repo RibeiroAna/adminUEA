@@ -1,13 +1,14 @@
 version: '3'
 services:
-  client:
-    image: httpd:2.4
+  server:
+    build: ./docker/server
+    image: uea-admin
     restart: always
     container_name: uea-admin
     ports:
       - 8000:80
     volumes:
-      - ./:/usr/local/apache2/htdocs/
+      - ./:/app
 
   livereload:
     build: ./docker/livereload
