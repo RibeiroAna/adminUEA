@@ -1,2 +1,4 @@
-/off-dev
-offindex.html
+/lib
+/node_modules/
+/package-lock.json
+.idea/*
