@@ -1,0 +1,20 @@
+version: '3'
+services:
+  client:
+    image: httpd:2.4
+    restart: always
+    container_name: uea-admin
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/usr/local/apache2/htdocs/
+
+  livereload:
+    build: ./docker/livereload
+    image: livereload
+    restart: always
+    container_name: livereload
+    ports:
+      - 35729:35729
+    volumes:
+      - ./:/app
