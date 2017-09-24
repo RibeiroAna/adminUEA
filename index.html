@@ -11,32 +11,38 @@
     <!--font montserrat-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400" rel="stylesheet"/>
     <!--propra stylesheet-->
-    <link href="app-content/css/stilo.css" rel="stylesheet"/>
+    <link href="content/css/stilo.css" rel="stylesheet"/>
   </head>
 
   <body ng-app="admin">
     <!--java script-->
-    <script src="app-content/js/script.js"></script>
+    <script src="content/js/script.js"></script>
 
     <!--angular-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.js"></script>
 
+    <!--angular-->
+    <script src="off-dev/angular.min.js"></script>
+    <script src="off-dev/angular-route.js"></script>
+    <script src="off-dev/xeditable.js"></script>
+
     <!--controllers-->
     <script src="app.js"></script>
-    <script src="app-controller/adminCtrl.js"></script>
-    <script src="app-controller/loginCtrl.js"></script>
-    <script src="app-controller/menuoCtrl.js"></script>
-    <script src="app-controller/landojCtrl.js"></script>
-    <script src="app-controller/membrecojCtrl.js"></script>
-    <script src="app-controller/kotizojCtrl.js"></script>
+    <script src="controller/adminCtrl.js"></script>
+    <script src="controller/loginCtrl.js"></script>
+    <script src="controller/menuoCtrl.js"></script>
+    <script src="controller/landojCtrl.js"></script>
+    <script src="controller/membrecojCtrl.js"></script>
+    <script src="controller/kotizojCtrl.js"></script>
+    <script src="controller/perantojCtrl.js"></script>
 
     <!--config-->
     <script src="config.js"></script>
 
     <!--view-->
-    <div ng-include="'app-template/menuo.htm'"
+    <div ng-include="'template/menuo.htm'"
          ng-show="menuo"
          ng-controller="menuoCtrl">
     </div>
