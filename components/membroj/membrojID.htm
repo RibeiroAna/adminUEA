@@ -1,0 +1,25 @@
+<div class="enhavo" data-ng-init="init2()">
+  <h1>Membroj de {{grupo.nomo}}</h1>
+  <p>Entuta membraro {{membroj.length}}</p>
+  <p>En la dua versio eblos serĉado por diversaj kampoj</p>
+  <table class="table">
+    <tdead>
+      <tr>
+        <td>Homo</td>
+        <td>Komencdato</td>
+        <td>Findato</td>
+      </tr>
+    </tdead>
+
+    <tbody>
+      <tr ng-repeat="membro in membroj | orderBy:'personanomo'">
+        <td>
+          {{membro.personanomo}} {{membro.familianomo}}
+          <a href="#!/uzantoj/{{membro.idAno}}">Vidi detalojn >></a>
+        </td>
+        <td>{{strip(membro.komencdato)}}</td>
+        <td>{{strip(membro.findato) || "Dumviva"}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

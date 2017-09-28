@@ -1,0 +1,13 @@
+<div class="enhavo" data-ng-init="init1()">
+  <h3>Elektu grupon por vidi ĝiajn membrojn</h3>
+  <h2>
+    <ul>
+      <li>
+        Baza membreco - <a href="#!/membroj/{{bazaMembreco}}">Vidi membrojn >></a>
+      </li>
+      <li ng-repeat="krom in krommembrecoj">
+        {{krom.nomo}} - <a href="#!/membroj/{{krom.id}}">Vidi membrojn >></a>
+      </li>
+    </ul>
+  </h2>
+</div>

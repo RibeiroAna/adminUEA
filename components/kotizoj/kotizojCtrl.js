@@ -27,6 +27,7 @@ app.controller("kotizojCtrl", function ($scope, $routeParams, $rootScope, $windo
     for(var i = 0; i < $scope.kotizoj.length; i++) {
         if($scope.kotizoj[i].idLando == lando.id) {
           $scope.kotizoj[i].prezo = $scope.kotizoj[i].prezo/100;
+          $scope.kotizoj[i].junaRabato = $scope.kotizoj[i].junaRabato/100;
           return $scope.kotizoj[i];
         }
     }
@@ -35,6 +36,8 @@ app.controller("kotizojCtrl", function ($scope, $routeParams, $rootScope, $windo
   $scope.postKotizo = function(idLando) {
     $scope.novKotizo[idLando].idLando = idLando;
     $scope.novKotizo[idLando].prezo = $scope.novKotizo[idLando].prezo * 100;
+    $scope.novKotizo[idLando].junaRabato = $scope.novKotizo[idLando].junaRabato * 100;
+
     var req = {
       method: 'POST',
       url: config.api_url + "/grupoj/" + $routeParams.id + "/kotizoj",
@@ -51,6 +54,9 @@ app.controller("kotizojCtrl", function ($scope, $routeParams, $rootScope, $windo
   $scope.updateKotizo = function(id, valoro, kampo) {
     if(kampo == 'prezo') {
       valoro = valoro * 100;
+    }
+    if(kampo == 'junaRabato') {
+        valoro = valoro * 100;
     }
     var data = {id: id, valoro: valoro, kampo: kampo};
     var req = {

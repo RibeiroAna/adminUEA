@@ -74,7 +74,6 @@ app.controller("adminCtrl", function ($scope, $rootScope, $window, $http, config
         headers: {'x-access-token': $window.localStorage.getItem('token')},
         data: data
       };
-      // how to handle err (Google later)
       $http(req);
   }
 

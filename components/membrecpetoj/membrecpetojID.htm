@@ -1,0 +1,30 @@
+<div class="enhavo" data-ng-init="init2()">
+  <h1>Membrecpetoj al {{grupo.nomo}}</h1>
+  <table class="table">
+    <tdead>
+      <tr>
+        <td>Homo</td>
+        <td>Komencdato</td>
+        <td>Findato</td>
+        <td>observoj</td>
+        <td>Aprobi</td>
+      </tr>
+    </tdead>
+
+    <tbody>
+      <tr ng-repeat="peto in anecpetoj | orderBy:'personanomo'">
+        <td>{{peto.personanomo}} {{peto.familianomo}}
+           <a href="#!/uzantoj/{{peto.idAno}}">Vidi detalojn >></a>
+         </td>
+        <td>{{strip(peto.komencdato)}}</td>
+        <td>{{strip(peto.findato) || "Dumviva"}}</td>
+        <td>{{peto.observoj}}</td>
+        <td>
+          <button class="btn btn-success"  ng-click="aprobi(peto)">
+            <i class="fa fa-check" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
