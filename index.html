@@ -23,26 +23,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.js"></script>
 
-    <!--angular-->
-    <script src="off-dev/angular.min.js"></script>
-    <script src="off-dev/angular-route.js"></script>
-    <script src="off-dev/xeditable.js"></script>
-
-    <!--controllers-->
     <script src="app.js"></script>
-    <script src="controller/adminCtrl.js"></script>
-    <script src="controller/loginCtrl.js"></script>
-    <script src="controller/menuoCtrl.js"></script>
-    <script src="controller/landojCtrl.js"></script>
-    <script src="controller/membrecojCtrl.js"></script>
-    <script src="controller/kotizojCtrl.js"></script>
-    <script src="controller/perantojCtrl.js"></script>
 
     <!--config-->
     <script src="config.js"></script>
+    <script src="config/app.routes.js"></script>
+
+    <!--components/s-->
+    <script src="components/admin/adminCtrl.js"></script>
+    <script src="components/login/loginCtrl.js"></script>
+    <script src="components/menuo/menuoCtrl.js"></script>
+    <script src="components/landoj/landojCtrl.js"></script>
+    <script src="components/membrecoj/membrecojCtrl.js"></script>
+    <script src="components/kotizoj/kotizojCtrl.js"></script>
+    <script src="components/perantoj/perantojCtrl.js"></script>
 
     <!--view-->
-    <div ng-include="'template/menuo.htm'"
+    <div ng-include="'components/menuo/menuo.htm'"
          ng-show="menuo"
          ng-controller="menuoCtrl">
     </div>
