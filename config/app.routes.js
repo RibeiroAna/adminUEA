@@ -27,5 +27,25 @@ angular.module('admin').config(function($routeProvider){
     .when("/perantoj", {
       templateUrl:"components/perantoj/perantoj.htm",
       controller: "perantojCtrl"
+    })
+    .when("/membrecpetoj", {
+      templateUrl:"components/membrecpetoj/membrecpetoj.htm",
+      controller: "membrecpetojCtrl"
+    })
+    .when("/membrecpetoj/:id", {
+      templateUrl:"components/membrecpetoj/membrecpetojID.htm",
+      controller: "membrecpetojCtrl"
+    })
+    .when("/membroj", {
+        templateUrl:"components/membroj/membroj.htm",
+        controller: "membrojCtrl"
+      })
+    .when("/membroj/:id", {
+      templateUrl:"components/membroj/membrojID.htm",
+      controller: "membrojCtrl"
+    })
+    .when("/uzantoj/:id", {
+      templateUrl:"components/uzantoj/uzantoj.htm",
+      controller: "uzantojCtrl"
     });
 });
