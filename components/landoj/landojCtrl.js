@@ -1,4 +1,5 @@
-app.controller("landojCtrl", function ($scope, $rootScope, $window, $http, config) {
+app.controller("landojCtrl", function ($scope, $rootScope, $window,
+                                       $http, config, auth) {
 
   $scope.init = function() {
     auth.ensalutita();

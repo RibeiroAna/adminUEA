@@ -1,4 +1,5 @@
-app.controller("kotizojCtrl", function ($scope, $routeParams, $rootScope, $window, $http, config) {
+app.controller("kotizojCtrl", function ($scope, $routeParams, $rootScope, $window,
+                                        $http, config, auth) {
 
   $scope.init = function() {
       auth.ensalutita();
