@@ -1,10 +1,7 @@
 app.controller("kotizojCtrl", function ($scope, $routeParams, $rootScope, $window, $http, config) {
 
   $scope.init = function() {
-      if (($window.localStorage.getItem('token') == null) ||
-          ($window.localStorage.getItem('token') == 0)) {
-        $window.location.href = '#!/login';
-      }
+      auth.ensalutita();
 
       $rootScope.menuo = true;
       $scope.novKotizo = [];

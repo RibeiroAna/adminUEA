@@ -1,19 +1,18 @@
-app.controller("membrecojCtrl", function ($scope, $rootScope, $window, $http, config) {
+app.controller("membrecojCtrl", function ($scope, $rootScope, $window, $http, config, auth) {
 
-  if (($window.localStorage.getItem('token') == null) ||
-      ($window.localStorage.getItem('token') == 0)) {
-    $window.location.href = '#!/login';
+  $scope.init = function() {
+    auth.ensalutita();
+
+    $scope.bazaMembreco = config.idBazaMembreco;
+    $rootScope.menuo = true;
+
+    $http.get(config.api_url + "/grupoj/membrecoj/aldonoj").then(
+      function(response) {
+        $scope.krommembrecoj = response.data;
+      });
   }
 
-  $scope.bazaMembreco = config.idBazaMembreco;
-  $rootScope.menuo = true;
-
-  $http.get(config.api_url + "/grupoj/membrecoj/aldonoj").then(
-    function(response) {
-      $scope.krommembrecoj = response.data;
-    });
-
-    $scope.delete = function(id) {
+  $scope.delete = function(id) {
       var req = {
           method: 'DELETE',
           url: config.api_url + '/grupoj/' + id,

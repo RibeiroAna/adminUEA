@@ -1,14 +1,18 @@
 app.controller("landojCtrl", function ($scope, $rootScope, $window, $http, config) {
 
-  if (($window.localStorage.getItem('token') == null) ||
-      ($window.localStorage.getItem('token') == 0)) {
-    $window.location.href = '#!/login';
-  }
+  $scope.init = function() {
+    auth.ensalutita();
 
-  $rootScope.menuo = true;
-  $http.get(config.api_url + "/landoj").then(function(response) {
-      $scope.landoj = response.data;
-  });
+    if (($window.localStorage.getItem('token') == null) ||
+        ($window.localStorage.getItem('token') == 0)) {
+      $window.location.href = '#!/login';
+    }
+
+    $rootScope.menuo = true;
+    $http.get(config.api_url + "/landoj").then(function(response) {
+        $scope.landoj = response.data;
+    });
+  }
 
   $scope.novaLando = function() {
    var req = {

@@ -1,11 +1,7 @@
 app.controller("membrojCtrl", function ($scope, $rootScope, $window, $http,
-                                             $routeParams, config) {
+                                             $routeParams, config, auth) {
   $scope.init = function() {
-    if (($window.localStorage.getItem('token') == null) ||
-        ($window.localStorage.getItem('token') == 0)) {
-      $window.location.href = '#!/login';
-    }
-
+    auth.ensalutita();
     $rootScope.menuo = true;
   }
 

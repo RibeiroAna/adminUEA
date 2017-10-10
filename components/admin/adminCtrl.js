@@ -1,20 +1,18 @@
-app.controller("adminCtrl", function ($scope, $rootScope, $window, $http, config) {
+app.controller("adminCtrl", function ($scope, $rootScope, $window,
+                                      $http, config, auth) {
 
-  if (($window.localStorage.getItem('token') == null) ||
-      ($window.localStorage.getItem('token') == 0)) {
-    $window.location.href = '#!/login';
-  }
-
-  $rootScope.menuo = true;
-
-  var reqAd = {
+  $scope.init = function() {
+    auth.ensalutita();
+    $rootScope.menuo = true;
+    var reqAd = {
       method: 'GET',
       url: config.api_url + '/admin',
       headers: {'x-access-token': $window.localStorage.getItem('token')}
     };
-  $http(reqAd).then(function(response) {
-    $scope.administrantoj = response.data;
-  });
+    $http(reqAd).then(function(response) {
+      $scope.administrantoj = response.data;
+    });
+  }
 
   $scope.novaAdmin = function(){
     var req = {
