@@ -4,17 +4,13 @@
        <img src="content/img/logoo_blanka.png" alt="logoo"></img>
     </div>
     <a href="javascript(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-    <label class="menutitolo">Bazaj agordoj</label>
-      <a href="#!/admin" class="menuero">Administrantoj</a>
-      <a href="#!/landoj" class="menuero">Landoj</a>
-      <a href="#!/perantoj" class="menuero">Perantoj</a>
-    <label class="menutitolo"> Membreco</label>
-      <a href="#!/membrecpetoj" class="menuero">Novaj membrecpetoj</a>
-      <a href="#!/membrecoj" class="menuero">Kategorioj kaj Kotizoj</a>
-    <label class="menutitolo">Membroj</label>
-      <a href="#!/membroj" class="menuero">Membroj</a>
-      <a href="" class="menuero" onClick="window.alert('Venos en la dua versio');">Statistikoj</a>
+    <any ng-repeat="menuero in menueroj">
+      <label class="menutitolo">{{menuero[0].titolo}}</label>
+      <a ng-repeat="ligilo in menuero | limitTo: (1 - menuero.length)"
+         class="menuero" href="{{ligilo.link}}">
+         {{ligilo.titolo}}
+      </a>
+    </any>
   </div>
 
   <div class="clear"></div>
@@ -23,5 +19,6 @@
     <span class="profilo" ng-click="elsaluti()">
       <i class="fa fa-power-off" aria-hidden="true"></i> Elsaluti
     </span>
+    <span class="uzantnomo"><i class="fa fa-user" aria-hidden="true"></i> {{uzanto.uzantnomo}}</span>
   </div>
 </div>

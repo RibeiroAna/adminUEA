@@ -5,7 +5,8 @@ app.controller("loginCtrl", function ($scope, $rootScope, $window, $http, config
 
   if (($window.localStorage.getItem('token') != null) &&
       ($window.localStorage.getItem('token') != 0)){
-    $window.location.href = '#!/admin';
+    $window.location.href = '#!/membroj';
+    $window.location.reload();
   }
 
   $http.get(config.api_url + '/admin/agordita').then(function(response) {
@@ -22,7 +23,9 @@ app.controller("loginCtrl", function ($scope, $rootScope, $window, $http, config
     $http.post(config.api_url + '/admin/ensaluti', $scope.uzanto).then(
         function(response) {
           $window.localStorage.setItem('token', response.data.token);
-          $window.location.href = '#!/admin';
+          $window.localStorage.setItem('uzanto', JSON.stringify(response.data.administranto));
+          $window.location.href = '#!/membroj';
+          $window.location.reload();
         }, function(response) {
           $scope.msg = response.data.message;
       });
