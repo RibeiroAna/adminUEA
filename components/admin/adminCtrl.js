@@ -4,6 +4,7 @@ app.controller("adminCtrl", function ($scope, $rootScope, $window,
   $scope.init = function() {
     auth.ensalutita();
     $rootScope.menuo = true;
+
     var reqAd = {
       method: 'GET',
       url: config.api_url + '/admin',
@@ -11,6 +12,24 @@ app.controller("adminCtrl", function ($scope, $rootScope, $window,
     };
     $http(reqAd).then(function(response) {
       $scope.administrantoj = response.data;
+      angular.forEach($scope.administrantoj, function(value, key){
+        req = {
+            method: 'GET',
+            url: config.api_url + '/admin/' + value.id + '/rajtoj',
+            headers: {'x-access-token': $window.localStorage.getItem('token')}
+       };
+       $http(req).then(
+        function sucess(response) {
+          value.rajtoj = response.data;
+        });
+      });
+    });
+
+
+
+
+    $http.get(config.api_url + '/admin/rajtoj').then(function(response) {
+      $scope.rajtoj = response.data;
     });
   }
 
@@ -23,18 +42,21 @@ app.controller("adminCtrl", function ($scope, $rootScope, $window,
       };
     $http(req).then(
       function(sucess){
-         req = {
-           method: 'POST',
-           url: config.api_url + '/admin/rajtoj',
-           data: {'idUzantoAuxAsocio': sucess.data.insertId,
-                  'idRajto': config.idAdministranto},
-           headers: {'x-access-token': $window.localStorage.getItem('token')}
-         }
-         $http(req).then(
-           function(sucess) {
-             $scope.eraro = "";
-             $window.location.reload();
-           });
+        for(var i = 0; i < $scope.rajtoj.length; i++) {
+           if($scope.rajtoj[i].elektita) {
+             req = {
+               method: 'POST',
+               url: config.api_url + '/admin/' + sucess.data.insertId + '/rajtoj',
+               data: {'idRajto': $scope.rajtoj[i].id},
+               headers: {'x-access-token': $window.localStorage.getItem('token')}
+             };
+             $http(req).then(
+               function(sucess) {
+                 $scope.eraro = "";
+                 $window.location.reload();
+               });
+          }
+        }
      }).catch(function (response) {
         $scope.eraro = "Okazis eraro en via provo. Bonvole, certigu ke la \
                         uzantnomo ankoraŭ ne ekzistas.\
@@ -52,7 +74,7 @@ app.controller("adminCtrl", function ($scope, $rootScope, $window,
       method: 'DELETE',
       url: config.api_url + '/admin/' + idAdmin,
       headers: {'x-access-token': $window.localStorage.getItem('token')}
-    }
+    };
     $http(req).then(
       function(response){
         if(response.status == '204') {

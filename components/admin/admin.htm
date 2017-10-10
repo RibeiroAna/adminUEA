@@ -12,23 +12,29 @@
   <!--formularo por aldoni novan landon-->
   <form ng-submit="novaAdmin()" ng-hide="nova" class="form-inline">
     <p>{{eraro}}</p>
-    <p class="col-sm-12">(En la dua versio, eblos aldoni administrantojn kun malsimlaj roloj)</p>
-    <div class="form-group">
+    <div class="form-group col-md-6">
       <label for="radiko">Uzantnomo</label>
       <input type="text"
              id="radiko"
              ng-model="admin.uzantnomo"
-             class="form-control">
+             class="form-control" required>
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-6">
       <label for="finajxo">Pasvorto</label>
       <input type="password"
              id="finajxo"
-             onbeforesave="updateLando(a.id, $data, 'pasvorto')"
              ng-model="admin.pasvorto"
-             class="form-control">
+             class="form-control" required>
     </div>
-    <button id="submit" type="submit" class="btn btn-primary">Aldoni</button>
+    <div class="form-group  col-md-6">
+      <label>Roloj: </label>
+      <label class="radio-inline" ng-repeat="rajto in rajtoj">
+        <input type="checkbox" ng-model="rajto.elektita">
+        {{rajto.nomo}}
+      </label>
+    </div>
+
+    <button id="submit" type="submit" class="btn btn-primary col-md-2">Aldoni</button>
   </form>
 
   <!--Tabelo kun enhavo-->
@@ -37,7 +43,7 @@
       <tr>
         <td><b>Uzantnomo</b></td>
         <td><b>Pasvorto</b></td>
-        <td><b>Rolo</b></td>
+        <td><b>Roloj</b></td>
       </tr>
     </thead>
     <tr ng-repeat="a in administrantoj | orderBy:'uzantnomo'">
@@ -49,7 +55,7 @@
            Ŝanĝi pasvorton
          </a>
        </td>
-      <td>Administranto</td>
+      <td><h ng-repeat="rajto in a.rajtoj">{{rajto.nomo}}, </h></td>
       <td>
         <a href="" ng-click="deleteAdmin(a.id)">
           <i class="fa fa-trash" aria-hidden="true"></i> Forviŝi
