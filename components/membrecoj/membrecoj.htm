@@ -36,13 +36,14 @@
 
   </form>
 
+  <label>Search: <input ng-model="searchText"></label>
   <table class="table">
     <thead>
       <td>Mallongigilo</td>
       <td>Nomo</td>
       <td>Priskribo</td>
     </thead>
-    <tr ng-repeat="k in krommembrecoj">
+    <tr ng-repeat="k in krommembrecoj | filter:searchText">
       <td>
         <a href="#"
            editable-text="k.mallongigilo"

@@ -42,6 +42,7 @@
     </div>
   </form>
 
+  <label>Search: <input ng-model="searchText"></label>
   <table class="table">
     <thead>
       <tr>
@@ -51,7 +52,7 @@
     </thead>
 
     <tbody>
-      <tr ng-repeat="peranto in perantoj | orderBy:'publikaNomo'">
+      <tr ng-repeat="peranto in perantoj | orderBy:'publikaNomo' | filter:searchText">
         <td>
           <a href=""
              editable-text="peranto.publikaNomo"

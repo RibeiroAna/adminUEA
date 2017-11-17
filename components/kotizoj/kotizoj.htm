@@ -1,5 +1,6 @@
 <div class="enhavo" data-ng-init="init()">
   <h2>Redaktante kotizojn por {{grupo.nomo}}</h2>
+    <label>Search: <input ng-model="searchText"></label>
   <table class="table">
     <thead>
       <tr>
@@ -10,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="lando in landoj | orderBy:'radikoEo'"
+      <tr ng-repeat="lando in landoj | orderBy:'radikoEo' | filter:searchText"
           ng-init="kotizo = getKotizo(lando)">
           <td>{{lando.radikoEo}}{{lando.finajxoEo}}</td>
 
