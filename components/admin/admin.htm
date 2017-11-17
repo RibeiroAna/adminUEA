@@ -37,6 +37,7 @@
     <button id="submit" type="submit" class="btn btn-primary col-md-2">Aldoni</button>
   </form>
 
+  <label>Search: <input placeholder="Uzantnomo or Roloj" ng-model="searchText"></label>
   <!--Tabelo kun enhavo-->
   <table class="table">
     <thead>
@@ -46,7 +47,7 @@
         <td><b>Roloj</b></td>
       </tr>
     </thead>
-    <tr ng-repeat="a in administrantoj | orderBy:'uzantnomo'">
+    <tr ng-repeat="a in administrantoj | orderBy:'uzantnomo' | filter:searchText">
       <td>{{a.uzantnomo}}</td>
       <td>
         <a href="#"
