@@ -1,6 +1,11 @@
-app.value('config', {
-   "api_url": "http://localhost:3000",
-   "idAdministranto": 1,
-   "idJunaAdministranto": 7,
-   "idBazaMembreco": 7
+app.service('config', function($http){
+  var service = this;
+
+  service.api_url = "http://localhost:3000";
+
+  $http.get(service.api_url + "/config/idAldonaMembrecgrupo").then(
+    function sucess(response) {
+      service.idAldonaMembrecgrupo = response.data.idAldonaMembrecgrupo;
+    }
+  );
 });

@@ -24,10 +24,7 @@ app.controller("adminCtrl", function ($scope, $rootScope, $window,
         });
       });
     });
-
-
-
-
+    
     $http.get(config.api_url + '/admin/rajtoj').then(function(response) {
       $scope.rajtoj = response.data;
     });

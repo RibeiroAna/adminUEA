@@ -8,7 +8,7 @@ app.controller("membrecpetojCtrl", function ($scope, $rootScope, $window, $http,
   $scope.init1 = function() {
     $scope.init();
     $scope.bazaMembreco = config.idBazaMembreco;
-    $http.get(config.api_url + "/grupoj/membrecoj/aldonoj").then(
+    $http.get(config.api_url + "/grupoj/" + config.idAldonaMembrecgrupo + "/sub").then(
       function(response) {
         $scope.krommembrecoj = response.data;
     });
