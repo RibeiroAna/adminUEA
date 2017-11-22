@@ -1,5 +1,5 @@
 app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $http,
-                                             $routeParams, config) {
+                                             $routeParams, config, uzantojService) {
   $scope.init = function() {
     if (($window.localStorage.getItem('token') == null) ||
         ($window.localStorage.getItem('token') == 0)) {
@@ -7,14 +7,9 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $http,
     }
     $rootScope.menuo = true;
 
-    var req = {
-        method: 'GET',
-        url: config.api_url + '/uzantoj/' + $routeParams.id,
-        headers: {'x-access-token': $window.localStorage.getItem('token')}
-      };
-    $http(req).then(function(response) {
-      $scope.uzanto = response.data[0];
-    });
+      uzantojService.getUzantoj($routeParams.id).then(function(response) {
+          $scope.uzanto = response.data[0];
+      });
   }
 
   $scope.strip = function(string) {
