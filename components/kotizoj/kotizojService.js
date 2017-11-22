@@ -24,7 +24,7 @@ app.service('kotizojService', function ($http, config, $window) {
         };
 
         return $http(req);
-    };
+    }
 
     function putKotizoj(grupojId, data) {
         var req = {
@@ -35,7 +35,7 @@ app.service('kotizojService', function ($http, config, $window) {
         };
 
         return $http(req);
-    };
+    }
 
     return service;
 });
