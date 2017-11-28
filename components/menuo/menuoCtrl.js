@@ -1,4 +1,4 @@
-app.controller("menuoCtrl", function ($scope, $rootScope, $window, $http, config) {
+ app.controller("menuoCtrl", function ($scope, $rootScope, $window, $http, config) {
 
   $scope.init = function() {
     $scope.uzanto = JSON.parse($window.localStorage.getItem('uzanto'));
@@ -21,6 +21,10 @@ app.controller("menuoCtrl", function ($scope, $rootScope, $window, $http, config
       {
         link: "#!/perantoj",
         titolo: "Perantoj"
+      },
+      {
+        link:"#!/membrecoj",
+        titolo:"Kategorioj kaj kotizoj"
       }
     ];
 
@@ -34,36 +38,29 @@ app.controller("menuoCtrl", function ($scope, $rootScope, $window, $http, config
         titolo: "Membroj"
       },
       {
+        link: "#!/membrecpetoj",
+        titolo: "Membrecpetoj"
+      },
+      {
         link:"",
         titolo:"Statistikoj"
       }
     ];
 
-    $scope.menuoMembreco =
-    [
-      {
-        titolo: "Membreco"
-      },
-      {
-        link: "#!/membrecpetoj",
-        titolo: "Membrecpetoj"
-      },
-      {
-        link:"#!/membrecoj",
-        titolo:"Kategorioj kaj kotizoj"
-      }
-    ];
     $scope.menueroj = [];
+    config.getConfig("idAdministranto").then(function(response){
+      if($scope.uzanto.permesoj.indexOf(response.data.idAdministranto) > -1) {
+        $scope.menueroj.push($scope.menuoBazaAgordoj);
+        $scope.menueroj.push($scope.menuoMembroj);
+      }
+    });
 
-    if($scope.uzanto.permesoj.indexOf(config.idAdministranto) > -1) {
-      $scope.menueroj.push($scope.menuoBazaAgordoj);
-      $scope.menueroj.push($scope.menuoMembreco);
-      $scope.menueroj.push($scope.menuoMembroj);
-    }
+   config.getConfig("idJunaAdministranto").then(function(response){
+      if($scope.uzanto.permesoj.indexOf(response.data.idJunaAdministranto) > -1) {
+         $scope.menueroj.push($scope.menuoMembroj);
+      }
+    });
 
-    if($scope.uzanto.permesoj.indexOf(config.idJunaAdministranto) > -1) {
-      $scope.menueroj.push($scope.menuoMembroj);
-    }
   }
 
   $scope.elsaluti = function() {

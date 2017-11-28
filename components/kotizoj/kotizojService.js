@@ -12,7 +12,7 @@ app.service('kotizojService', function ($http, config, $window) {
     }
 
     function getKotizoj(id){
-        return $http.get(config.api_url + 'grupoj/' + id + '/kotizoj');
+        return $http.get(config.api_url + '/grupoj/' + id + '/kotizoj');
     }
 
     function postKotizoj(grupojId, data) {

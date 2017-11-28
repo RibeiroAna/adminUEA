@@ -10,7 +10,7 @@
   </h2>
 
   <!--formularo por aldoni novan landon-->
-  <form ng-submit="novaLando()" ng-hide="novaL" class="form-inline">
+  <form ng-submit="novaLando()" ng-hide="novaL">
     {{status}}
     <div class="form-group">
       <label for="radiko">Radiko en esperanto (ekz: Brit)</label>
@@ -35,15 +35,18 @@
              class="form-control">
     </div>
     <div class="form-group">
-      <label for="nomoLoka">Nomo en loka lingvo (ekz: Great Britain)</label>
+      <label for="valuto">Valuto uzita de UEA (Ekz GBP):</label>
       <input type="text"
-             id="nomoLoka"
-             ng-model="lando.nomoLoka"
+             id="valuto"
+             ng-model="lando.valuto"
              class="form-control">
     </div>
-    <button id="submit" type="submit" class="btn btn-primary col-sm-12">Aldoni</button>
+    <button id="submit" type="submit" class="btn btn-primary">Aldoni</button>
+    <br><br>
   </form>
-  <label>Search: <input ng-model="searchText"></label>
+
+
+  <label>Serĉi: <input ng-model="searchText" class="form-control"></label>
 
   <!--Tabelo kun enhavo-->
   <table class="table">
@@ -51,8 +54,8 @@
       <tr>
         <td>Radiko en Esperanto</td>
         <td>Finaĵo en Esperanto</td>
-        <td>Nomo en loka lingvo</td>
-        <td>Landkodo</td>
+        <td>Valuto uzita de UEA</td>
+        <td>2-litera Landkodo</td>
       </tr>
     </thead>
     <tr ng-repeat="l in landoj | orderBy:'radikoEo' | filter:searchText">
@@ -72,9 +75,9 @@
        </td>
       <td>
         <a href="#"
-           editable-text="l.nomoLoka"
-           onbeforesave="updateLando(l.id, $data, 'nomoLoka')">
-           {{l.nomoLoka}}
+           editable-text="l.valuto"
+           onbeforesave="updateLando(l.id, $data, 'valuto')">
+           {{l.valuto}}
          </a>
        </td>
       <td>

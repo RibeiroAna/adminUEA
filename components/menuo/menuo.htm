@@ -5,11 +5,18 @@
     </div>
     <a href="javascript(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <any ng-repeat="menuero in menueroj">
-      <label class="menutitolo">{{menuero[0].titolo}}</label>
+      <label ng-init="montri[$index] = false" class="menutitolo" ng-click="montri[$index] = !montri[$index]">
+        <span ng-hide="montri[$index]">+</span>
+        <span ng-show="montri[$index]">-</span>
+
+        {{menuero[0].titolo}}
+      </label><br>
+      <span  ng-show="montri[$index]">
       <a ng-repeat="ligilo in menuero | limitTo: (1 - menuero.length)"
          class="menuero" href="{{ligilo.link}}">
          {{ligilo.titolo}}
       </a>
+    </a>
     </any>
   </div>
 
