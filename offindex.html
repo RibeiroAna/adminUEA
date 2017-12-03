@@ -23,21 +23,37 @@
     <script src="off-dev/angular-route.js"></script>
     <script src="off-dev/xeditable.js"></script>
 
-    <!--controllers-->
     <script src="app.js"></script>
-    <script src="controller/adminCtrl.js"></script>
-    <script src="controller/loginCtrl.js"></script>
-    <script src="controller/menuoCtrl.js"></script>
-    <script src="controller/landojCtrl.js"></script>
-    <script src="controller/membrecojCtrl.js"></script>
-    <script src="controller/kotizojCtrl.js"></script>
-    <script src="controller/perantojCtrl.js"></script>
 
     <!--config-->
     <script src="config.js"></script>
+    <script src="config/app.routes.js"></script>
+
+    <!--service-->
+    <script src="service/auth.js"></script>
+
+    <!--components Services-->
+    <script src="components/kotizoj/kotizojService.js"></script>
+    <script src="components/landoj/landojService.js"></script>
+    <script src="components/perantoj/perantoService.js"></script>
+    <script src="components/membroj/membrojService.js"></script>
+    <script src="components/uzantoj/uzantojService.js"></script>
+    <script src="components/login/loginService.js"></script>
+
+    <!--components Controllers-->
+    <script src="components/admin/adminCtrl.js"></script>
+    <script src="components/login/loginCtrl.js"></script>
+    <script src="components/menuo/menuoCtrl.js"></script>
+    <script src="components/landoj/landojCtrl.js"></script>
+    <script src="components/membrecoj/membrecojCtrl.js"></script>
+    <script src="components/kotizoj/kotizojCtrl.js"></script>
+    <script src="components/perantoj/perantojCtrl.js"></script>
+    <script src="components/membrecpetoj/membrecpetojCtrl.js"></script>
+    <script src="components/membroj/membrojCtrl.js"></script>
+    <script src="components/uzantoj/uzantojCtrl.js"></script>
 
     <!--view-->
-    <div ng-include="'template/menuo.htm'"
+    <div ng-include="'components/menuo/menuo.htm'"
          ng-show="menuo"
          ng-controller="menuoCtrl">
     </div>

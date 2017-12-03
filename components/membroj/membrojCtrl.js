@@ -6,11 +6,26 @@ app.controller("membrojCtrl", function ($scope, $rootScope, $window, $http,
   }
 
   $scope.init1 = function() {
-      $scope.init();
-      $scope.bazaMembreco = config.idBazaMembreco;
-      membrojService.getAldonoj().then(function(response) {
-          $scope.krommembrecoj = response.data;
+    $rootScope.menuo = true;
+
+    config.getConfig("idAldonaMembrecgrupo").then(function(response) {
+      $scope.idAldonaMembrecgrupo = response.data.idAldonaMembrecgrupo;
+      membrojService.getGrupKat($scope.idAldonaMembrecgrupo).then(function(response) {
+        $scope.krommembrecoj = response.data;
       });
+    });
+
+    config.getConfig("idMembrecgrupo").then(function(response) {
+      $scope.idMembrecgrupo = response.data.idMembrecgrupo;
+      membrojService.getGrupKat($scope.idMembrecgrupo).then(function(response) {
+        $scope.membrecgrupoj = response.data;
+      });
+    });
+
+    //idJunajGrupoj
+    config.getConfig("idJunajGrupoj").then(function(response) {
+      $scope.idJunajGrupoj = response.data.idJunajGrupoj;
+    });
   }
 
   $scope.init2 = function() {
