@@ -1,5 +1,5 @@
 app.controller("membrojCtrl", function ($scope, $rootScope, $window, $http,
-                                             $routeParams, config, auth, membrojService) {
+                                        $routeParams, config, auth, membrojService) {
   $scope.init = function() {
     auth.ensalutita();
     $rootScope.menuo = true;

@@ -5,4 +5,11 @@ app.service('auth', function($window) {
         $window.location.href = '#!/login';
       }
   }
+
+  this.elsaluti = function() {
+    $window.localStorage.setItem('token', 0);
+    $window.localStorage.setItem('uzanto', 0);
+    $window.location.href = '#!/login';
+    $window.location.reload();
+  }
 });

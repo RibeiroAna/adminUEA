@@ -1,5 +1,9 @@
 <div class="enhavo" data-ng-init="init2()">
   <h1>Membrecpetoj al {{grupo.nomo}}</h1>
+  <span>
+    <label>Serĉi: <input ng-model="searchText" class="form-control"></label>
+    (konsileto: vi povas filtri la pagmaniero tajpante: paypal, ueakonto, ktp)
+  </span>
   <table class="table">
     <tdead>
       <tr>
@@ -8,20 +12,26 @@
         <td>Findato</td>
         <td>observoj</td>
         <td>Aprobi</td>
+        <td>Malaprobi</td>
       </tr>
     </tdead>
 
     <tbody>
-      <tr ng-repeat="peto in anecpetoj | orderBy:'personanomo'">
+      <tr ng-repeat="peto in anecpetoj | orderBy:'personanomo' | filter:searchText">
         <td>{{peto.personanomo}} {{peto.familianomo}}
            <a href="#!/uzantoj/{{peto.idAno}}">Vidi detalojn >></a>
          </td>
         <td>{{strip(peto.komencdato)}}</td>
         <td>{{strip(peto.findato) || "Dumviva"}}</td>
-        <td>{{peto.observoj}}</td>
+        <td ng-bind-html="peto.observoj"></td>
         <td>
           <button class="btn btn-success"  ng-click="aprobi(peto)">
-            <i class="fa fa-check" aria-hidden="true"></i>
+            <i class="fa fa-check" aria-hidden="true"></i> Aprobi
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-danger">
+            <i class="fa fa-trash" aria-hidden="true"></i> Malaprobi
           </button>
         </td>
       </tr>
