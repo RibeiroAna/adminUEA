@@ -1,6 +1,6 @@
-app.controller("membrecpetojCtrl", function ($scope, $rootScope, $window, $http,
-                                             $routeParams, $sanitize,
-                                             config, auth, membrojService, errorService) {
+app.controller("membrecpetojCtrl",
+function ($scope, $rootScope, $window, $http, $routeParams, $sanitize, config,
+          auth, membrojService, errorService) {
   $scope.init = function() {
     auth.ensalutita();
     $rootScope.menuo = true;
@@ -53,10 +53,23 @@ app.controller("membrecpetojCtrl", function ($scope, $rootScope, $window, $http,
     }, errorService.error);
   }
 
+  $scope.forvisxiAnecon = function(peto) {
+    if(confirm("Ĉu vi vere volas forviŝi tiun anecpeton?" +
+               " Tiu ago ne povos esti nuligita")) {
+         var data = {
+           anecnomo: $scope.grupo.nomo,
+           retposxto: peto.retposxto
+         };
+
+         membrojService.deleteAneco(peto.id, data).then(function(response) {
+           $window.location.reload();
+         }, errorService.error);
+    }
+  }
+
   $scope.strip = function(string) {
     if(string == null)
       return string;
     return string.slice(0,10);
   }
-
 });

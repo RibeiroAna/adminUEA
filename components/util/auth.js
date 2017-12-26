@@ -11,5 +11,7 @@ app.service('auth', function($window) {
     $window.localStorage.setItem('uzanto', 0);
     $window.location.href = '#!/login';
     $window.location.reload();
+    $window.localStorage.setItem('menuoBazaAgordoj', '}');
+    $window.localStorage.setItem('menuoMembroj', '}');
   }
 });

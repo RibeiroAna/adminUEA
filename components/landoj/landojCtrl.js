@@ -10,9 +10,9 @@ app.controller("landojCtrl", function ($scope, $rootScope, $window,
     }
 
     $rootScope.menuo = true;
-      landojService.getLandoj().then(function(response) {
-          $scope.landoj = response.data;
-      }, errorService.error);
+    landojService.getLandoj().then(function(response) {
+        $scope.landoj = response.data;
+    }, errorService.error);
   }
 
   $scope.novaLando = function() {
@@ -22,20 +22,17 @@ app.controller("landojCtrl", function ($scope, $rootScope, $window,
   }
 
   $scope.deleteLando = function(idLando) {
+    if(confirm("Ĉu vi certas ke vi volas forviŝi tiun landon?" +
+               " Tiu ago ne povos esti malfarita!")) {
       landojService.deleteLandoj(idLando).then(function(response){
-          if(response.status == '204') {
-              $window.location.reload();
-          } else {
-              window.alert("Okazis eraro en la servilo." +
-                  " Provu elsaluti kaj ensaluti denove");
-          }
+         $window.location.reload();
       }, errorService.error);
+    }
   }
 
   $scope.updateLando = function(id, valoro, kampo) {
     var data = {valoro: valoro, kampo: kampo};
-
-      landojService.updateLandoj(id, data).then(function(sucess){}, errorService.error);
+    landojService.updateLandoj(id, data).then(function(sucess){}, errorService.error);
   }
 
 });

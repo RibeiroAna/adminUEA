@@ -28,9 +28,11 @@ app.controller("membrecojCtrl", function ($scope, $rootScope, $window,
   }
 
   $scope.delete = function(id) {
+    if(confirm("Ĉu vi certas ke vi volas fari tion? Tio ne povos esti malfarita")) {
       membrojService.deleteGrupoj(id).then(function(sucess){
           $window.location.reload();
       }, errorService.error);
+    }
   }
 
   $scope.update = function(id, valoro, kampo) {

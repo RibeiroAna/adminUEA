@@ -37,19 +37,16 @@
       [
         {
           titolo: "Membroj",
-          montri: false
+          montri: true
         },
         {
           link: "#!/membroj",
-          titolo: "Membroj"
+          titolo: "Membroj",
+          ngClass: "selektita"
         },
         {
           link: "#!/membrecpetoj",
           titolo: "Membrecpetoj"
-        },
-        {
-          link:"",
-          titolo:"Statistikoj"
         }
       ];
     }
@@ -83,8 +80,8 @@
   }
 
   window.onbeforeunload = function() {
-      $window.localStorage.setItem('menuoMembroj', JSON.stringify($scope.menuoMembroj));
-      $window.localStorage.setItem('menuoBazaAgordoj', JSON.stringify($scope.menuoBazaAgordoj));
+    $window.localStorage.setItem('menuoMembroj', JSON.stringify($scope.menuoMembroj));
+    $window.localStorage.setItem('menuoBazaAgordoj', JSON.stringify($scope.menuoBazaAgordoj));
   }
 
 });

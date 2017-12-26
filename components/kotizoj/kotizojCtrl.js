@@ -50,7 +50,6 @@ app.controller("kotizojCtrl", function ($scope, $routeParams, $rootScope, $windo
     }
     var data = {id: id, valoro: valoro, kampo: kampo};
 
-      kotizojService.putKotizoj($routeParams.id, data).then(funtion(sucess){},
-                                                            errorService.error);
+    kotizojService.putKotizoj($routeParams.id, data).then(function(sucess){}, errorService.error);
    }
 });

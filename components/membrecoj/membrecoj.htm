@@ -64,24 +64,27 @@
     </thead>
     <tr ng-repeat="k in krommembrecoj | filter:searchText">
       <td>
+        {{k.mallongigilo}}
         <a href="#"
            editable-text="k.mallongigilo"
            onbeforesave="update(k.id, $data, 'mallongigilo')">
-           {{k.mallongigilo}}
+           Redakti aŭ aldoni
         </a>
       </td>
       <td>
+        {{k.nomo}}
         <a href="#"
            editable-text="k.nomo"
            onbeforesave="update(k.id, $data, 'nomo')">
-           {{k.nomo}}
+           Redakti aŭ aldoni
         </a>
       </td>
       <td>
+        {{k.priskribo}}
         <a href="#"
-           editable-text="k.priskribo"
+           editable-textarea="k.priskribo"
            onbeforesave="update(k.id, $data, 'priskribo')">
-           {{k.priskribo}}
+           Redakti aŭ aldoni
         </a>
       </td>
        <td>
@@ -94,24 +97,27 @@
     </tr>
     <tr ng-repeat="k in membrecgrupoj | filter:searchText">
       <td>
+        {{k.mallongigilo}}
         <a href="#"
            editable-text="k.mallongigilo"
            onbeforesave="update(k.id, $data, 'mallongigilo')">
-           {{k.mallongigilo}}
+           Redakti aŭ aldoni
         </a>
       </td>
       <td>
+        {{k.nomo}}
         <a href="#"
            editable-text="k.nomo"
            onbeforesave="update(k.id, $data, 'nomo')">
-           {{k.nomo}}
+           Redakti aŭ aldoni
         </a>
       </td>
       <td>
+        {{k.priskribo}}
         <a href="#"
-           editable-text="k.priskribo"
+           editable-textarea="k.priskribo"
            onbeforesave="update(k.id, $data, 'priskribo')">
-           {{k.priskribo}}
+           Redakti aŭ aldoni
         </a>
       </td>
       <td>
@@ -123,6 +129,4 @@
       <td><a href="#!/kotizoj/{{k.id}}"> Redakti kotizojn >> </a></td>
     </tr>
   </table>
-  <p>* Klaku je la kampoj por redakti</p>
-
 </div>

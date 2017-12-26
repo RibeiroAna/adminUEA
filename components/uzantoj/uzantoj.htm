@@ -1,13 +1,97 @@
 <div class="enhavo" data-ng-init="init()">
-  <h2>Uzanta informoj</h2>
-  <p>Atento: En la dua versio eblos redakti la informojn</p>
-  <p><b>Nomo: </b>{{uzanto.personanomo}} {{uzanto.familianomo}}</p>
-  <p><b>Naskiĝtago: </b>{{strip(uzanto.naskigxtago)}}</p>
-  <p><b>titolo: </b>{{uzanto.titolo}}</p>
-  <p><b>Retpoŝtadreso: </b>{{uzanto.retposxto}}</p>
-  <p><b>UEA-kodo: </b>{{uzanto.ueakodo}}</p>
-  <p><b>Adreso: </b>{{uzanto.adreso}}</p>
-  <p><b>Poŝtkodo: </b>{{uzanto.posxtkodo}}</p>
-  <p><b>Lando: </b> {{uzanto.radikoEo+uzanto.finajxoEo}}</p>
-  <p><b>Notoj: </b> {{uzanto.notoj}}</p>
+  <div class="col-md-7">
+    <h2>Uzanta informoj</h2>
+    -------
+    <p>
+      <b>UEA-kodo:</b> {{uzanto.ueakodo}}
+      <a href="#"
+         onbeforesave="updateUzantoj($data, 'ueakodo')"
+         editable-text="uzanto.ueakodo"
+         e-ui-mask="AAAA-A">redakti aŭ aldoni</a>
+    </p>
+    <p>
+      <b>Retpoŝtadreso kaj uzantnomo:</b> {{uzanto.retposxto}}
+      <a href="#"
+         onbeforesave="updateUzantoj($data, 'retposxto')"
+         editable-email="uzanto.retposxto">
+        redakti aŭ aldoni
+      </a>
+    </p>
+    <p>
+      <b>Pasvorto:</b>
+      <a href="#"
+         onbeforesave="updateUzantoj($data, 'pasvorto')"
+         editable-password="uzanto.pasvorto">
+        Ŝanĝi pasvorton
+      </a>
+    </p>
+    -------
+    <p>
+      <b>Personana nomo:</b> {{uzanto.personanomo}}
+      <a href="#"
+         editable-text="uzanto.personanomo"
+         onbeforesave="updateUzantoj($data, 'personanomo')">
+         redakti aŭ aldoni
+       </a>
+    </p>
+    <p>
+      <b>Familia nomo:</b> {{uzanto.familianomo}}
+      <a href="#"
+         editable-text="uzanto.familianomo"
+         onbeforesave="updateUzantoj($data, 'familianomo')">
+         redakti aŭ aldoni
+       </a>
+    </p>
+    <p>
+      <b>Naskiĝtago (JJJJ-MM-TT):</b> {{uzanto.naskigxtago}}
+      <a href="#"
+         editable-text="uzanto.naskigxtago"
+         onbeforesave="updateUzantoj($data, 'naskigxtago')">
+        redakti aŭ aldoni
+      </a>
+    </p>
+    <p>
+      <b>titolo:</b> {{uzanto.titolo}}
+      <a href="#"
+         onbeforesave="updateUzantoj($data, 'titolo')"
+         editable-select="uzanto.titolo"
+         e-ng-options="s as s for s in titoloj">
+        redakti aŭ aldoni
+      </a>
+    </p>
+    <p>
+      <b>Adreso:</b> {{uzanto.adreso}}
+      <a href="#"
+         onbeforesave="updateUzantoj($data, 'adreso')"
+         editable-textarea="uzanto.adreso">
+        redakti aŭ aldoni
+      </a>
+    </p>
+    <p>
+      <b>Poŝtkodo:</b> {{uzanto.posxtkodo}}
+      <a href="#"
+         onbeforesave="updateUzantoj($data, 'posxtkodo')"
+         editable-text="uzanto.posxtkodo">
+        redakti aŭ aldoni
+      </a>
+    </p>
+    <p>
+      <b>Lando: </b> {{uzanto.radikoEo + uzanto.finajxoEo}}
+      <a href="#"
+         onbeforesave="updateUzantoj($data, 'idLando')"
+         editable-select="uzanto.titolo"
+         e-ng-options="l.id as l.radikoEo + l.finajxoEo for l in landoj">
+         redakti aŭ aldoni
+      </a>
+    </p>
+    <p>
+      <b>Notoj:</b> {{uzanto.notoj}}
+      <a href="#"
+         onbeforesave="updateUzantoj($data, 'notoj')"
+         editable-textarea="uzanto.notoj"
+         e-rows="7" e-cols="40">
+        redakti aŭ aldoni
+      </a>
+    </p>
+ </div>
 </div>

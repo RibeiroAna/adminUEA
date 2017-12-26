@@ -1,8 +1,13 @@
 <div class="enhavo" data-ng-init="init2()">
   <h1>Membroj de {{grupo.nomo}}</h1>
-  <p>Entuta membraro {{membroj.length}}</p>
-  <p>En la dua versio eblos serĉado por diversaj kampoj</p>
-    <label>Search: <input placeholder="Nomo, Komencdato or Findato" ng-model="searchText"></label>
+    <label>Serĉi:
+      <input class="form-control" ng-model="filtrilo">
+    </label>
+    <p>Entuta membraro {{query.length}}</p>
+    <a href="" ng-click="filtri()">
+      Klaku por vidi nur novajn membrojn (sen UEA-kodo)
+    </a>
+
     <table class="table">
     <tdead>
       <tr>
@@ -11,9 +16,8 @@
         <td>Findato</td>
       </tr>
     </tdead>
-
     <tbody>
-      <tr ng-repeat="membro in membroj | orderBy:'personanomo' | filter:searchText">
+      <tr ng-repeat="membro in membroj | orderBy:'personanomo' | filter: filtrilo as query">
         <td>
           {{membro.personanomo}} {{membro.familianomo}}
           <a href="#!/uzantoj/{{membro.idAno}}">Vidi detalojn >></a>
