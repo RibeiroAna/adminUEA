@@ -38,8 +38,6 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window,
       $window.location.reload();
     }, errorService.error, function (evt) {
         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-        console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-        $scope.progress = 'progress: ' + progressPercentage + '% ';
     });
   };
 

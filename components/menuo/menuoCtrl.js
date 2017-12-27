@@ -30,6 +30,10 @@
         {
           link:"#!/membrecoj",
           titolo:"Kategorioj kaj kotizoj"
+        },
+        {
+          link: "#!/laborgrupoj",
+          titolo: "Laborgrupoj"
         }
       ];
 
