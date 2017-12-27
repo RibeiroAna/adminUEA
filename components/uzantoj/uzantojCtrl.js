@@ -7,18 +7,41 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window,
     $rootScope.menuo = true;
 
     uzantojService.getUzantoj($routeParams.id).then(function(response) {
+      if(response.data[0]) {
         $scope.uzanto = response.data[0];
         $scope.uzanto.naskigxtago = $scope.uzanto.naskigxtago.slice(0,10);
+      } else {
+        window.alert("Tiu uzanto ne ekzistas");
+        $window.history.back();
+      }
     }, errorService.error);
 
     landojService.getLandoj().then(function(response) {
         $scope.landoj = response.data;
     }, errorService.error);
 
+    uzantojService.elsxutiBildon($routeParams.id).then(
+      function(response) {
+        $scope.bildo = response.data;
+      },
+      function(err) {
+        $scope.bildo = 'content/img/profilo.png'
+      });
+
     $scope.titoloj = ["S-ro", "S-rino", "D-ro",
                       "D-rino", "Profesoro", "Profesorino",
                       "Magistro", "Magistrino", "Pastro", "Pastrino"];
   }
+
+  $scope.upload = function () {
+    uzantojService.alsxultiBildon($routeParams.id, $scope.file).then(function (resp) {
+      $window.location.reload();
+    }, errorService.error, function (evt) {
+        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        $scope.progress = 'progress: ' + progressPercentage + '% ';
+    });
+  };
 
   $scope.updateUzantoj = function(valoro, kampo) {
     var data = {valoro: valoro, kampo: kampo};

@@ -1,6 +1,35 @@
 <div class="enhavo" data-ng-init="init()">
-  <div class="col-md-7">
-    <h2>Uzanta informoj</h2>
+  <div class="col-md-3">
+    <h2>Profilbildo:</h2>
+    <img src="{{bildo}}" alt="profilbildo" width="100%"></img>
+    <br><br>
+    <button
+       type="file"
+       class="btn btn-default"
+       ngf-select
+       ng-model="file"
+       name="file"
+       ngf-pattern="'image/*'"
+       accept="image/*"
+       ngf-max-size="20MB">
+       Alŝulti/redakti profilbildon
+     </button>
+     <br><br>
+    <p ng-show="file">
+      Antaŭvido: <img style="width:100px;" ngf-thumbnail="file"/>
+      <i ng-show="up.upload_form.file.$error.maxSize">Tro granda bildo
+      {{file.size / 1000000|number:1}}MB: max 20M</i>
+      <br><br>
+      <button
+        type="submit"
+        class="btn btn-default"
+        ng-click="upload()">
+        Konfirmi alŝuton
+      </button>
+    </p>
+  </div>
+  <div class="col-md-9">
+    <h2>Uzanta informoj:</h2>
     -------
     <p>
       <b>UEA-kodo:</b> {{uzanto.ueakodo}}
