@@ -1,7 +1,10 @@
  app.controller("menuoCtrl", function ($scope, $rootScope, $window, $http, config) {
 
   $scope.init = function() {
-    $scope.uzanto = JSON.parse($window.localStorage.getItem('uzanto'));
+    // $scope.uzanto = JSON.parse($window.localStorage.getItem('uzanto'));
+
+
+    console.log($window.localStorage);
 
     $scope.alert = window.alert;
 
@@ -47,7 +50,6 @@
       }
     ];
 
-    $scope.menueroj = [];
     config.getConfig("idAdministranto").then(function(response){
       if($scope.uzanto.permesoj.indexOf(response.data.idAdministranto) > -1) {
         $scope.menueroj.push($scope.menuoBazaAgordoj);
