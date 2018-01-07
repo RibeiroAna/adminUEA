@@ -187,6 +187,15 @@ a {
   padding: 10px;
 }
 
+#printejo-info-box {
+  width: 60%; 
+  height: 55%; 
+  display:inline-block;
+  position: fixed; 
+  margin: 2% 0 0 10%;
+  border: 2px solid black;
+}
+
 @media screen and (max-width: 700px) {
   .sidenav .closebtn {
     visibility: visible;

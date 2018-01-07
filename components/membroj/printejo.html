@@ -9,17 +9,15 @@
   				<option>Relish</option>
 			</select>
     	</div>
-    	<div id="select-fields">
-    		<h3>Kampoj</h3>
-<!--     		<div class="checkbox">
-  				<label><input type="checkbox" value="">Option 1</label>
-			</div>
-			<div class="checkbox">
-				<label><input type="checkbox" value="">Option 2</label>
-			</div> -->
-			<div class="checkbox" ng-repeat="field in checkboxFields">
-				<label><input type="checkbox" value="">{{field.name}}</label>
-			</div>
+    	<div>
+	    	<div id="select-fields" style="display:inline-block;">
+	    		<h3>Kampoj</h3>
+				<div class="checkbox" ng-repeat="field in checkboxFields">
+					<label><input type="checkbox" value="">{{field.name}}</label>
+				</div>
+	    	</div>
+	    	<div id="printejo-info-box" class="container">
+	    	</div>
     	</div>
     </div>
 </div>
