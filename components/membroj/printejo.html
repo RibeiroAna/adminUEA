@@ -1,3 +1,25 @@
-<div>
-    <h1>Printejo</h1>
+<div class="container">
+    <h1>Printu adreson de membroj</h1>
+    <div class="container">
+    	<div id="select-grupo">
+    		<h3 style="display:inline-block">Grupo de membroj</h2>
+    		<select class="selectpicker" style="display:inline-block">
+  				<option>Mustard</option>
+  				<option>Ketchup</option>
+  				<option>Relish</option>
+			</select>
+    	</div>
+    	<div id="select-fields">
+    		<h3>Kampoj</h3>
+<!--     		<div class="checkbox">
+  				<label><input type="checkbox" value="">Option 1</label>
+			</div>
+			<div class="checkbox">
+				<label><input type="checkbox" value="">Option 2</label>
+			</div> -->
+			<div class="checkbox" ng-repeat="field in checkboxFields">
+				<label><input type="checkbox" value="">{{field.name}}</label>
+			</div>
+    	</div>
+    </div>
 </div>
