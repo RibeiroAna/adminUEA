@@ -5,6 +5,7 @@ app.service('uzantojService', function ($http, $window, Upload, config) {
     service.updateUzantoj = updateUzantoj;
     service.alsxultiBildon = alsxultiBildon;
     service.elsxutiBildon = elsxutiBildon;
+    service.getGrupoj = getGrupoj;
 
     function getUzantoj(id) {
         var req = {
@@ -39,6 +40,16 @@ app.service('uzantojService', function ($http, $window, Upload, config) {
           headers: {'x-access-token': $window.localStorage.getItem('token')},
           data: data
       };
+      return $http(req);
+    }
+
+    function getGrupoj(id) {
+      var req = {
+        method: 'GET',
+        url: config.api_url + '/uzantoj/admin/' + id + '/grupoj',
+        headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+
       return $http(req);
     }
 

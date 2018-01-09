@@ -1,8 +1,9 @@
 <div class="enhavo" data-ng-init="init()">
-  <div class="col-md-3">
+  <h3>Uzantprofilo por: {{uzanto.titolo}} {{uzanto.personanomo}} <b>{{uzanto.familianomo}}</b></h3>
+  <div class="col-md-4" style="align:center">
     <h2>Profilbildo:</h2>
-    <img src="{{bildo}}" alt="profilbildo" width="100%"></img>
-    <br><br>
+    <img src="{{bildo}}" alt="profilbildo" class="profilbildo"></img>
+    <br>
     <button
        type="file"
        class="btn btn-default"
@@ -12,7 +13,7 @@
        ngf-pattern="'image/*'"
        accept="image/*"
        ngf-max-size="20MB">
-       Alŝulti/redakti profilbildon
+       Redakti aŭ aldoni profilbildon
      </button>
      <br><br>
     <p ng-show="file">
@@ -27,10 +28,28 @@
         Konfirmi alŝuton
       </button>
     </p>
+    <h4>
+      Anecoj:
+      <button class="btn btn-default" ng-click="montriDetalojn($event, grupo, '#aldoniAnecon')">
+        Aldoni novan anecon
+      </button>
+    </h4>
+
+    <ul ng-repeat="grupo in grupoj">
+      <li>
+          <b>{{grupo.nomo}}</b>:
+          ekde {{grupo.komencdato}} ĝis {{grupo.findato || "dumvive"}}
+          <span ng-show="grupo.aprobita.data == 0" style="color:red"> - Ne aprobita</span>
+          <span ng-show="grupo.aprobita.data == 1" style="color:green"> - Aprobita</span>
+          <a href="" ng-click="montriDetalojn($event, grupo, '#redaktiAnecon')">
+            --  Vidi detalojn >>
+          </a>
+      </li>
+
+    </ul>
   </div>
-  <div class="col-md-9">
-    <h2>Uzanta informoj:</h2>
-    -------
+  <div class="col-md-8">
+    <h2>Pri la uzanto</h2>
     <p>
       <b>UEA-kodo:</b> {{uzanto.ueakodo}}
       <a href="#"
@@ -89,6 +108,14 @@
       </a>
     </p>
     <p>
+      <b>tttpaĝo:</b> {{uzanto.tttpagxo}}
+      <a href="#"
+         onbeforesave="updateUzantoj($data, 'tttpagxo')"
+         editable-text="uzanto.tttpagxo">
+        redakti aŭ aldoni
+      </a>
+    </p>
+    <p>
       <b>Adreso:</b> {{uzanto.adreso}}
       <a href="#"
          onbeforesave="updateUzantoj($data, 'adreso')"
@@ -106,11 +133,39 @@
     </p>
     <p>
       <b>Lando: </b> {{uzanto.radikoEo + uzanto.finajxoEo}}
+      <img src="{{landInformoj.flag}}" alt="flago" width="20"></img>
       <a href="#"
          onbeforesave="updateUzantoj($data, 'idLando')"
-         editable-select="uzanto.titolo"
+         editable-select="uzanto.idLando"
          e-ng-options="l.id as l.radikoEo + l.finajxoEo for l in landoj">
          redakti aŭ aldoni
+      </a>
+    </p>
+    <p>
+      <b>Hejmtelefono:</b>
+      +{{landInformoj.callingCodes[0]}} {{uzanto.telhejmo}}
+      <a href="#"
+         onbeforesave="updateUzantoj($data, 'telhejmo')"
+         editable-text="uzanto.telhejmo">
+        redakti aŭ aldoni
+      </a>
+    </p>
+    <p>
+      <b>Oficeja telefono:</b>
+      +{{landInformoj.callingCodes[0]}} {{uzanto.teloficejo}}
+      <a href="#"
+         onbeforesave="updateUzantoj($data, 'teloficejo')"
+         editable-text="uzanto.teloficejo">
+        redakti aŭ aldoni
+      </a>
+    </p>
+    <p>
+      <b>Poŝtelefono:</b>
+      +{{landInformoj.callingCodes[0]}} {{uzanto.telportebla}}
+      <a href="#"
+         onbeforesave="updateUzantoj($data, 'telportebla')"
+         editable-text="uzanto.telportebla">
+        redakti aŭ aldoni
       </a>
     </p>
     <p>
@@ -123,4 +178,180 @@
       </a>
     </p>
  </div>
+</div>
+
+<div style="visibility: hidden">
+  <div class="md-dialog-container" id="aldoniAnecon">
+    <md-dialog flex>
+      <md-toolbar class="md-toolbar-tools">
+        <h2>Aldoni novan anencon al la uzanto</h2>
+        <span flex></span>
+        <a href="" ng-click="cancel()">
+          <i class="fa fa-window-close" aria-hidden="true"></i>
+        </a>
+      </md-toolbar>
+      <md-content class="md-padding">
+        <form>
+          <p>Por komenci, elektu grupon por anigi tiun homon</p>
+          <md-autocomplete
+                md-selected-item="aneco.grupo"
+                md-search-text="ctrl.searchText"
+                md-items="item in querySearch(ctrl.searchText)"
+                md-item-text="item.nomo"
+                md-min-length="0"
+                placeholder="Al kiu grupo vi ŝatus anigi tiun homon?">
+              <md-item-template>
+                <span class="item-title">
+                  <strong>{{item.mallongigilo}}</strong> {{item.nomo}}
+               </span>
+              </md-item-template>
+              <md-not-found>
+                Neniu grupo kun "{{ctrl.searchText}}" estis trovita.
+              </md-not-found>
+          </md-autocomplete>
+
+          <p>&nbsp</p>
+
+          <div layout="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Komencdato</label>
+              <md-datepicker ng-model="aneco.komencdato"></md-datepicker>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Findato</label>
+              <md-datepicker ng-model="aneco.findato"
+                            ng-disabled="aneco.dumviva">
+              </md-datepicker>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-sm>
+              <md-checkbox ng-model="aneco.dumviva">
+                  Dumvive
+              </md-checkbox>
+           </md-input-container>
+          </div>
+
+          <div layout="row" ng-show="opciaj">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Tasko:</label>
+              <input name="Tasko" ng-model="aneco.rolo" />
+              <div class="hint">
+                Ĝenerale por estraranoj, oficistoj, ktp.
+                la tasko estas io kiel "Prezidanto", "Ĝenerala Direktoro", ktp
+              </div>
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Respondeco:</label>
+              <input name="Respondeco" ng-model="aneco.respondeco" />
+              <div class="hint">
+                Respondeco estas io kiel: "Faka Agado", "Rilatoj kun TEJO", ktp.
+              </div>
+            </md-input-container>
+          </div>
+
+          <div layout="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <md-checkbox ng-model="opciaj">
+                  Montri opciajn kampojn
+              </md-checkbox>
+           </md-input-container>
+           <md-button class="md-raised" ng-click="postAneco()">
+             Registri anecon
+           </md-button>
+         </div>
+      </form>
+    </md-content>
+  </md-dialog>
+ </div>
+</div>
+
+<div style="visibility: hidden">
+  <div class="md-dialog-container" id="redaktiAnecon">
+    <md-dialog layout-padding>
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>Vidante detalojn por: {{elektitaGrupo.nomo}}</h2>
+          <span flex></span>
+          <a href="" ng-click="cancel()">
+            <i class="fa fa-window-close" aria-hidden="true"></i>
+          </a>
+        </div>
+      </md-toolbar>
+      <p>
+        <b>Komencdato</b> {{elektitaGrupo.komencdato}}
+        <a href="#"
+           editable-text="elektitaGrupo.komencdato"
+           onbeforesave="updateAneco(elektitaGrupo.id, $data, 'komencdato')">
+              redakti aŭ aldoni
+        </a>
+      </p>
+
+      <p>
+        <b>Findato</b> {{elektitaGrupo.findato || "Dumviva"}}
+        <a href="#"
+           editable-text="elektitaGrupo.findato"
+           e-ui-mask="9999-99-99"
+           onbeforesave="updateAneco(elektitaGrupo.id, $data, 'findato')">
+          redakti aŭ aldoni
+        </a>
+        <button class="btn btn-default"
+           ng-show="elektitaGrupo.dumviva.data == 0"
+           ng-click="updateAneco(elektitaGrupo.id, true, 'dumviva')">
+          Farigi dumviva
+        </button>
+      </p>
+
+      <p>
+        <b>Aprobita</b>
+        <span ng-show="elektitaGrupo.aprobita.data == 0" style="color:red">Ne</span>
+        <span ng-show="elektitaGrupo.aprobita.data == 1" style="color:green">Jes</span>
+        <a href="#"
+           editable-select="elektitaGrupo.aprobita"
+           e-ng-options="s.value as s.text for s in [{value: true, text: 'Jes'}, {value: false, text: 'Ne'}]"
+           onaftersave="updateAneco(elektitaGrupo.id, elektitaGrupo.aprobita, 'aprobita')">
+          redakti aŭ aldoni
+        </a>
+      </p>
+
+      <p ng-if="elektitaGrupo.tasko">
+        <b>Tasko:</b> {{elektitaGrupo.rolo}}
+        <a href="#"
+           editable-text="elektitaGrupo.tasko">
+          redakti aŭ aldoni
+        </a>
+      </p>
+
+      <p ng-if="elektitaGrupo.respondeco">
+        <b>Respondeco:</b> {{elektitaGrupo.respondeco}}
+        <a href="#"
+           editable-text="elektitaGrupo.respondeco">
+          redakti aŭ aldoni
+        </a>
+      </p>
+
+      <p ng-if="elektitaGrupo.idUrbo">
+        <b>Respondeco:</b> {{elektitaGrupo.respondeco}}
+        <a href="#"
+           editable-text="elektitaGrupo.findato">
+          redakti aŭ aldoni
+        </a>
+      </p>
+
+      <p>
+        <b>Observoj:</b>
+        <a href="#"
+           editable-textarea="elektitaGrupo.observoj">
+          redakti aŭ aldoni
+        </a>
+        <div ng-bind-html="elektitaGrupo.observoj" style="background-color: #D3D3D3;"></div>
+      </p>
+
+      <button type="button" class="btn btn-danger" ng-click="forvisxiAnecon(elektitaGrupo)">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        Forviŝi Anecon
+      </button>
+    </md-dialog>
+  </div>
 </div>

@@ -54,7 +54,7 @@ function ($scope, $rootScope, $window, $http, $routeParams, $sanitize, config,
   }
 
   $scope.forvisxiAnecon = function(peto) {
-    if(confirm("Ĉu vi vere volas forviŝi tiun anecpeton?" +
+    if(confirm("Ĉu vi vere volas forviŝi tiun anecon?" +
                " Tiu ago ne povos esti nuligita")) {
          var data = {
            anecnomo: $scope.grupo.nomo,
