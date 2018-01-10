@@ -1,30 +1,17 @@
-app.controller("membrecojCtrl", function ($scope, $rootScope, $window, $q,
-                                          errorService, config, auth, membrojService) {
+app.controller("laborgrupojCtrl", function ($scope, $rootScope, $window, $q,
+                                            errorService, config, auth, membrojService) {
 
   $scope.init = function() {
       auth.ensalutita();
 
       $rootScope.menuo = true;
 
-      config.getConfig("idAldonaMembrecgrupo").then(function(response) {
-        $scope.idAldonaMembrecgrupo = response.data.idAldonaMembrecgrupo;
-        membrojService.getGrupKat($scope.idAldonaMembrecgrupo).then(function(response) {
-          $scope.krommembrecoj = response.data;
+      config.getConfig("idLaborgrupo").then(function(response) {
+        $scope.idLaborgrupo = response.data.idLaborgrupo;
+        membrojService.getGrupKat($scope.idLaborgrupo).then(function(response) {
+          $scope.laborgrupoj = response.data;
         }, errorService.error);
       });
-
-      config.getConfig("idMembrecgrupo").then(function(response) {
-        $scope.idMembrecgrupo = response.data.idMembrecgrupo;
-        membrojService.getGrupKat($scope.idMembrecgrupo).then(function(response) {
-          $scope.membrecgrupoj = response.data;
-        }, errorService.error);
-      });
-
-      //idJunajGrupoj
-      config.getConfig("idJunajGrupoj").then(function(response) {
-        $scope.idJunajGrupoj = response.data.idJunajGrupoj;
-      }, errorService.error);
-
   }
 
   $scope.delete = function(id) {
@@ -42,11 +29,8 @@ app.controller("membrecojCtrl", function ($scope, $rootScope, $window, $q,
 
   $scope.novaKategorio = function() {
     var kat = [];
-    if($scope.baza == 1) {
-      kat.push($scope.idMembrecgrupo);
-    } else {
-      kat.push($scope.idAldonaMembrecgrupo);
-    }
+
+    kat.push($scope.idLaborgrupo);
 
     if($scope.tejo == 1) {
       kat.push($scope.idJunajGrupoj);

@@ -1,13 +1,16 @@
 <div class="enhavo" data-ng-init="init()">
-  <h3>Baza membrckategorio - <a href="#!/kotizoj/{{bazaMembreco}}"> Redakti kotizojn >></a></h3>
+  <label class="col-md-12">
+    <h3 class="col-md-6">Membreckategorioj</h3>
+    <label class="col-md-6">Serĉi: <input class="form-control" ng-model="searchText"></label>
+  </label>
+
   <h2>
-    Krommembrecoj kaj servoj:
     <a href="" ng-click="nova = !nova" ng-init="nova = true">
-       + Aldoni novan krommembrecon aŭ servon
+       + Aldoni novan membreckategorion aŭ servon
     </a>
   </h2>
 
-  <form ng-hide="nova" ng-submit="novaKrommebreco()" class="form-inline">
+  <form ng-hide="nova" ng-submit="novaKategorio()">
     <div class="form-group">
       <label for="mallogigilo">Mallongigilo (Ekz: PTEJO):</label>
       <input type="text"
@@ -32,8 +35,24 @@
              class="form-control">
     </div>
 
-    <button id="submit" type="submit" class="btn btn-primary">Aldoni</button>
+    <div class="form-group">
+      <label for="juna">Ĉu ĝi estas kategorio de TEJO? (ekz. Patrono de TEJO)</label>
+      <select class="form-control" ng-model="tejo">
+        <option value=1>Jes</option>
+        <option value=0>Ne</option>
+      </select>
+    </div>
 
+    <div class="form-group">
+      <label>Ĉu ĝi estas baza membreckategorio (kiel MG, MJ, ktp) aŭ
+          kroma kategorio (kiel Societo Zamenhof, abonanto de Kontakto)</label>
+      <select class="form-control" ng-model="baza">
+        <option value=1>Baza membreckategorio</option>
+        <option value=0>Kroma kategorio</option>
+      </select>
+    </div>
+
+    <button id="submit" type="submit" class="btn btn-primary">Aldoni</button>
   </form>
 
   <table class="table">
@@ -41,28 +60,68 @@
       <td>Mallongigilo</td>
       <td>Nomo</td>
       <td>Priskribo</td>
+      <td>Baza aŭ kroma</td>
     </thead>
-    <tr ng-repeat="k in krommembrecoj">
+    <tr ng-repeat="k in krommembrecoj | filter:searchText">
       <td>
+        {{k.mallongigilo}}
         <a href="#"
            editable-text="k.mallongigilo"
            onbeforesave="update(k.id, $data, 'mallongigilo')">
-           {{k.mallongigilo}}
+           Redakti aŭ aldoni
         </a>
       </td>
       <td>
+        {{k.nomo}}
         <a href="#"
            editable-text="k.nomo"
            onbeforesave="update(k.id, $data, 'nomo')">
-           {{k.nomo}}
+           Redakti aŭ aldoni
         </a>
       </td>
       <td>
+        {{k.priskribo}}
         <a href="#"
-           editable-text="k.priskribo"
+           editable-textarea="k.priskribo"
            onbeforesave="update(k.id, $data, 'priskribo')">
-           {{k.priskribo}}
+           Redakti aŭ aldoni
         </a>
+      </td>
+       <td>
+         Kroma
+        </td>
+      <td><a href="" ng-click="delete(k.id)">  <i class="fa fa-trash" aria-hidden="true"></i>
+         Forviŝi</a>
+       </td>
+      <td><a href="#!/kotizoj/{{k.id}}"> Redakti kotizojn >> </a></td>
+    </tr>
+    <tr ng-repeat="k in membrecgrupoj | filter:searchText">
+      <td>
+        {{k.mallongigilo}}
+        <a href="#"
+           editable-text="k.mallongigilo"
+           onbeforesave="update(k.id, $data, 'mallongigilo')">
+           Redakti aŭ aldoni
+        </a>
+      </td>
+      <td>
+        {{k.nomo}}
+        <a href="#"
+           editable-text="k.nomo"
+           onbeforesave="update(k.id, $data, 'nomo')">
+           Redakti aŭ aldoni
+        </a>
+      </td>
+      <td>
+        {{k.priskribo}}
+        <a href="#"
+           editable-textarea="k.priskribo"
+           onbeforesave="update(k.id, $data, 'priskribo')">
+           Redakti aŭ aldoni
+        </a>
+      </td>
+      <td>
+        Baza
       </td>
       <td><a href="" ng-click="delete(k.id)">  <i class="fa fa-trash" aria-hidden="true"></i>
          Forviŝi</a>
@@ -70,6 +129,4 @@
       <td><a href="#!/kotizoj/{{k.id}}"> Redakti kotizojn >> </a></td>
     </tr>
   </table>
-  <p>* Klaku je la kampoj por redakti</p>
-
 </div>

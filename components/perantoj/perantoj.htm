@@ -8,7 +8,6 @@
   </h2>
 
   <form class="form-inline" ng-show="nova" ng-submit="novaPeranto()">
-    <p class="col-md-12">(En la dua versio eblos rekte ligi peranton al asocioj kaj homoj)</p>
     <div class="form-group">
       <label>Perantlando</label>
       <select class="form-control"
@@ -42,6 +41,7 @@
     </div>
   </form>
 
+  <label>Serĉi: <input ng-model="searchText" class="form-control"></label>
   <table class="table">
     <thead>
       <tr>
@@ -51,7 +51,7 @@
     </thead>
 
     <tbody>
-      <tr ng-repeat="peranto in perantoj | orderBy:'publikaNomo'">
+      <tr ng-repeat="peranto in perantoj | orderBy:'publikaNomo' | filter:searchText">
         <td>
           <a href=""
              editable-text="peranto.publikaNomo"

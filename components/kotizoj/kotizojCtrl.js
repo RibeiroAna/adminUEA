@@ -1,5 +1,6 @@
 app.controller("kotizojCtrl", function ($scope, $routeParams, $rootScope, $window,
-                                        $http, config, auth) {
+                                        config, auth, errorService,
+                                        kotizojService, landojService) {
 
   $scope.init = function() {
       auth.ensalutita();
@@ -7,18 +8,16 @@ app.controller("kotizojCtrl", function ($scope, $routeParams, $rootScope, $windo
       $rootScope.menuo = true;
       $scope.novKotizo = [];
 
-      $http.get(config.api_url + "/grupoj/" + $routeParams.id).then(
-        function(response) {
+      kotizojService.getGrupoj($routeParams.id).then(function(response) {
           $scope.grupo = response.data[0];
-      });
+      }, errorService.error);
 
-      $http.get(config.api_url + "/grupoj/" + $routeParams.id + "/kotizoj").then(
-        function(response) {
+      kotizojService.getKotizoj($routeParams.id).then(function (response) {
           $scope.kotizoj= response.data;
-          $http.get(config.api_url + "/landoj").then(function(response) {
+          landojService.getLandoj().then(function(response) {
               $scope.landoj = response.data;
-          });
-      });
+          }, errorService.error);
+      }, errorService.error);
   }
 
   $scope.getKotizo = function(lando) {
@@ -36,17 +35,10 @@ app.controller("kotizojCtrl", function ($scope, $routeParams, $rootScope, $windo
     $scope.novKotizo[idLando].prezo = $scope.novKotizo[idLando].prezo * 100;
     $scope.novKotizo[idLando].junaRabato = $scope.novKotizo[idLando].junaRabato * 100;
 
-    var req = {
-      method: 'POST',
-      url: config.api_url + "/grupoj/" + $routeParams.id + "/kotizoj",
-      headers: {'x-access-token': $window.localStorage.getItem('token')},
-      data: $scope.novKotizo[idLando]
-    };
-    $http(req).then(
-      function(sucess){
-        $window.location.reload();
-      }
-    );
+      kotizojService.postKotizoj($routeParams.id, $scope.novKotizo[idLando]).
+      then(function(sucess){
+          $window.location.reload();
+      }, errorService.error);
   }
 
   $scope.updateKotizo = function(id, valoro, kampo) {
@@ -57,12 +49,7 @@ app.controller("kotizojCtrl", function ($scope, $routeParams, $rootScope, $windo
         valoro = valoro * 100;
     }
     var data = {id: id, valoro: valoro, kampo: kampo};
-    var req = {
-        method: 'PUT',
-        url: config.api_url + "/grupoj/" + $routeParams.id + "/kotizoj",
-        headers: {'x-access-token': $window.localStorage.getItem('token')},
-        data: data
-      };
-      $http(req);
+
+    kotizojService.putKotizoj($routeParams.id, data).then(function(sucess){}, errorService.error);
    }
 });

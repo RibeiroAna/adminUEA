@@ -10,7 +10,7 @@
   </h2>
 
   <!--formularo por aldoni novan landon-->
-  <form ng-submit="novaAdmin()" ng-hide="nova" class="form-inline">
+  <form ng-submit="novaAdmin()" ng-hide="nova" class="form-inline col-md-12">
     <p>{{eraro}}</p>
     <div class="form-group col-md-12">
       <label for="radiko">Uzantnomo</label>
@@ -34,9 +34,11 @@
       </label>
     </div>
 
-    <button id="submit" type="submit" class="btn btn-primary col-md-2">Aldoni</button>
+    <button id="submit" type="submit" class="btn btn-primary col-md-4">Aldoni</button>
+    <br><br>
   </form>
 
+  <label>serĉi: <input placeholder="Uzantnomo aŭ Roloj" ng-model="searchText" class="form-control col-md-12"></label>
   <!--Tabelo kun enhavo-->
   <table class="table">
     <thead>
@@ -46,7 +48,7 @@
         <td><b>Roloj</b></td>
       </tr>
     </thead>
-    <tr ng-repeat="a in administrantoj | orderBy:'uzantnomo'">
+    <tr ng-repeat="a in administrantoj | orderBy:'uzantnomo' | filter:searchText">
       <td>{{a.uzantnomo}}</td>
       <td>
         <a href="#"

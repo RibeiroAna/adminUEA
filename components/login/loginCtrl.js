@@ -1,4 +1,5 @@
-app.controller("loginCtrl", function ($scope, $rootScope, $window, $http, config) {
+app.controller("loginCtrl", function ($scope, $rootScope, $window,
+                                      errorService, config, loginService) {
 
   $rootScope.menuo = false;
   $scope.msg = "ERARO: Ni ne havas konekton kun la servilo nun";
@@ -9,7 +10,7 @@ app.controller("loginCtrl", function ($scope, $rootScope, $window, $http, config
     $window.location.reload();
   }
 
-  $http.get(config.api_url + '/admin/agordita').then(function(response) {
+  loginService.getAgordita().then(function(response) {
     if (response.data.agordita == false) {
       $scope.msg = "ATENTO: Tiu estas la unua fojo kiun iu uzas tiun sistemon." +
                    "Tajpu ajnan uzantnomon kaj pasvorton, kaj ili estos uzataj" +
@@ -17,11 +18,10 @@ app.controller("loginCtrl", function ($scope, $rootScope, $window, $http, config
     } else {
         $scope.msg = "Ensalutu kun la datumoj antaŭdonitaj";
     }
-  });
+  }, errorService.error);
 
   $scope.ensaluti = function() {
-    $http.post(config.api_url + '/admin/ensaluti', $scope.uzanto).then(
-        function(response) {
+      loginService.doEnsaluti($scope.uzanto).then(function(response) {
           $window.localStorage.setItem('token', response.data.token);
           $window.localStorage.setItem('uzanto', JSON.stringify(response.data.administranto));
           $window.location.href = '#!/membroj';
