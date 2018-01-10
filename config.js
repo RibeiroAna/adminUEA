@@ -10,3 +10,4 @@ app.service('config', function($http){
   }
 
   return service;
+}
