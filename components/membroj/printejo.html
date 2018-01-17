@@ -1,23 +1,34 @@
 <div class="container">
     <h1>Printu adreson de membroj</h1>
-    <div class="container">
-    	<div id="select-grupo">
-    		<h3 style="display:inline-block">Grupo de membroj</h2>
-    		<select class="selectpicker" style="display:inline-block">
-  				<option>Mustard</option>
-  				<option>Ketchup</option>
-  				<option>Relish</option>
-			</select>
-    	</div>
-    	<div>
-	    	<div id="select-fields" style="display:inline-block;">
-	    		<h3>Kampoj</h3>
-				<div class="checkbox" ng-repeat="field in checkboxFields">
-					<label><input type="checkbox" value="">{{field.name}}</label>
-				</div>
-	    	</div>
-	    	<div id="printejo-info-box" class="container">
-	    	</div>
-    	</div>
+    <div class="container" style="height: 100%;">
+		<div style="height: 70%;">
+            <div id="select-grupo">
+                <h3 style="display:inline-block">Grupo de membroj</h3>
+                <select class="selectpicker" style="display:inline-block">
+                    <option>Mustard</option>
+                    <option>Ketchup</option>
+                    <option>Relish</option>
+                </select>
+            </div>
+            <div style="height: 100%">
+                <div id="select-fields" class="col-md-6" style="width: 200px">
+                    <div style="display: inline-block">
+                        <h3>Kampoj</h3>
+                        <div class="checkbox" ng-repeat="field in checkboxFields">
+                            <label><input type="checkbox" value="">{{field.name}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" style="margin-top: 2%">
+                    <div id="printejo-info-box" class="row container">
+                    </div>
+                    <div class="row" style="margin-top: 10%;">
+                        <button>Elsuti PDF</button>
+                        <button>Elsuti TXT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
