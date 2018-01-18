@@ -21,19 +21,21 @@
                 </div>
                 <div class="col-md-6" style="margin-top: 2%;">
                     <div id="printejo-info-box" class="row container" style="overflow-y: scroll">
-                        <h3>Antaŭvido</h3>
-                        <div style="" class="container" ng-repeat="user in grupoj">
-                            <span class="row">{{user.nomo}}</span>
-                            <span class="row">
+                        <div id="exportthis">
+                            <h3>Antaŭvido</h3>
+                            <div  style="" class="container" ng-repeat="user in grupoj">
+                                <span class="row">{{user.nomo}}</span>
+                                <span class="row">
                                 {{user.adreso}}
                                 <br>{{user.postkodo}}
                                 <br>{{user.lando}}
                             </span>
+                            </div>
                         </div>
                     </div>
-                    <div class="row" style="margin-top: 10%;">
-                        <button>Elsuti PDF</button>
-                        <button>Elsuti TXT</button>
+                    <div class="row" style="margin-top: 10%; margin-left: 50%; width: 100%">
+                        <button ng-click="teste()" class="col-md-6" style="width: 150px">Elsuti PDF</button>
+                        <button class="col-md-6" style="width: 150px">Elsuti TXT</button>
                     </div>
                 </div>
             </div>
