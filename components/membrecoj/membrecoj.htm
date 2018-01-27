@@ -90,8 +90,11 @@
        <td>
          Kroma
         </td>
-      <td><a href="" ng-click="delete(k.id)">  <i class="fa fa-trash" aria-hidden="true"></i>
-         Forviŝi</a>
+      <td>
+        <a href="" ng-click="delete(k.id, idAldonaMembrecgrupo)">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+           Forviŝi
+        </a>
        </td>
       <td><a href="#!/kotizoj/{{k.id}}"> Redakti kotizojn >> </a></td>
     </tr>
@@ -123,8 +126,11 @@
       <td>
         Baza
       </td>
-      <td><a href="" ng-click="delete(k.id)">  <i class="fa fa-trash" aria-hidden="true"></i>
-         Forviŝi</a>
+      <td>
+        <a href="" ng-click="delete(k.id, idMembrecgrupo)">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+           Forviŝi
+        </a>
        </td>
       <td><a href="#!/kotizoj/{{k.id}}"> Redakti kotizojn >> </a></td>
     </tr>

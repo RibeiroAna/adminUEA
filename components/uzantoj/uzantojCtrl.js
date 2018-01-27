@@ -115,8 +115,14 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $mdDialog, 
 
   $scope.querySearch  = function (query) {
     var results = $scope.cxiujGrupoj.filter(function(obj) {
-        return obj.nomo.toLowerCase().indexOf(query.toLowerCase()) != -1 ||
-        obj.mallongigilo.toLowerCase().indexOf(query.toLowerCase()) != -1;
+        // console.log(obj);
+        // return
+        if(obj.nomo != null && obj.mallongigilo != null) {
+          return obj.nomo.toLowerCase().indexOf(query.toLowerCase()) != -1 ||
+          obj.mallongigilo.toLowerCase().indexOf(query.toLowerCase()) != -1;
+        } else {
+          return obj.id == query;
+        }
     });
     return results;
   }
