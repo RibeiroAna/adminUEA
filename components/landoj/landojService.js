@@ -7,8 +7,12 @@ app.service('landojService', function ($http, config, $window) {
     service.deleteLandoj = deleteLandoj;
     service.getInfoPriLanda = getInfoPriLanda;
 
-    function getLandoj() {
-        return $http.get(config.api_url + '/landoj');
+    function getLandoj(id) {
+      var url = config.api_url + '/landoj';
+      if(id){
+        url = config.api_url + '/landoj?id=' + id;
+      }
+      return $http.get(url);
     }
 
     function getInfoPriLanda(landkodo) {

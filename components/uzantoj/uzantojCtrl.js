@@ -10,8 +10,11 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $mdDialog, 
       if(response.data[0]) {
         $scope.uzanto = response.data[0];
         $scope.uzanto.naskigxtago = $scope.uzanto.naskigxtago.slice(0,10);
-        landojService.getInfoPriLanda($scope.uzanto.landkodo).then(function(response) {
-          $scope.landInformoj = response.data;
+        landojService.getLandoj($scope.uzanto.idLando).then(function(response){
+          $scope.lando = response.data[0];
+          landojService.getInfoPriLanda(response.data[0].landkodo).then(function(response) {
+            $scope.landInformoj = response.data;
+          }, errorService.error);
         }, errorService.error);
 
         uzantojService.getGrupoj($routeParams.id).then(function(response) {
@@ -88,6 +91,17 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $mdDialog, 
     }
   }
 
+  $scope.forvisxiUzanton = function() {
+    var familianomo = prompt("Se vi volas vere foriviŝi tiun uzanton, "
+                      + "tajpu ŝian aŭ lian familian nomon", "tajpu");
+    if(familianomo == $scope.uzanto.familianomo){
+      uzantojService.deleteUzanto($scope.uzanto.id).then(function(sucess){
+        $window.location.href = '#!/membroj';
+        $window.location.reload()
+      }, errorService.error);
+    }
+  }
+
   $scope.updateAneco = function(id, valoro, kampo) {
     if((kampo == 'dumviva') && (valoro == true)){
       var data = {kampo: 'findato', valoro: null};
@@ -99,7 +113,7 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $mdDialog, 
     }
     var data = {kampo: kampo, valoro: valoro};
     membrojService.updateAneco(id, data).then(function(sucess){
-      window.location.reload();
+      $window.location.reload();
     }, errorService.error);
   }
 
@@ -140,7 +154,6 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $mdDialog, 
       }
     }
 
-console.log($scope.aneco.komencdato);
     if($scope.aneco.komencdato) {
       $scope.aneco.komencdato = $scope.aneco.komencdato.toISOString().slice(0,10);
     } else {

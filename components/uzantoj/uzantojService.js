@@ -2,18 +2,28 @@ app.service('uzantojService', function ($http, $window, Upload, config) {
     var service = this;
 
     service.getUzantoj = getUzantoj;
+    service.deleteUzanto = deleteUzanto;
     service.updateUzantoj = updateUzantoj;
     service.alsxultiBildon = alsxultiBildon;
     service.elsxutiBildon = elsxutiBildon;
     service.getGrupoj = getGrupoj;
 
     function getUzantoj(id) {
-        var req = {
-            method: 'GET',
-            url: config.api_url + '/uzantoj/admin/' + id,
-            headers: {'x-access-token': $window.localStorage.getItem('token')}
-        };
-        return $http(req);
+      var req = {
+          method: 'GET',
+          url: config.api_url + '/uzantoj/admin/' + id,
+          headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+      return $http(req);
+    }
+
+    function deleteUzanto(id) {
+      var req = {
+        method: 'DELETE',
+        url: config.api_url + '/uzantoj/admin/' + id,
+        headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+      return $http(req);
     }
 
     function alsxultiBildon(id, file) {

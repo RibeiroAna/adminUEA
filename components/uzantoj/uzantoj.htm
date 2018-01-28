@@ -1,5 +1,13 @@
 <div class="enhavo" data-ng-init="init()">
-  <h3>Uzantprofilo por: {{uzanto.titolo}} {{uzanto.personanomo}} <b>{{uzanto.familianomo}}</b></h3>
+  <h3 class="col-md-9">
+    Uzantprofilo por: {{uzanto.titolo}} {{uzanto.personanomo}}
+    <b>{{uzanto.familianomo}}</b>
+  </h3>
+  <h3 class="col-md-3">
+    <button class="btn btn-danger"  ng-click="forvisxiUzanton()">
+      <i class="fa fa-trash" aria-hidden="true"></i> Forviŝi uzanton
+    </button>
+  </h3>
   <div class="col-md-4" style="align:center">
     <h2>Profilbildo:</h2>
     <img src="{{bildo}}" alt="profilbildo" class="profilbildo"></img>
@@ -132,7 +140,7 @@
       </a>
     </p>
     <p>
-      <b>Lando: </b> {{uzanto.radikoEo + uzanto.finajxoEo}}
+      <b>Lando: </b> {{lando.radikoEo + lando.finajxoEo}}
       <img src="{{landInformoj.flag}}" alt="flago" width="20"></img>
       <a href="#"
          onbeforesave="updateUzantoj($data, 'idLando')"
