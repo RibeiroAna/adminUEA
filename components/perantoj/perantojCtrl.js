@@ -1,5 +1,6 @@
 app.controller("perantojCtrl", function ($scope, $rootScope, $window,
-                                         $http, config, auth, landojService, perantoService) {
+                                         errorService, config, auth,
+                                        landojService, perantoService) {
 
   $scope.init = function() {
     auth.ensalutita();
@@ -7,11 +8,11 @@ app.controller("perantojCtrl", function ($scope, $rootScope, $window,
 
       landojService.getLandoj().then(function(response) {
           $scope.landoj = response.data;
-      });
+      }, errorService.error);
 
       perantoService.getPerantoj().then(function(response) {
           $scope.perantoj = response.data;
-      });
+      }, errorService.error);
 
     $scope.peranto = {}
   }
@@ -19,7 +20,7 @@ app.controller("perantojCtrl", function ($scope, $rootScope, $window,
   $scope.getPerantoj = function() {
       perantoService.getPerantojByLando($scope.lando.id).then(function(response) {
           $scope.perantoj = response.data;
-      });
+      }, errorService.error);
   }
 
   $scope.deletePeranto = function(id) {
@@ -30,7 +31,7 @@ app.controller("perantojCtrl", function ($scope, $rootScope, $window,
               window.alert("Okazis eraro en la servilo." +
                   " Provu elsaluti kaj ensaluti denove");
           }
-      });
+      }, errorService.error);
  }
 
 
@@ -38,11 +39,11 @@ app.controller("perantojCtrl", function ($scope, $rootScope, $window,
      $scope.peranto.idLando = $scope.peranto.lando.id;
      perantoService.postPerantoj($scope.peranto).then(function(sucess){
          $window.location.reload();
-     });
+     }, errorService.error);
  }
 
  $scope.updatePeranto = function(id, valoro, kampo) {
      var data = {valoro: valoro, kampo: kampo};
-     perantoService.updatePerantoj(id, data);
+     perantoService.updatePerantoj(id, data).then(function(sucess){}, errorService.error);
  }
 });

@@ -44,6 +44,10 @@ angular.module('admin').config(function($routeProvider){
       templateUrl:"components/membroj/membrojID.htm",
       controller: "membrojCtrl"
     })
+    .when("/laborgrupoj", {
+      templateUrl:"components/laborgrupoj/laborgrupoj.htm",
+      controller: "laborgrupojCtrl"
+    })
     .when("/uzantoj/:id", {
       templateUrl:"components/uzantoj/uzantoj.htm",
       controller: "uzantojCtrl"

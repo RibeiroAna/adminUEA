@@ -4,17 +4,22 @@ app.service('membrojService', function ($http, config, $window) {
     service.getGrupKat = getGrupKat;
     service.getAnecoj = getAnecoj;
     service.getGrupojById = getGrupojById;
+    service.getGrupoj = getGrupoj;
     service.postGrupoj = postGrupoj;
     service.deleteGrupoj = deleteGrupoj;
+    service.deleteGrupKat = deleteGrupKat;
     service.updateGrupoj = updateGrupoj;
+    service.updateAneco = updateAneco;
     service.postAprobi = postAprobi;
     service.postGrupKat = postGrupKat;
     service.getAllGrupoj = getAllGrupoj;
     service.getMembroj = getMembroj;
+    service.deleteAneco = deleteAneco;
+    service.postAneco = postAneco;
 
 
     function getGrupKat(idKat) {
-        return $http.get(config.api_url + "/grupoj/kategorioj/" + idKat + "/sub");
+      return $http.get(config.api_url + "/grupoj/kategorioj/" + idKat + "/sub");
     }
 
 
@@ -26,6 +31,30 @@ app.service('membrojService', function ($http, config, $window) {
         };
 
         return $http(req);
+    }
+
+    function getGrupoj() {
+      return $http.get(config.api_url + "/grupoj");
+    }
+
+    function postAneco(idGrupo, data) {
+      var req = {
+          method: 'POST',
+          data: data,
+          url: config.api_url + '/grupoj/' + idGrupo + '/anoj',
+          headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+      return $http(req);
+    }
+
+    function deleteAneco(idPeto, data) {
+      var req = {
+          method: 'DELETE',
+          data: data,
+          url: config.api_url + '/grupoj/anecoj/' + idPeto,
+          headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+      return $http(req);
     }
 
     function getAnecoj(idGrupo, aprobitaValue) {
@@ -43,39 +72,36 @@ app.service('membrojService', function ($http, config, $window) {
     };
 
     function getGrupojById(id) {
-        return $http.get(config.api_url + "/grupoj/" + id);
+      return $http.get(config.api_url + "/grupoj/" + id);
     }
 
     function postGrupoj(data) {
-        var req = {
-            method: 'POST',
-            url: config.api_url + '/grupoj',
-            data: data,
-            headers: {'x-access-token': $window.localStorage.getItem('token')}
-        };
-
-        return $http(req);
+      var req = {
+          method: 'POST',
+          url: config.api_url + '/grupoj',
+          data: data,
+          headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+      return $http(req);
     }
 
     function deleteGrupoj(id) {
-        var req = {
-            method: 'DELETE',
-            url: config.api_url + '/grupoj/' + id,
-            headers: {'x-access-token': $window.localStorage.getItem('token')}
-        };
-
-        return $http(req);
+      var req = {
+          method: 'DELETE',
+          url: config.api_url + '/grupoj/' + id,
+          headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+      return $http(req);
     }
 
     function updateGrupoj(id, data) {
-        var req = {
-            method: 'PUT',
-            url: config.api_url + '/grupoj/' + id,
-            headers: {'x-access-token': $window.localStorage.getItem('token')},
-            data: data
-        };
-
-        return $http(req);
+      var req = {
+          method: 'PUT',
+          url: config.api_url + '/grupoj/' + id,
+          headers: {'x-access-token': $window.localStorage.getItem('token')},
+          data: data
+      };
+      return $http(req);
     };
 
     function postAprobi(idPeto, data) {
@@ -90,12 +116,32 @@ app.service('membrojService', function ($http, config, $window) {
     }
 
     function postGrupKat(idKat, idGrupo) {
-        var req = {
-            method: 'POST',
-            url: config.api_url + '/grupoj/kategorioj/' + idKat + '/sub/' + idGrupo,
-            headers: {'x-access-token': $window.localStorage.getItem('token')}
-        };
-        return $http(req);
+      var req = {
+          method: 'POST',
+          url: config.api_url + '/grupoj/kategorioj/' + idKat + '/sub/' + idGrupo,
+          headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+      return $http(req);
+    }
+
+    function deleteGrupKat(idGrupo, idKat) {
+      var req = {
+          method: 'DELETE',
+          url: config.api_url + '/grupoj/kategorioj/' + idKat + '/sub/' + idGrupo,
+          headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+      return $http(req);
+    }
+
+   function updateAneco(idAneco, data) {
+      var req = {
+        method: 'PUT',
+        url: config.api_url + '/grupoj/anecoj/' + idAneco,
+        headers: {'x-access-token': $window.localStorage.getItem('token')},
+        data: data
+      };
+
+      return $http(req);
     }
 
 

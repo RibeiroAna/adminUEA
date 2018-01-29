@@ -1,4 +1,5 @@
-app.controller("loginCtrl", function ($scope, $rootScope, $window, $http, config, loginService) {
+app.controller("loginCtrl", function ($scope, $rootScope, $window,
+                                      errorService, config, loginService) {
 
   $rootScope.menuo = false;
   $scope.msg = "ERARO: Ni ne havas konekton kun la servilo nun";
@@ -17,7 +18,7 @@ app.controller("loginCtrl", function ($scope, $rootScope, $window, $http, config
     } else {
         $scope.msg = "Ensalutu kun la datumoj antaŭdonitaj";
     }
-  });
+  }, errorService.error);
 
   $scope.ensaluti = function() {
       loginService.doEnsaluti($scope.uzanto).then(function(response) {

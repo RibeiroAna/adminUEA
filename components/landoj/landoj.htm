@@ -11,7 +11,6 @@
 
   <!--formularo por aldoni novan landon-->
   <form ng-submit="novaLando()" ng-hide="novaL">
-    {{status}}
     <div class="form-group">
       <label for="radiko">Radiko en esperanto (ekz: Brit)</label>
       <input type="text"
@@ -60,31 +59,35 @@
     </thead>
     <tr ng-repeat="l in landoj | orderBy:'radikoEo' | filter:searchText">
       <td>
+        {{l.radikoEo}}
         <a href="#"
            editable-text="l.radikoEo"
            onbeforesave="updateLando(l.id, $data, 'radikoEo')">
-              {{l.radikoEo}}
+           Redakti
         </a>
       </td>
       <td>
+        {{l.finajxoEo}}
         <a href="#"
            editable-text="l.finajxoEo"
            onbeforesave="updateLando(l.id, $data, 'finajxoEo')">
-           {{l.finajxoEo}}
+           Redakti
          </a>
        </td>
       <td>
+        {{l.valuto}}
         <a href="#"
            editable-text="l.valuto"
            onbeforesave="updateLando(l.id, $data, 'valuto')">
-           {{l.valuto}}
+           Redakti
          </a>
        </td>
       <td>
+        {{l.landkodo}}
         <a href="#"
            editable-text="l.landkodo"
            onbeforesave="updateLando(l.id, $data, 'landKodo')">
-           {{l.landkodo}}
+           Redakti
          </a>
        </td>
       <td>
@@ -94,6 +97,5 @@
       </td>
     </tr>
   </table>
-  <p>* klaku en la kampoj por redakti</p>
 
 </div>

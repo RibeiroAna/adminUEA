@@ -4,19 +4,22 @@
        <img src="content/img/logoo_blanka.png" alt="logoo"></img>
     </div>
     <a href="javascript(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <any ng-repeat="menuero in menueroj">
-      <label ng-init="montri[$index] = false" class="menutitolo" ng-click="montri[$index] = !montri[$index]">
-        <span ng-hide="montri[$index]">+</span>
-        <span ng-show="montri[$index]">-</span>
-        <a href="{{menuero[0].link}}">{{menuero[0].titolo}}</a>
+    <span ng-repeat="menuero in menueroj">
+      <label class="menutitolo" ng-click="menuero[0].montri = !menuero[0].montri">
+        <span ng-hide="menuero[0].montri">+</span>
+        <span ng-show="menuero[0].montri">-</span>
+        {{menuero[0].titolo}}
       </label><br>
-      <span  ng-show="montri[$index]">
-<!--      <a ng-repeat="ligilo in menuero | limitTo: (1 - menuero.length)"
-         class="menuero" href="{{ligilo.link}}">
+      <span ng-show="menuero[0].montri">
+      <a ng-repeat="ligilo in menuero | limitTo: (1 - menuero.length)"
+         class="menuero"
+         ng-class="ligilo.ngClass"
+         ng-click="selektita($index, menuero)"
+         href="{{ligilo.link}}">
          {{ligilo.titolo}}
-      </a>-->
-    </a>
-    </any>
+      </a>
+    </span>
+  </span>
   </div>
 
   <div class="clear"></div>
@@ -25,6 +28,8 @@
     <span class="profilo" ng-click="elsaluti()">
       <i class="fa fa-power-off" aria-hidden="true"></i> Elsaluti
     </span>
-    <span class="uzantnomo"><i class="fa fa-user" aria-hidden="true"></i> {{uzanto.uzantnomo}}</span>
+    <span class="uzantnomo">
+      <i class="fa fa-user" aria-hidden="true"></i> {{uzanto.uzantnomo}}
+    </span>
   </div>
 </div>

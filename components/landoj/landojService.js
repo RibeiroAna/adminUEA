@@ -5,10 +5,19 @@ app.service('landojService', function ($http, config, $window) {
     service.postLandoj = postLandoj;
     service.updateLandoj = updateLandoj;
     service.deleteLandoj = deleteLandoj;
+    service.getInfoPriLanda = getInfoPriLanda;
 
-    function getLandoj() {
-        return $http.get(config.api_url + '/landoj');
+    function getLandoj(id) {
+      var url = config.api_url + '/landoj';
+      if(id){
+        url = config.api_url + '/landoj?id=' + id;
+      }
+      return $http.get(url);
     }
+
+    function getInfoPriLanda(landkodo) {
+       return $http.get("https://restcountries.eu/rest/v2/alpha/" + landkodo);
+    };
 
     function postLandoj(data) {
         var req = {
@@ -19,7 +28,7 @@ app.service('landojService', function ($http, config, $window) {
         };
         return $http(req);
     }
-    
+
     function updateLandoj(id, data) {
         var req = {
             method: 'PUT',
@@ -30,14 +39,13 @@ app.service('landojService', function ($http, config, $window) {
 
         return $http(req);
     }
-    
+
     function deleteLandoj(idLando) {
         var req = {
             method: 'DELETE',
             url: config.api_url + '/landoj/' + idLando,
             headers: {'x-access-token': $window.localStorage.getItem('token')}
         };
-
         return $http(req);
     }
 
