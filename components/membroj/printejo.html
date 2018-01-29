@@ -4,18 +4,16 @@
 		<div style="height: 70%;">
             <div id="select-grupo">
                 <h3 style="display:inline-block">Grupo de membroj</h3>
-                <select class="selectpicker" style="display:inline-block">
-                    <option>Mustard</option>
-                    <option>Ketchup</option>
-                    <option>Relish</option>
+                <select class="selectpicker" ng-model="selectedGrupoj" style="display:inline-block">
+                    <option ng-repeat="grupo in grupoj" value="{{grupo.nomo}}">{{grupo.nomo}}</option>
                 </select>
             </div>
             <div style="height: 100%">
                 <div id="select-fields" class="col-md-6" style="width: 200px">
                     <div style="display: inline-block">
                         <h3>Kampoj</h3>
-                        <div class="checkbox" ng-repeat="field in checkboxFields">
-                            <label><input type="checkbox" value="">{{field.name}}</label>
+                        <div class="checkbox"  ng-repeat="field in checkboxFields">
+                            <label><input ng-model="field.selected" type="checkbox" value="">{{field.name}}</label>
                         </div>
                     </div>
                 </div>
@@ -23,23 +21,25 @@
                     <div id="printejo-info-box" class="row container" style="overflow-y: scroll">
                         <div id="exportthis">
                             <h3>Antaŭvido</h3>
-                            <div  style="" class="container" ng-repeat="user in grupoj">
-                                <span class="row">{{user.nomo}}</span>
+                            <div  style="" class="container" ng-repeat="user in uzantoj[selectedGrupoj]">
+                                <span ng-if="checkboxFields[0].selected" class="row">{{user.personanomo + " " + user.familianomo}}</span>
                                 <span class="row">
-                                {{user.adreso}}
-                                <br>{{user.postkodo}}
-                                <br>{{user.lando}}
+                                <span ng-if="checkboxFields[2].selected">{{user.adreso}}</span>
+                                <span ng-if="checkboxFields[9].selected"><br>{{user.retposxto}}</span>
+                                <span ng-if="checkboxFields[3].selected"><br>{{user.posxtkodo}}</span>
+                                <span ng-if="checkboxFields[8].selected && user.telportebla"><br>{{user.telportebla}}</span>
+                                <span ng-if="checkboxFields[8].selected && user.telhejmo"><br>{{user.telhejmo}}</span>
+                                <span ng-if="checkboxFields[8].selected && user.teloficejo"><br>{{user.teloficejo}}</span>
                             </span>
                             </div>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 10%; margin-left: 50%; width: 100%">
-                        <button ng-click="teste()" class="col-md-6" style="width: 150px">Elsuti PDF</button>
-                        <button class="col-md-6" style="width: 150px">Elsuti TXT</button>
+                        <button id="pdfmaker" ng-click="makePDF()" class="col-md-6" style="width: 150px">Elsuti PDF</button>
+                        <button id="txtmaker" ng-click="expFile()" class="col-md-6" style="width: 150px">Elsuti TXT</button>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>

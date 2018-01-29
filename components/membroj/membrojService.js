@@ -9,10 +9,23 @@ app.service('membrojService', function ($http, config, $window) {
     service.updateGrupoj = updateGrupoj;
     service.postAprobi = postAprobi;
     service.postGrupKat = postGrupKat;
+    service.getAllGrupoj = getAllGrupoj;
+    service.getMembroj = getMembroj;
 
 
     function getGrupKat(idKat) {
         return $http.get(config.api_url + "/grupoj/kategorioj/" + idKat + "/sub");
+    }
+
+
+    function getMembroj(id) {
+        var req = {
+            method: 'GET',
+            url: config.api_url + '/grupoj/' + id + '/anoj',
+            headers: {'x-access-token': $window.localStorage.getItem('token')}
+        };
+
+        return $http(req);
     }
 
     function getAnecoj(idGrupo, aprobitaValue) {
@@ -24,6 +37,10 @@ app.service('membrojService', function ($http, config, $window) {
 
         return $http(req);
     }
+
+    function getAllGrupoj() {
+       return $http.get(config.api_url + '/grupoj/');
+    };
 
     function getGrupojById(id) {
         return $http.get(config.api_url + "/grupoj/" + id);
