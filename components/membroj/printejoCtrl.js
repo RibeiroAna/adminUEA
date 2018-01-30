@@ -1,4 +1,4 @@
-app.controller('printejoCtrl', function ($scope, $window, $http, config, membrojService) {
+app.controller('printejoCtrl', function ($scope, $window, $http, config, membrojService, $rootScope, auth) {
 
 	$scope.grupoj = [];
 	$scope.checkboxFields = [{'name': 'Tuta nomo', selected: true},
