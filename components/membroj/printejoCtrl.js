@@ -29,6 +29,10 @@ app.controller('printejoCtrl', function ($scope, $window, $http, config, membroj
 	};
 
 	var init = function () {
+		auth.ensalutita();
+
+      	$rootScope.menuo = true;
+      	
 		membrojService.getAllGrupoj().then(function (response) {
 			$scope.grupoj = response.data;
 

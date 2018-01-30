@@ -35,6 +35,9 @@
         {
           link: "#!/laborgrupoj",
           titolo: "Laborgrupoj"
+        },{
+          link: "#!/printejo",
+          titolo: "Printejo"
         }
       ];
 
