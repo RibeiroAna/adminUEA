@@ -220,6 +220,12 @@ md-input-container.md-block {
   padding: 10px;
 }
 
+#printejo-info-box {
+    border: 2px solid black;
+    width: 960px;
+    height: 500px;
+}
+
 @media screen and (max-width: 700px) {
   .sidenav .closebtn {
     visibility: visible;
