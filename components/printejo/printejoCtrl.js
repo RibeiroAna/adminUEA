@@ -1,4 +1,4 @@
-app.controller('printejoCtrl', function ($scope, $window, $http, config, membrojService, $rootScope, auth, landojService, errorService) {
+app.controller('printejoCtrl', function ($scope, $window, $http, config, membrojService, $rootScope, auth, landojService, errorService, PDFService) {
 
 	$scope.grupoj = [];
 	$scope.checkboxFields = [{'name': 'Tuta nomo', selected: true},
@@ -19,13 +19,8 @@ app.controller('printejoCtrl', function ($scope, $window, $http, config, membroj
 	$scope.makePDF = function () {
 		html2canvas(document.getElementById('exportthis')).then(function(canvas) {
 			var data = canvas.toDataURL();
-			var docDefinition = {
-				content: [{
-					image: data,
-					width: 500,
-				}]
-			};
-			pdfMake.createPdf(docDefinition).download("uzantoj.pdf");
+
+			PDFService.addImage(data);
 		});
 	};
 
@@ -44,7 +39,7 @@ app.controller('printejoCtrl', function ($scope, $window, $http, config, membroj
 			$scope.landoj[id].translations.en = response.data.name;
 		}, errorService);
 
-	}
+	};
 
 	var getGrupoj = function () {
 		membrojService.getAllGrupoj().then(function (response) {
@@ -56,7 +51,7 @@ app.controller('printejoCtrl', function ($scope, $window, $http, config, membroj
 				});
 			});
 		});
-	}
+	};
 
 	var init = function () {
 		auth.ensalutita();
