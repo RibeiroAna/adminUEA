@@ -52,7 +52,7 @@ angular.module('admin').config(function($routeProvider){
       templateUrl:"components/uzantoj/uzantoj.htm",
       controller: "uzantojCtrl"
     }).when("/printejo", {
-        templateUrl:"components/membroj/printejo.html",
+        templateUrl:"components/printejo/printejo.html",
         controller: "printejoCtrl"
     });
 });
