@@ -21,12 +21,13 @@
                     <div id="printejo-info-box" class="row container" style="overflow-y: scroll">
                         <div id="exportthis">
                             <h3>Antaŭvido</h3>
-                            <div  style="" class="container" ng-repeat="user in uzantoj[selectedGrupoj]">
+                            <div  style="" class="container" ng-repeat="user in uzantoj[selectedGrupoj] | orderBy:'idLando'">
                                 <span ng-if="checkboxFields[0].selected" class="row">{{user.personanomo + " " + user.familianomo}}</span>
                                 <span class="row">
-                                <span ng-if="checkboxFields[2].selected">{{user.adreso}}</span>
-                                <span ng-if="checkboxFields[9].selected"><br>{{user.retposxto}}</span>
-                                <span ng-if="checkboxFields[3].selected"><br>{{user.posxtkodo}}</span>
+                                <span ng-if="checkboxFields[2].selected && user.adreso">{{user.adreso}}</span>
+                                <span ng-if="checkboxFields[9].selected && user.retposxto"><br>{{user.retposxto}}</span>
+                                <span ng-if="checkboxFields[3].selected && user.posxtkodo"><br>{{user.posxtkodo}}</span>
+                                <span ng-if="checkboxFields[3].selected && user.posxtkodo"><br>{{landoj[user.idLando].radikoEo + landoj[user.idLando].finajxoEo}}</span>
                                 <span ng-if="checkboxFields[8].selected && user.telportebla"><br>{{user.telportebla}}</span>
                                 <span ng-if="checkboxFields[8].selected && user.telhejmo"><br>{{user.telhejmo}}</span>
                                 <span ng-if="checkboxFields[8].selected && user.teloficejo"><br>{{user.teloficejo}}</span>

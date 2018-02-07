@@ -1,4 +1,4 @@
-app.controller('printejoCtrl', function ($scope, $window, $http, config, membrojService, $rootScope, auth) {
+app.controller('printejoCtrl', function ($scope, $window, $http, config, membrojService, $rootScope, auth, landojService, errorService) {
 
 	$scope.grupoj = [];
 	$scope.checkboxFields = [{'name': 'Tuta nomo', selected: true},
@@ -14,6 +14,7 @@ app.controller('printejoCtrl', function ($scope, $window, $http, config, membroj
 							];
 
 	$scope.uzantoj = {};
+	$scope.landoj = {};
 
 	$scope.makePDF = function () {
 		html2canvas(document.getElementById('exportthis')).then(function(canvas) {
@@ -28,11 +29,14 @@ app.controller('printejoCtrl', function ($scope, $window, $http, config, membroj
 		});
 	};
 
-	var init = function () {
-		auth.ensalutita();
 
-      	$rootScope.menuo = true;
-      	
+	var groupByLando = function (landoj) {
+		landoj.forEach(function (lando) {
+			$scope.landoj[lando.id] = lando;
+		})
+	}
+
+	var getGrupoj = function () {
 		membrojService.getAllGrupoj().then(function (response) {
 			$scope.grupoj = response.data;
 
@@ -42,6 +46,19 @@ app.controller('printejoCtrl', function ($scope, $window, $http, config, membroj
 				});
 			});
 		});
+	}
+
+	var init = function () {
+		auth.ensalutita();
+
+      	$rootScope.menuo = true;
+
+		landojService.getLandoj().then(function (response) {
+			groupByLando(response.data);
+			getGrupoj();
+
+		}, errorService);
+
 	};
 
 	function saveTextAsFile (data, filename){
