@@ -222,7 +222,7 @@ md-input-container.md-block {
 
 #printejo-info-box {
     border: 2px solid black;
-    width: 960px;
+    width: 150%;
     height: 500px;
 }
 
