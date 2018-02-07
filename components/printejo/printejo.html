@@ -27,7 +27,10 @@
                                 <span ng-if="checkboxFields[2].selected && user.adreso">{{user.adreso}}</span>
                                 <span ng-if="checkboxFields[9].selected && user.retposxto"><br>{{user.retposxto}}</span>
                                 <span ng-if="checkboxFields[3].selected && user.posxtkodo"><br>{{user.posxtkodo}}</span>
-                                <span ng-if="checkboxFields[3].selected && user.posxtkodo"><br>{{landoj[user.idLando].radikoEo + landoj[user.idLando].finajxoEo}}</span>
+                                <span ng-if="checkboxFields[4].selected"><br>{{landoj[user.idLando].radikoEo + landoj[user.idLando].finajxoEo}}</span>
+                                <span ng-if="checkboxFields[5].selected"><br>{{landoj[user.idLando].translations.fr}}</span>
+                                <span ng-if="checkboxFields[6].selected"><br>{{landoj[user.idLando].translations.nl}}</span>
+                                <span ng-if="checkboxFields[7].selected"><br>{{landoj[user.idLando].translations.en}}</span>
                                 <span ng-if="checkboxFields[8].selected && user.telportebla"><br>{{user.telportebla}}</span>
                                 <span ng-if="checkboxFields[8].selected && user.telhejmo"><br>{{user.telhejmo}}</span>
                                 <span ng-if="checkboxFields[8].selected && user.teloficejo"><br>{{user.teloficejo}}</span>

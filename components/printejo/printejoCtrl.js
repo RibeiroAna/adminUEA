@@ -5,8 +5,8 @@ app.controller('printejoCtrl', function ($scope, $window, $http, config, membroj
 							{'name': 'UEA-kodo', selected: false},
 							{'name': 'Adreso', selected: true},
 							{'name': 'Postkodo', selected: true},
-							{'name': 'Lando - FR', selected: true},
-							{'name': 'Lando - EO', selected: false},
+							{'name': 'Lando - EO', selected: true},
+							{'name': 'Lando - FR', selected: false},
 							{'name': 'Lando - NL', selected: false},
 							{'name': 'Lando - EN', selected: false},
 							{'name': 'Telefono', selected: false},
@@ -33,7 +33,17 @@ app.controller('printejoCtrl', function ($scope, $window, $http, config, membroj
 	var groupByLando = function (landoj) {
 		landoj.forEach(function (lando) {
 			$scope.landoj[lando.id] = lando;
+			getTranslations(lando.id, lando.landkodo);
 		})
+	};
+
+
+	var getTranslations = function (id, landkodo) {
+		landojService.getInfoPriLanda(landkodo).then(function (response) {
+			$scope.landoj[id].translations = response.data.translations;
+			$scope.landoj[id].translations.en = response.data.name;
+		}, errorService);
+
 	}
 
 	var getGrupoj = function () {
