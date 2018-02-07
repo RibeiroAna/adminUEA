@@ -1,4 +1,4 @@
-app.controller('printejoCtrl', function ($scope, $window, $http, config, membrojService) {
+app.controller('printejoCtrl', function ($scope, $window, $http, config, membrojService, $rootScope, auth) {
 
 	$scope.grupoj = [];
 	$scope.checkboxFields = [{'name': 'Tuta nomo', selected: true},
@@ -29,6 +29,10 @@ app.controller('printejoCtrl', function ($scope, $window, $http, config, membroj
 	};
 
 	var init = function () {
+		auth.ensalutita();
+
+      	$rootScope.menuo = true;
+      	
 		membrojService.getAllGrupoj().then(function (response) {
 			$scope.grupoj = response.data;
 
