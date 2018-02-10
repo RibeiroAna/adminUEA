@@ -63,5 +63,9 @@ app.service('PDFService', function () {
         }
 
         content.push({ image: image, width: PAGE_WIDTH });
+
+        if(printHeight < PAGE_HEIGHT){
+            next();
+        }
     }
 });
