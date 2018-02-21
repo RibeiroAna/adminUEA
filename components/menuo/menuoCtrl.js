@@ -9,6 +9,7 @@
     try {
       $scope.menuoBazaAgordoj = JSON.parse($window.localStorage.getItem('menuoBazaAgordoj'));
       $scope.menuoMembroj = JSON.parse($window.localStorage.getItem('menuoMembroj'));
+      $scope.menuoKomunikado = JSON.parse($window.localStorage.getItem('menuoKomunikado'));
     } catch(err) {
       $scope.menuoBazaAgordoj =
       [
@@ -57,6 +58,18 @@
           titolo: "Membrecpetoj"
         }
       ];
+
+      $scope.menuoKomunikado =
+          [
+            {
+              titolo: "Komunikado",
+              montri: false
+            },
+            {
+              link: "#!/revuoj",
+              titolo: "Revuoj"
+            }
+          ];
     }
 
     $scope.menueroj = [];
@@ -64,6 +77,7 @@
       if($scope.uzanto.permesoj.indexOf(response.data.idAdministranto) > -1) {
         $scope.menueroj.push($scope.menuoBazaAgordoj);
         $scope.menueroj.push($scope.menuoMembroj);
+        $scope.menueroj.push($scope.menuoKomunikado);
       }
     }, errorService.error);
 
@@ -90,6 +104,7 @@
   window.onbeforeunload = function() {
     $window.localStorage.setItem('menuoMembroj', JSON.stringify($scope.menuoMembroj));
     $window.localStorage.setItem('menuoBazaAgordoj', JSON.stringify($scope.menuoBazaAgordoj));
+    $window.localStorage.setItem('menuoKomunikado', JSON.stringify($scope.menuoKomunikado));
   }
 
 });

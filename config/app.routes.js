@@ -54,5 +54,8 @@ angular.module('admin').config(function($routeProvider){
     }).when("/printejo", {
         templateUrl:"components/printejo/printejo.html",
         controller: "printejoCtrl"
+    }).when("/revuoj", {
+        templateUrl: "components/revuoj/revuoj.html",
+        controller: "revuojCtrl"
     });
 });
