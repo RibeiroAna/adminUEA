@@ -37,7 +37,7 @@
           titolo: "Laborgrupoj"
         },{
           link: "#!/printejo",
-          titolo: "Printejo"
+          titolo: "Adresprintejo"
         }
       ];
 
