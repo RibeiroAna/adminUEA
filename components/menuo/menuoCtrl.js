@@ -5,15 +5,28 @@
     $scope.uzanto = JSON.parse($window.localStorage.getItem('uzanto'));
     $scope.alert = window.alert;
 
-    try {
-      $scope.menuoBazaAgordoj = JSON.parse($window.localStorage.getItem('menuoBazaAgordoj'));
-      $scope.menuoMembroj = JSON.parse($window.localStorage.getItem('menuoMembroj'));
-    } catch(err) {
-      $scope.menuoBazaAgordoj =
-      [
+    function getMenuoMembroj() {
+      return   [
+        {
+          titolo: "Membroj",
+          montri: true
+        },
+        {
+          link: "#!/membroj",
+          titolo: "Membroj"
+        },
+        {
+          link: "#!/membrecpetoj",
+          titolo: "Membrecpetoj"
+        }
+      ];
+    }
+
+    function getMenuoBazaAgordoj() {
+      return [
         {
           titolo: "Bazaj agordoj",
-          montri: false
+          montri: true
         },
         {
           link: "#!/admin",
@@ -36,24 +49,19 @@
           titolo: "Laborgrupoj"
         }
       ];
-
-      $scope.menuoMembroj =
-      [
-        {
-          titolo: "Membroj",
-          montri: true
-        },
-        {
-          link: "#!/membroj",
-          titolo: "Membroj",
-          ngClass: "selektita"
-        },
-        {
-          link: "#!/membrecpetoj",
-          titolo: "Membrecpetoj"
-        }
-      ];
     }
+
+    try {
+      $scope.menuoMembroj = JSON.parse($window.localStorage.getItem('menuoMembroj'));
+      if(!scope.menuoMembroj)
+        $scope.menuoMembroj = getMenuoMembroj();
+      $scope.menuoBazaAgordoj = JSON.parse($window.localStorage.getItem('menuoBazaAgordoj'));
+      if(!$scope.menuoBazaAgordoj)
+        $scope.menuoBazaAgordoj = getMenuoBazaAgordoj();
+    } catch(err) {
+      $scope.menuoMembroj = getMenuoMembroj();
+      $scope.menuoBazaAgordoj = getMenuoBazaAgordoj();
+    };
 
     $scope.menueroj = [];
     config.getConfig("idAdministranto").then(function(response){
