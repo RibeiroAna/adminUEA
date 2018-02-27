@@ -3,6 +3,7 @@
 
   $scope.init = function() {
     $scope.uzanto = JSON.parse($window.localStorage.getItem('uzanto'));
+
     $scope.alert = window.alert;
 
     function getMenuoMembroj() {
@@ -47,6 +48,9 @@
         {
           link: "#!/laborgrupoj",
           titolo: "Laborgrupoj"
+        },{
+          link: "#!/printejo",
+          titolo: "Adresprintejo"
         }
       ];
     }
