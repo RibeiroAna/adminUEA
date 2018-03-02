@@ -68,13 +68,17 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $mdDialog, 
       var data2 = {valoro: valoro, kampo: "uzantnomo"};
       uzantojService.updateUzantoj($routeParams.id, data2).then(
         function(sucess){
+          uzantojService.updateUzantoj($routeParams.id, data).then(
+            function(sucess){
+              $window.location.reload();
+            }, errorService.error);
+        }, errorService.error);
+    } else {
+      uzantojService.updateUzantoj($routeParams.id, data).then(
+        function(sucess){
           $window.location.reload();
         }, errorService.error);
     }
-    uzantojService.updateUzantoj($routeParams.id, data).then(
-      function(sucess){
-        $window.location.reload();
-      }, errorService.error);
   }
 
   $scope.forvisxiAnecon = function(peto) {

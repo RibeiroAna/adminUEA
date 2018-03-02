@@ -59,7 +59,6 @@ app.service('uzantojService', function ($http, $window, Upload, config) {
         url: config.api_url + '/uzantoj/admin/' + id + '/grupoj',
         headers: {'x-access-token': $window.localStorage.getItem('token')}
       };
-
       return $http(req);
     }
 
