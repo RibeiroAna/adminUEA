@@ -10,7 +10,6 @@ app.service('membrojService', function ($http, config, $window) {
     service.deleteGrupKat = deleteGrupKat;
     service.updateGrupoj = updateGrupoj;
     service.updateAneco = updateAneco;
-    service.postAprobi = postAprobi;
     service.postGrupKat = postGrupKat;
     service.deleteAneco = deleteAneco;
     service.postAneco = postAneco;
@@ -30,17 +29,6 @@ app.service('membrojService', function ($http, config, $window) {
           url: config.api_url + '/grupoj/' + idGrupo + '/anoj',
           headers: {'x-access-token': $window.localStorage.getItem('token')}
       };
-      return $http(req);
-    }
-
-    function postAprobi(idPeto, data) {
-      var req = {
-          method: 'PUT',
-          data: data,
-          url: config.api_url + '/grupoj/anecoj/' + idPeto + '/aprobi',
-          headers: {'x-access-token': $window.localStorage.getItem('token')}
-      };
-
       return $http(req);
     }
 

@@ -1,4 +1,4 @@
-app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $mdDialog, $routeParams, $sanitize,
+app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $routeParams, $sanitize, $mdDialog,
                                         config, uzantojService, landojService, membrojService,
                                         errorService, auth) {
   $scope.init = function() {
@@ -25,6 +25,23 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $mdDialog, 
                 $scope.grupoj[i].findato = $scope.grupoj[i].findato.slice(0,10);
           }
         }, errorService.error);
+
+        config.getConfig("idMembrecgrupo").then(function(response) {
+          $scope.idMembrecgrupo = response.data.idMembrecgrupo;
+          membrojService.getGrupKat($scope.idMembrecgrupo).then(function(response){
+            $scope.membrecgrupo  = $scope.grupoj.slice().filter(function(grupo){
+              return response.data.map(function(e){return e.id;}).indexOf(grupo.idGrupo) > -1;
+            });
+            if($scope.membrecgrupo.length > 0) {
+              if($scope.membrecgrupo[0].findato == null) {
+                $scope.gxis = "Dumviva membro";
+              } else {
+                var finjaro = parseInt($scope.membrecgrupo[0].findato.slice(0, 4)) - 1;
+                $scope.gxis = "Membro ĝis " +  finjaro;
+              }
+            }
+          }, errorService.error);
+        });
       } else {
         window.alert("Tiu uzanto ne ekzistas");
         $window.history.back();
@@ -61,6 +78,21 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $mdDialog, 
         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
     });
   };
+
+
+    $scope.montriDetalojn = function(ev, grupo, element) {
+      $scope.elektitaGrupo = grupo;
+      $mdDialog.show({
+        contentElement: element,
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true
+      });
+    };
+
+    $scope.cancel = function() {
+       $mdDialog.cancel();
+     };
 
   $scope.updateUzantoj = function(valoro, kampo) {
     var data = {valoro: valoro, kampo: kampo};
@@ -121,16 +153,6 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $mdDialog, 
     }, errorService.error);
   }
 
-  $scope.montriDetalojn = function(ev, grupo, element) {
-    $scope.elektitaGrupo = grupo;
-    $mdDialog.show({
-      contentElement: element,
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose: true
-    });
-  };
-
   $scope.querySearch  = function (query) {
     var results = $scope.cxiujGrupoj.filter(function(obj) {
         // console.log(obj);
@@ -170,9 +192,5 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $mdDialog, 
       $window.location.reload();
     }, errorService.error);
   }
-
-  $scope.cancel = function() {
-     $mdDialog.cancel();
-   };
 
 });
