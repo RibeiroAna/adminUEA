@@ -14,7 +14,7 @@
 
         <md-input-container>
             <label>Fondjaro:</label>
-            <input name="fondjaro" ng-model="revuon.fondjaro"/>
+            <input name="fondjaro" ng-model="revuon.fondjaro" type="number"/>
         </md-input-container>
 
         <p></p>
@@ -27,7 +27,7 @@
 
     <md-dialog-actions layout-align="end">
         <span flex></span>
-        <md-button class="md-raised" ng-click="addRevuon()" type="submit">
+        <md-button ng-disabled="!revuon.titolo || !revuon.fondjaro || !revuon.issn" class="md-raised" ng-click="addRevuon()" type="submit">
             Aldoni Revuon
         </md-button>
     </md-dialog-actions>
