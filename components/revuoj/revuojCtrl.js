@@ -1,4 +1,4 @@
-app.controller('revuojCtrl', function ($scope, $window, $http, config, membrojService, $rootScope, auth, revuojService, $mdDialog) {
+app.controller('revuojCtrl', function ($scope, $window, config, membrojService, $rootScope, auth, revuojService, $mdDialog) {
 
     $scope.revuejo = [];
 
@@ -21,7 +21,6 @@ app.controller('revuojCtrl', function ($scope, $window, $http, config, membrojSe
             // Function for when cancel() function of mdDialog is called
         });
     };
-
 
     var init = function () {
         getRevuoj();

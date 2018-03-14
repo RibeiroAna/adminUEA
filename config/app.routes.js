@@ -57,5 +57,8 @@ angular.module('admin').config(function($routeProvider){
     }).when("/revuoj", {
         templateUrl: "components/revuoj/revuoj.html",
         controller: "revuojCtrl"
+    }).when("/revuoj/:id/volumon", {
+        templateUrl: "components/revuoj/volumon/volumon.html",
+        controller: "volumonCtrl"
     });
 });
