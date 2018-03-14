@@ -3,6 +3,7 @@ app.service('revuojService', function ($http, $window, config) {
 
     service.getRevuoj = getRevuoj;
     service.postRevuon = postRevuon;
+    service.getRevuoVolumoj = getRevuoVolumoj;
 
 
     function getRevuoj() {
@@ -19,6 +20,11 @@ app.service('revuojService', function ($http, $window, config) {
         };
 
         return $http(req);
+    }
+
+
+    function getRevuoVolumoj(revuonId) {
+        return $http.get(config.api_url + '/revuoj/' + revuonId + '/volumoj');
     }
 
     return service;
