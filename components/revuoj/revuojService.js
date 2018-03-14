@@ -11,7 +11,14 @@ app.service('revuojService', function ($http, $window, config) {
 
 
     function postRevuon(data) {
-        return $http.post(config.api_url + '/revuoj', data);
+        var req = {
+            method: 'POST',
+            url: config.api_url + '/revuoj',
+            headers: {'x-access-token': $window.localStorage.getItem('token')},
+            data: data
+        };
+
+        return $http(req);
     }
 
     return service;
