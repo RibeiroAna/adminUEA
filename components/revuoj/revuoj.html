@@ -1,4 +1,13 @@
+<div class="revuoj">
+    <div class="row">
+        <h1 class="col-md-1">Revuoj</h1>
+        <a  class="col-md-3" style="padding-top: 0.5%; padding-left: 2%" ng-click="showAddRevuojDialog()"><h2>+Aldoni novan revuon</h2></a>
+    </div>
 
-<div class="container" style="padding: 5% 5% 5% 5%">
-    <h3> Revuoj</h3>
+    <div class="revuoj-list">
+        <div class="row" style="padding-top: 2%; width: 100%" ng-repeat="revuoj in revuejo">
+            <li class="col-md-6">{{revuoj.name}}</li>
+            <a class="col-md-6" href="#">Vidi/Redakti/aldoni volumon >></a>
+        </div>
+    </div>
 </div>
