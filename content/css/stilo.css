@@ -229,7 +229,10 @@ md-input-container.md-block {
 .revuoj {
     padding-top: 3%;
     padding-left: 270px;
-    width: 100%
+    padding-bottom: 3%;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .revuoj a {
@@ -239,6 +242,16 @@ md-input-container.md-block {
 .revuoj-list {
     padding-top: 2%;
     padding-left: 2%;
+}
+
+#aldoni-revuon{
+    padding-top: 1%;
+    color: lightskyblue
+}
+
+.revuon {
+    padding-top: 2%;
+    width: 100%;
 }
 
 @media screen and (max-width: 700px) {
