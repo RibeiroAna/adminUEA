@@ -4,6 +4,7 @@ app.service('revuojService', function ($http, $window, config) {
     service.getRevuoj = getRevuoj;
     service.postRevuon = postRevuon;
     service.getRevuoVolumoj = getRevuoVolumoj;
+    service.addVolumon = addVolumon;
 
 
     function getRevuoj() {
@@ -15,6 +16,17 @@ app.service('revuojService', function ($http, $window, config) {
         var req = {
             method: 'POST',
             url: config.api_url + '/revuoj',
+            headers: {'x-access-token': $window.localStorage.getItem('token')},
+            data: data
+        };
+
+        return $http(req);
+    }
+
+    function addVolumon(revuonId, data){
+        var req = {
+            method: 'POST',
+            url: config.api_url + '/revuoj/' + revuonId + '/volumoj',
             headers: {'x-access-token': $window.localStorage.getItem('token')},
             data: data
         };
