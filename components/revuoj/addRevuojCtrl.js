@@ -5,6 +5,7 @@ app.controller('addRevuojCtrl', function ($scope, revuojService, $mdDialog, erro
         $scope.revuon.fondjaro = parseInt($scope.revuon.fondjaro);
 
         var success = function (response) {
+            $scope.revuon.id = response.data.insertId;
             $mdDialog.hide($scope.revuon);
         };
 
