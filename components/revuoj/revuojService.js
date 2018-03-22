@@ -69,7 +69,7 @@ app.service('revuojService', function ($http, $window, config) {
 
     function postVolumonKovrilbildo(volumonId, kovrilbildo) {
         var file = kovrilbildo;
-        var uploadUrl = config.api_url + '/revuoj/volumoj/' + volumonId + '/kovrilbildo';
+        var uploadUrl = config.api_url + '/revuoj/volumoj/' + volumonId + '/bildo';
         var fd = new FormData();
         fd.append('file', file);
 
