@@ -21,6 +21,27 @@
 
         <hr>
 
+        <div>
+            <label style="color: grey">Malpeza Dosiero</label>
+            <input onchange="angular.element(this).scope().getFile('input-malpeza-id')" id="input-malpeza-id" name="file" type="file" />
+        </div>
+
+        <hr>
+
+        <div>
+            <label style="color: grey">Kvalita Dosiero</label>
+            <input onchange="angular.element(this).scope().getFile('input-kvalita-id')" id="input-kvalita-id" type="file" />
+        </div>
+
+        <hr>
+
+        <div>
+            <label style="color: grey">Kovrilbildo</label>
+            <input onchange="angular.element(this).scope().getFile('input-kovrilbildo-id')" id="input-kovrilbildo-id" type="file" />
+        </div>
+
+        <hr>
+
         <trix-editor placeholder="Enhavlisto" id="trix"></trix-editor>
 
         <hr>
