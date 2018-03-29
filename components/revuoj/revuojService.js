@@ -8,6 +8,9 @@ app.service('revuojService', function ($http, $window, config) {
     service.postVolumonKovrilbildo = postVolumonKovrilbildo;
     service.postVolumonKvalita = postVolumonKvalita;
     service.postVolumonMalpeza = postVolumonMalpeza;
+    service.getVolumonKovrilbildo = getVolumonKovrilbildo;
+    service.getVolumonKvalita = getVolumonKvalita;
+    service.updateVolumon = updateVolumon;
 
 
     function getRevuoj() {
@@ -77,6 +80,26 @@ app.service('revuojService', function ($http, $window, config) {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined, 'x-access-token': $window.localStorage.getItem('token')}
         });
+    }
+
+    function getVolumonKovrilbildo(volumonId) {
+        return $http.get(config.api_url + '/revuoj/volumoj/' + volumonId + '/bildo');
+    }
+
+
+    function getVolumonKvalita(volumonId) {
+        return $http.get(config.api_url + '/revuoj/volumoj/' + volumonId + '/kvalita');
+    }
+
+    function updateVolumon(volumonId, data) {
+        var req = {
+            method: 'PUT',
+            url: config.api_url + '/revuoj/volumoj/' + volumonId,
+            headers: {'x-access-token': $window.localStorage.getItem('token')},
+            data: data
+        };
+
+        return $http(req);
     }
 
     return service;

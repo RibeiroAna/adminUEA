@@ -1,5 +1,6 @@
 app.controller('volumonCtrl', function ($scope, auth, $rootScope, $routeParams, $mdDialog, errorService, revuojService) {
     $scope.revuonTitolo = $routeParams.titolo;
+    $scope.revuonId = $routeParams.id;
 
     $scope.volumoj = [];
 

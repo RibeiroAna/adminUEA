@@ -1,0 +1,57 @@
+<div class="enhavo">
+    <div class="col-md-4" style="align:center">
+        <h2>Krovilbildo:</h2>
+        <img ngf-thumbnail="file ? file: bildo" alt="profilbildo" class="profilbildo"/>
+        <br>
+        <button ng-show="!file"
+                type="file"
+                class="btn btn-default"
+                ngf-select
+                ng-model="file"
+                name="file"
+                ngf-pattern="'image/*'"
+                accept="image/*"
+                ngf-max-size="20MB">
+            Redakti aŭ aldoni krovilbildo
+        </button>
+
+        <p ng-show="file">
+            <button ng-click="cancel()" class="btn btn-danger">
+                Malfari
+            </button>
+            <button
+                    type="submit"
+                    class="btn btn-default"
+                    ng-click="upload()">
+                Konfirmi alŝuton
+            </button>
+        </p>
+    </div>
+    <div class="col-md-8">
+        <h2>Pri la volumon</h2>
+        <p>
+            <b>Numero relative al jaro:</b> {{volumon.numeroJaro}}
+            <a href="#"
+               onbeforesave="updateVolumon($data, 'numeroJaro')"
+               editable-text="volumon.numeroJaro">redakti aŭ aldoni</a>
+        </p>
+        <p>
+            <b>Numero entute:</b> {{volumon.numeroEntute}}
+            <a href="#"
+               onbeforesave="updateVolumon($data, 'numeroEntute')"
+               editable-text="volumon.numeroEntute">
+                Ŝanĝi pasvorton
+            </a>
+        </p>
+        <p>
+            <b>Eldon Dato:</b> {{volumon.eldondato | date}}
+            <a href="#"
+               onbeforesave="updateVolumon($data, 'eldondato')"
+               editable-date="volumon.eldondato"
+               >
+                redakti aŭ aldoni
+            </a>
+        </p>
+          -------
+    </div>
+</div>
