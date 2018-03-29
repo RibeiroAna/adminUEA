@@ -51,5 +51,9 @@ angular.module('admin').config(function($routeProvider){
     .when("/uzantoj/:id", {
       templateUrl:"components/uzantoj/uzantoj.htm",
       controller: "uzantojCtrl"
+    })
+    .when("/faktemoj", {
+      templateUrl:"components/faktemoj/faktemoj.htm",
+      controller: "faktemojCtrl"
     });
 });

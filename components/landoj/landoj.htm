@@ -45,19 +45,18 @@
   </form>
 
 
-  <label>Serĉi: <input ng-model="searchText" class="form-control"></label>
+  <label>Serĉi: <input ng-model="filtrilo" class="form-control"></label>
 
   <!--Tabelo kun enhavo-->
   <table class="table">
     <thead>
       <tr>
-        <td>Radiko en Esperanto</td>
-        <td>Finaĵo en Esperanto</td>
+        <td>Nomo de la lando</td>
         <td>Valuto uzita de UEA</td>
         <td>2-litera Landkodo</td>
       </tr>
     </thead>
-    <tr ng-repeat="l in landoj | orderBy:'radikoEo' | filter:searchText">
+    <tr ng-repeat="l in landoj | localeOrderBy:'radikoEo' | filter:ignoreAccents | filter: filtrilo as query">
       <td>
         {{l.radikoEo}}
         <a href="#"
@@ -66,14 +65,6 @@
            Redakti
         </a>
       </td>
-      <td>
-        {{l.finajxoEo}}
-        <a href="#"
-           editable-text="l.finajxoEo"
-           onbeforesave="updateLando(l.id, $data, 'finajxoEo')">
-           Redakti
-         </a>
-       </td>
       <td>
         {{l.valuto}}
         <a href="#"

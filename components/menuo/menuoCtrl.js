@@ -4,7 +4,7 @@
   $scope.init = function() {
     $scope.uzanto = JSON.parse($window.localStorage.getItem('uzanto'));
     $scope.alert = window.alert;
-
+    $scope.teksto = {};
     function getMenuoMembroj() {
       return   [
         {
@@ -39,6 +39,10 @@
         {
           link: "#!/perantoj",
           titolo: "Perantoj"
+        },
+        {
+          link: "#!/faktemoj",
+          titolo: "Faktemoj"
         },
         {
           link:"#!/membrecoj",
@@ -89,6 +93,15 @@
 
   $scope.elsaluti = function() {
     auth.elsaluti();
+  }
+
+  $scope.sercxi = function() {
+    $window.location.href = "#!/membroj/" + $scope.teksto.sercxi;
+  }
+
+  $scope.sercxi_enter = function(keyEvent) {
+    if (keyEvent.which === 13)
+      $scope.sercxi()
   }
 
   window.onbeforeunload = function() {

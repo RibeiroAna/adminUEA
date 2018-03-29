@@ -1,6 +1,9 @@
 body {
- font-family: 'Montserrat'  !important;
+ font-family: 'Montserrat' !important;
  max-height: 2000px;
+ color-adjust: exact !important;
+ -webkit-print-color-adjust: exact !important;
+ background-color: #fafafa;
 }
 
 h2 {
@@ -28,6 +31,11 @@ h2 {
   height:100px;
   margin-left: 10px;
   margin-top: 0px;
+}
+
+.sercxado {
+  float: right;
+  margin-right: 35px;
 }
 
 .nav-logoo img {
@@ -229,13 +237,13 @@ md-input-container.md-block {
 @media print {
   body * {
     visibility: hidden;
-    color-adjust: exact;
+    color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;
   }
   #membrkarto, #membrkarto * {
     visibility: visible;
     overflow: visible !important;
-    color-adjust: exact;
+    color-adjust: exact !important;;
     -webkit-print-color-adjust: exact !important;
   }
   #membrkarto {

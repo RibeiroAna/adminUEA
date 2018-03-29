@@ -1,14 +1,12 @@
 <div class="enhavo" data-ng-init="init()">
-  <h3 class="col-md-7">
+  <h3 class="col-md-12">
     Uzantprofilo por: {{uzanto.titolo}} {{uzanto.personanomo}}
     <b>{{uzanto.familianomo}}</b>
   </h3>
-  <h3 class="col-md-3">
+  <h3 class="col-md-12">
     <button class="btn btn-default" onclick="window.print()">
       <i class="fa fa-print" aria-hidden="true"></i> Printi membrkarton
     </button>
-  </h3>
-  <h3 class="col-md-2">
     <button class="btn btn-danger"  ng-click="forvisxiUzanton()">
       <i class="fa fa-trash" aria-hidden="true"></i> Forviŝi uzanton
     </button>
@@ -133,6 +131,14 @@
       <a href="#"
          onbeforesave="updateUzantoj($data, 'adreso')"
          editable-textarea="uzanto.adreso">
+        redakti aŭ aldoni
+      </a>
+    </p>
+    <p>
+      <b>Urbo:</b> {{uzanto.urbo}}
+      <a href="#"
+         onbeforesave="updateUzantoj($data, 'urbo')"
+         editable-textarea="uzanto.urbo">
         redakti aŭ aldoni
       </a>
     </p>
@@ -371,36 +377,26 @@
 
 <div id="membrkarto">
   <div style="width:323px; border-style: dotted; height: 204px; padding: 10px 20px 0px 20px; border-width:1px;">
-    <div style="width:323px; padding-left:40px; padding-bottom:30px;">
+    <div style="width:323px; padding-left:40px; padding-bottom:20px;">
       <img src="content/img/logoo.png" style="width:30px;"></img>
-      <span style="font-size:15px;">UEA - Membrkarto</span>
+      <span style="font-size:15px;">UEA - Membrokarto</span>
     </div>
-    <span style="float:left;">
-      <img src="{{bildo}}" alt="profilbildo" style="width:80px;"></img>
-    </span>
-    <span style="width:180px; float:right;">
-      {{uzanto.titolo}} {{uzanto.personanomo}} {{uzanto.familianomo}}
-      <br>
-      UEA-kodo: {{uzanto.ueakodo}}
-      <br>
-      {{gxis}}
-      <br>
-      {{lando.radikoEo + lando.finajxoEo}}
-      <img src="{{landInformoj.flag}}" alt="flago" width="20"></img>
+    <div style="padding-bottom: 20px;">
+      <span style="float:left;">
+        <img src="{{bildo}}" alt="profilbildo" style="width:80px;"></img>
+      </span>
+      <span style="width:180px; float:right;">
+        {{uzanto.titolo}} {{uzanto.personanomo}} {{uzanto.familianomo}}
+        <br>
+        UEA-kodo: {{uzanto.ueakodo}}
+        <br>
+        {{gxis}}
+        <br>
+        {{lando.radikoEo + lando.finajxoEo}}
+        <img src="{{landInformoj.flag}}" alt="flago" width="20"></img>
+      </span>
+    </div>
+    <span style="font-size:9px;">
+      Universala Esperanto-Asocio: En oficialaj rilatoj kun UN kaj UNESKO - UEA.org
     </span>
   </div>
-  <div style="width:323px; border-style: dotted; height: 204px;
-              padding: 10px 20px 0px 20px; border-width:1px; background-color:#326464 !important;
-              transform: rotate(180deg); color: white !important;">
-    <p style="font-size:30px; padding-top: 10px; color: white !important;">Membrkarto</p>
-    <img src="content/img/logoo_blanka.png" alt="profilbildo"
-         style="width:250px; padding-left: 10px; padding-top: 40px;"></img>
-
-    <p style="font-size:12px; padding-left:0px; padding-top:5px; color: white!important;">
-      En oficialaj rilatoj kun UN kaj UNESKO
-    </p>
-    <p style="font-size:12px; padding-left:0px; padding-top:5px;color: white!important;">
-      www.UEA.org
-    </p>
-  </div>
-</div>

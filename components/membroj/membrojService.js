@@ -13,9 +13,19 @@ app.service('membrojService', function ($http, config, $window) {
     service.postGrupKat = postGrupKat;
     service.deleteAneco = deleteAneco;
     service.postAneco = postAneco;
+    service.getUzantoj = getUzantoj;
 
     function getGrupKat(idKat) {
       return $http.get(config.api_url + "/grupoj/kategorioj/" + idKat + "/sub");
+    }
+
+    function getUzantoj(){
+      var req = {
+          method: 'GET',
+          url: config.api_url + '/uzantoj',
+          headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+      return $http(req);
     }
 
     function getGrupoj() {
