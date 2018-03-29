@@ -1,0 +1,58 @@
+<md-dialog style="width: auto" flex="30">
+    <md-toolbar class="md-toolbar-tools">
+        <h2>Aldoni novan volumon</h2>
+        <span flex></span>
+        <a href="" ng-click="cancel()">
+            <i class="fa fa-window-close" aria-hidden="true"></i>
+        </a>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <md-input-container class="md-block" flex="50">
+            <label>Numero relative al jaro:</label>
+            <input name="jaro" ng-model="volumon.numeroJaro" type="number"/>
+        </md-input-container>
+
+        <hr>
+
+        <md-input-container class="md-block" flex="50">
+            <label>Entuta numero:</label>
+            <input name="entute" ng-model="volumon.numeroEntute" type="number"/>
+        </md-input-container>
+
+        <hr>
+
+        <div>
+            <label style="color: grey">Malpeza Dosiero</label>
+            <input onchange="angular.element(this).scope().getFile('input-malpeza-id')" id="input-malpeza-id" name="file" type="file" />
+        </div>
+
+        <hr>
+
+        <div>
+            <label style="color: grey">Kvalita Dosiero</label>
+            <input onchange="angular.element(this).scope().getFile('input-kvalita-id')" id="input-kvalita-id" type="file" />
+        </div>
+
+        <hr>
+
+        <div>
+            <label style="color: grey">Kovrilbildo</label>
+            <input onchange="angular.element(this).scope().getFile('input-kovrilbildo-id')" id="input-kovrilbildo-id" type="file" />
+        </div>
+
+        <hr>
+
+        <trix-editor placeholder="Enhavlisto" id="trix"></trix-editor>
+
+        <hr>
+
+
+    </md-content>
+
+    <md-dialog-actions layout-align="end">
+        <span flex></span>
+        <md-button ng-click="addVolumon()" type="submit">
+            Aldoni Volumon
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>
