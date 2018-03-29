@@ -1,5 +1,7 @@
 app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootScope, $routeParams, revuojService, errorService) {
 
+    $scope.editEnhavListoMode = false;
+
     $scope.upload = function () {
         function success(response) {
             $scope.bildo = $scope.file;
@@ -15,14 +17,41 @@ app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootSco
 
 
     $scope.updateVolumon = function (valoro, kampo) {
+
+        if(kampo === 'enhavlisto'){
+            valoro = document.getElementById('enhavlisto-edit').innerHTML;
+        }
+
         var data = {valoro: valoro, kampo: kampo};
 
         function success(response) {
             $scope.volumon[kampo] = valoro;
+
+            if(kampo === 'enhavlisto'){
+                document.getElementById('enhavlisto').innerHTML = valoro;
+                $scope.cancelEditEnhavListo();
+            }
+
         }
 
         revuojService.updateVolumon($scope.volumon.id, data).then(success, errorService.error);
+    };
+
+
+    $scope.editEnhavListo = function () {
+        $scope.editEnhavListoMode = true;
+        var element = document.querySelector("trix-editor");
+        element.editor.insertHTML($scope.volumon.enhavlisto);
     }
+
+    $scope.cancelEditEnhavListo = function () {
+        var element = document.querySelector("trix-editor");
+        element.editor.getSelectedRange();
+        var editorLength = element.editor.getSelectedRange()[0];
+        element.editor.setSelectedRange([0, editorLength]);
+        element.editor.deleteInDirection("forward");
+        $scope.editEnhavListoMode = false;
+    };
 
     var init = function () {
         $rootScope.menuo = true;
@@ -32,6 +61,9 @@ app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootSco
                 if(volumon.id.toString() === $routeParams.id){
                     $scope.volumon = volumon;
                     $scope.volumon.eldondato = new Date($scope.volumon.eldondato);
+                    $scope.volumon.numeroJaro = parseInt($scope.volumon.numeroJaro);
+                    $scope.volumon.numeroEntute = parseInt($scope.volumon.numeroEntute);
+                    document.getElementById('enhavlisto').innerHTML = $scope.volumon.enhavlisto;
                 }
             })
         }, errorService.error);

@@ -33,14 +33,14 @@
             <b>Numero relative al jaro:</b> {{volumon.numeroJaro}}
             <a href="#"
                onbeforesave="updateVolumon($data, 'numeroJaro')"
-               editable-text="volumon.numeroJaro">redakti aŭ aldoni</a>
+               editable-number="volumon.numeroJaro">redakti aŭ aldoni</a>
         </p>
         <p>
             <b>Numero entute:</b> {{volumon.numeroEntute}}
             <a href="#"
                onbeforesave="updateVolumon($data, 'numeroEntute')"
-               editable-text="volumon.numeroEntute">
-                Ŝanĝi pasvorton
+               editable-number="volumon.numeroEntute">
+                redakti aŭ aldoni
             </a>
         </p>
         <p>
@@ -48,10 +48,24 @@
             <a href="#"
                onbeforesave="updateVolumon($data, 'eldondato')"
                editable-date="volumon.eldondato"
-               >
+            >
                 redakti aŭ aldoni
             </a>
         </p>
-          -------
+        -------
+
+        <p>
+            <div layout="row">
+                <b>Enhav listo</b>   <a style="padding-left: 5px" href="" ng-click="editEnhavListo()">redakti aŭ aldoni</a>
+            </div>
+
+            <div id="enhavlisto" ng-show="!editEnhavListoMode"></div>
+        </p>
+
+        <p ng-show="editEnhavListoMode">
+            <trix-editor class="trix-content" placeholder="Enhav listo" id="enhavlisto-edit"></trix-editor>
+            <button class="btn btn-danger" ng-click="cancelEditEnhavListo()">Malfari</button>
+            <button class="btn btn-default" ng-click="updateVolumon('undefined', 'enhavlisto')">Redakti</button>
+        </p>
     </div>
 </div>
