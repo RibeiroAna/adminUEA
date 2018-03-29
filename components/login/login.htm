@@ -1,26 +1,27 @@
-<div class="container titolo">
+<div class="container titolo" data-ng-init="init()">
    <div class="row">
     <div class="col-sm-6">
        <img src="content/img/logoo.png" class="logoo" alt="logoo"></img>
        <h1> Universala Esperanto-Asocio - <b>Admnistra sistemo</b></h1>
     </div>
   </div>
- </div>
+</div>
 
 <div class="container login">
  <div class="row form">
-    <h4>{{msg}}</h4>
-    <form ng-submit="ensaluti()">
-        <div class="form-group">
-          <label for="uzantnomo">Uzantnomo:</label>
-          <input type="text" class="form-control"
-                 id="uzantnomo" ng-model="uzanto.uzantnomo">
-        </div>
-        <div class="form-group">
-          <label for="pwd">Pasvorto:</label>
-          <input type="password" class="form-control" id="pwd"
-                 ng-model="uzanto.pasvorto">
-        </div>
-        <button type="submit" class="btn btn-default">Ensaluti</button>
-     </form>
+  <h4>{{msg}}</h4>
+  <form ng-submit="ensaluti()">
+      <div class="form-group">
+        <label for="uzantnomo">Uzantnomo:</label>
+        <input type="text" class="form-control"
+               id="uzantnomo" ng-model="uzanto.uzantnomo">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Pasvorto:</label>
+        <input type="password" class="form-control" id="pwd"
+               ng-model="uzanto.pasvorto">
+      </div>
+      <button type="submit" class="btn btn-default">Ensaluti</button>
+   </form>
+ </div>
 </div>

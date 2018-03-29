@@ -10,7 +10,6 @@ app.service('membrojService', function ($http, config, $window) {
     service.deleteGrupKat = deleteGrupKat;
     service.updateGrupoj = updateGrupoj;
     service.updateAneco = updateAneco;
-    service.postAprobi = postAprobi;
     service.postGrupKat = postGrupKat;
     service.getAllGrupoj = getAllGrupoj;
     service.getMembroj = getMembroj;

@@ -3,19 +3,30 @@
 
   $scope.init = function() {
     $scope.uzanto = JSON.parse($window.localStorage.getItem('uzanto'));
-
     $scope.alert = window.alert;
 
-    try {
-      $scope.menuoBazaAgordoj = JSON.parse($window.localStorage.getItem('menuoBazaAgordoj'));
-      $scope.menuoMembroj = JSON.parse($window.localStorage.getItem('menuoMembroj'));
-      $scope.menuoKomunikado = JSON.parse($window.localStorage.getItem('menuoKomunikado'));
-    } catch(err) {
-      $scope.menuoBazaAgordoj =
-      [
+    function getMenuoMembroj() {
+      return   [
+        {
+          titolo: "Membroj",
+          montri: true
+        },
+        {
+          link: "#!/membroj",
+          titolo: "Membroj"
+        },
+        {
+          link: "#!/membrecpetoj",
+          titolo: "Membrecpetoj"
+        }
+      ];
+    }
+
+    function getMenuoBazaAgordoj() {
+      return [
         {
           titolo: "Bazaj agordoj",
-          montri: false
+          montri: true
         },
         {
           link: "#!/admin",
@@ -36,41 +47,38 @@
         {
           link: "#!/laborgrupoj",
           titolo: "Laborgrupoj"
-        },{
-          link: "#!/printejo",
-          titolo: "Printejo"
         }
       ];
+    }
 
-      $scope.menuoMembroj =
-      [
+    function getMenuoKomunikado() {
+      return [
         {
-          titolo: "Membroj",
+          titolo: "Komunikado",
           montri: true
         },
         {
-          link: "#!/membroj",
-          titolo: "Membroj",
-          ngClass: "selektita"
-        },
-        {
-          link: "#!/membrecpetoj",
-          titolo: "Membrecpetoj"
+          link: "#!/revuoj",
+          titolo: "Revuoj"
         }
       ];
-
-      $scope.menuoKomunikado =
-          [
-            {
-              titolo: "Komunikado",
-              montri: false
-            },
-            {
-              link: "#!/revuoj",
-              titolo: "Revuoj"
-            }
-          ];
     }
+
+    try {
+      $scope.menuoMembroj = JSON.parse($window.localStorage.getItem('menuoMembroj'));
+      if(!scope.menuoMembroj)
+        $scope.menuoMembroj = getMenuoMembroj();
+      $scope.menuoBazaAgordoj = JSON.parse($window.localStorage.getItem('menuoBazaAgordoj'));
+      if(!$scope.menuoBazaAgordoj)
+        $scope.menuoBazaAgordoj = getMenuoBazaAgordoj();
+      $scope.menuoKomunikado = JSON.parse($window.localStorage.getItem('menuoKomunikado'));
+      if(!$scope.menuoKomunikado)
+        $scope.menuoKomunikado = getMenuoKomunikado();
+    } catch(err) {
+      $scope.menuoMembroj = getMenuoMembroj();
+      $scope.menuoBazaAgordoj = getMenuoBazaAgordoj();
+      $scope.menuoKomunikado = getMenuoKomunikado();
+    };
 
     $scope.menueroj = [];
     config.getConfig("idAdministranto").then(function(response){

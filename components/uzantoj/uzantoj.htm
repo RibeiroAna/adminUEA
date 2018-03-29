@@ -1,9 +1,14 @@
 <div class="enhavo" data-ng-init="init()">
-  <h3 class="col-md-9">
+  <h3 class="col-md-7">
     Uzantprofilo por: {{uzanto.titolo}} {{uzanto.personanomo}}
     <b>{{uzanto.familianomo}}</b>
   </h3>
   <h3 class="col-md-3">
+    <button class="btn btn-default" onclick="window.print()">
+      <i class="fa fa-print" aria-hidden="true"></i> Printi membrkarton
+    </button>
+  </h3>
+  <h3 class="col-md-2">
     <button class="btn btn-danger"  ng-click="forvisxiUzanton()">
       <i class="fa fa-trash" aria-hidden="true"></i> Forviŝi uzanton
     </button>
@@ -47,8 +52,8 @@
       <li>
           <b>{{grupo.nomo}}</b>:
           ekde {{grupo.komencdato}} ĝis {{grupo.findato || "dumvive"}}
-          <span ng-show="grupo.aprobita.data == 0" style="color:red"> - Ne aprobita</span>
-          <span ng-show="grupo.aprobita.data == 1" style="color:green"> - Aprobita</span>
+          <span ng-show="grupo.aprobita == false" style="color:red"> - Ne aprobita</span>
+          <span ng-show="grupo.aprobita == true" style="color:green"> - Aprobita</span>
           <a href="" ng-click="montriDetalojn($event, grupo, '#redaktiAnecon')">
             --  Vidi detalojn >>
           </a>
@@ -313,8 +318,8 @@
 
       <p>
         <b>Aprobita</b>
-        <span ng-show="elektitaGrupo.aprobita.data == 0" style="color:red">Ne</span>
-        <span ng-show="elektitaGrupo.aprobita.data == 1" style="color:green">Jes</span>
+        <span ng-show="elektitaGrupo.aprobita == false" style="color:red">Ne</span>
+        <span ng-show="elektitaGrupo.aprobita == true" style="color:green">Jes</span>
         <a href="#"
            editable-select="elektitaGrupo.aprobita"
            e-ng-options="s.value as s.text for s in [{value: true, text: 'Jes'}, {value: false, text: 'Ne'}]"
@@ -361,5 +366,41 @@
         Forviŝi Anecon
       </button>
     </md-dialog>
+  </div>
+</div>
+
+<div id="membrkarto">
+  <div style="width:323px; border-style: dotted; height: 204px; padding: 10px 20px 0px 20px; border-width:1px;">
+    <div style="width:323px; padding-left:40px; padding-bottom:30px;">
+      <img src="content/img/logoo.png" style="width:30px;"></img>
+      <span style="font-size:15px;">UEA - Membrkarto</span>
+    </div>
+    <span style="float:left;">
+      <img src="{{bildo}}" alt="profilbildo" style="width:80px;"></img>
+    </span>
+    <span style="width:180px; float:right;">
+      {{uzanto.titolo}} {{uzanto.personanomo}} {{uzanto.familianomo}}
+      <br>
+      UEA-kodo: {{uzanto.ueakodo}}
+      <br>
+      {{gxis}}
+      <br>
+      {{lando.radikoEo + lando.finajxoEo}}
+      <img src="{{landInformoj.flag}}" alt="flago" width="20"></img>
+    </span>
+  </div>
+  <div style="width:323px; border-style: dotted; height: 204px;
+              padding: 10px 20px 0px 20px; border-width:1px; background-color:#326464 !important;
+              transform: rotate(180deg); color: white !important;">
+    <p style="font-size:30px; padding-top: 10px; color: white !important;">Membrkarto</p>
+    <img src="content/img/logoo_blanka.png" alt="profilbildo"
+         style="width:250px; padding-left: 10px; padding-top: 40px;"></img>
+
+    <p style="font-size:12px; padding-left:0px; padding-top:5px; color: white!important;">
+      En oficialaj rilatoj kun UN kaj UNESKO
+    </p>
+    <p style="font-size:12px; padding-left:0px; padding-top:5px;color: white!important;">
+      www.UEA.org
+    </p>
   </div>
 </div>

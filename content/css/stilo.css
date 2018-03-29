@@ -1,5 +1,5 @@
 body {
- font-family: 'Montserrat';
+ font-family: 'Montserrat'  !important;
  max-height: 2000px;
 }
 
@@ -220,6 +220,31 @@ md-input-container.md-block {
   padding: 10px;
 }
 
+#membrkarto {
+  visibility: hidden;
+  position: absolute;
+  left: -999em;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+    color-adjust: exact;
+    -webkit-print-color-adjust: exact !important;
+  }
+  #membrkarto, #membrkarto * {
+    visibility: visible;
+    overflow: visible !important;
+    color-adjust: exact;
+    -webkit-print-color-adjust: exact !important;
+  }
+  #membrkarto {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
 #printejo-info-box {
     border: 2px solid black;
     width: 150%;
@@ -261,6 +286,7 @@ md-input-container.md-block {
 
   .form {
     margin-left: 0px;
+    width: 100%;
   }
 
   .enhavo {

@@ -43,14 +43,11 @@ function ($scope, $rootScope, $window, $http, $routeParams, $sanitize, config,
   }
 
   $scope.aprobi = function(peto) {
-    var data = {
-      anecnomo: $scope.grupo.nomo,
-      retposxto: peto.retposxto
-    };
-
-    membrojService.postAprobi(peto.id, data).then(function(response) {
-      $window.location.reload();
-    }, errorService.error);
+    console.log(peto);
+    // var data = {kampo: "aprobita", valoro: true};
+    //   membrojService.updateAneco(peto.id, data).then(function(sucess){
+    //   $window.location.reload();
+    // }, errorService.error);
   }
 
   $scope.forvisxiAnecon = function(peto) {
