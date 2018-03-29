@@ -16,6 +16,15 @@ app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootSco
     };
 
 
+    $scope.downloadFile = function (kampo) {
+        if(kampo === 'malpeza'){
+            window.open($scope.malpeza);
+        }else {
+            window.open($scope.kvalita);
+        }
+    };
+
+
     $scope.updateVolumon = function (valoro, kampo) {
 
         if(kampo === 'enhavlisto'){
@@ -38,11 +47,28 @@ app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootSco
     };
 
 
+    $scope.updateMalpeza = function () {
+        function success(response) {
+            $window.location.reload();
+        }
+
+        revuojService.postVolumonMalpeza($scope.volumon.id, $scope.newMalpeza).then(success, errorService.error);
+    };
+
+    $scope.updateKvalita = function () {
+        function success(response) {
+            $window.location.reload();
+        }
+
+        revuojService.postVolumonKvalita($scope.volumon.id, $scope.newKvalita).then(success, errorService.error);
+    }
+
+
     $scope.editEnhavListo = function () {
         $scope.editEnhavListoMode = true;
         var element = document.querySelector("trix-editor");
         element.editor.insertHTML($scope.volumon.enhavlisto);
-    }
+    };
 
     $scope.cancelEditEnhavListo = function () {
         var element = document.querySelector("trix-editor");
@@ -74,7 +100,13 @@ app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootSco
 
 
         revuojService.getVolumonKvalita($routeParams.id).then(function (response) {
-        })
+            $scope.kvalita = response.data;
+        }, errorService.error);
+
+
+        revuojService.getVolumonMalpeza($routeParams.id).then(function (response) {
+            $scope.malpeza = response.data;
+        }, errorService.error);
 
     };
 

@@ -55,6 +55,40 @@
         -------
 
         <p>
+            <b>Kvalita</b> <a href="" ng-click="downloadFile('kvalita')">elŝuti</a>
+            <a href=""
+                    type="file"
+                    ngf-select
+                    ng-model="newKvalita"
+                    name="kvalita"
+                    ngf-pattern=".pdf"
+                    accept="pdf/*"
+                    ngf-max-size="25MB">
+                redakti
+            </a>
+            <button class="btn btn-default" ng-show="newKvalita" ng-click="updateKvalita()">okay</button>
+            <i style="color: red" ng-show="newKvalita === null">max 25M kaj .pdf</i>
+        </p>
+
+        <p>
+            <b>Malpeza</b> <a href="" ng-click="downloadFile('malpeza')">elŝuti</a>
+            <a href=""
+               type="file"
+               ngf-select
+               ng-model="newMalpeza"
+               name="malpeza"
+               ngf-pattern=".pdf"
+               accept="pdf/*"
+               ngf-max-size="25MB">
+                redakti
+            </a>
+            <button class="btn btn-default" ng-show="newMalpeza" ng-click="updateMalpeza()">okay</button>
+            <i style="color: red" ng-show="newMalpeza === null">max 25M kaj .pdf</i>
+        </p>
+
+        -------
+
+        <p>
             <div layout="row">
                 <b>Enhav listo</b>   <a style="padding-left: 5px" href="" ng-click="editEnhavListo()">redakti aŭ aldoni</a>
             </div>

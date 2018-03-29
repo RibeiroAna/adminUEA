@@ -10,6 +10,7 @@ app.service('revuojService', function ($http, $window, config) {
     service.postVolumonMalpeza = postVolumonMalpeza;
     service.getVolumonKovrilbildo = getVolumonKovrilbildo;
     service.getVolumonKvalita = getVolumonKvalita;
+    service.getVolumonMalpeza = getVolumonMalpeza;
     service.updateVolumon = updateVolumon;
 
 
@@ -89,6 +90,11 @@ app.service('revuojService', function ($http, $window, config) {
 
     function getVolumonKvalita(volumonId) {
         return $http.get(config.api_url + '/revuoj/volumoj/' + volumonId + '/kvalita');
+    }
+
+    function getVolumonMalpeza(volumonId) {
+        return $http.get(config.api_url + '/revuoj/volumoj/' + volumonId + '/malpeza');
+
     }
 
     function updateVolumon(volumonId, data) {
