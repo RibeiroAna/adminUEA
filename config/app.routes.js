@@ -55,5 +55,17 @@ angular.module('admin').config(function($routeProvider){
     .when("/faktemoj", {
       templateUrl:"components/faktemoj/faktemoj.htm",
       controller: "faktemojCtrl"
+    }).when("/printejo", {
+        templateUrl:"components/printejo/printejo.html",
+        controller: "printejoCtrl"
+    }).when("/revuoj", {
+        templateUrl: "components/revuoj/revuoj.html",
+        controller: "revuojCtrl"
+    }).when("/revuoj/:id/volumon", {
+        templateUrl: "components/revuoj/volumon/volumon.html",
+        controller: "volumonCtrl"
+    }).when("/revuoj/:revuonId/volumon/:id", {
+        templateUrl: "components/revuoj/volumon/redaktiVolumon.html",
+        controller: "redaktiVolumonCtrl"
     });
 });

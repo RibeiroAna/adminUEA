@@ -1,0 +1,105 @@
+<div class="enhavo">
+    <div class="col-md-4" style="align:center">
+        <h2>Krovilbildo:</h2>
+        <img ngf-thumbnail="file ? file: bildo" alt="profilbildo" class="profilbildo"/>
+        <br>
+        <button ng-show="!file"
+                type="file"
+                class="btn btn-default"
+                ngf-select
+                ng-model="file"
+                name="file"
+                ngf-pattern="'image/*'"
+                accept="image/*"
+                ngf-max-size="20MB">
+            Redakti aŭ aldoni krovilbildo
+        </button>
+
+        <p ng-show="file">
+            <button ng-click="cancel()" class="btn btn-danger">
+                Malfari
+            </button>
+            <button
+                    type="submit"
+                    class="btn btn-default"
+                    ng-click="upload()">
+                Konfirmi alŝuton
+            </button>
+        </p>
+    </div>
+    <div class="col-md-8">
+        <h2>Pri la volumon</h2>
+        <p>
+            <b>Numero relative al jaro:</b> {{volumon.numeroJaro}}
+            <a href="#"
+               onbeforesave="updateVolumon($data, 'numeroJaro')"
+               editable-number="volumon.numeroJaro">redakti aŭ aldoni</a>
+        </p>
+        <p>
+            <b>Numero entute:</b> {{volumon.numeroEntute}}
+            <a href="#"
+               onbeforesave="updateVolumon($data, 'numeroEntute')"
+               editable-number="volumon.numeroEntute">
+                redakti aŭ aldoni
+            </a>
+        </p>
+        <p>
+            <b>Eldon Dato:</b> {{volumon.eldondato | date}}
+            <a href="#"
+               onbeforesave="updateVolumon($data, 'eldondato')"
+               editable-date="volumon.eldondato"
+            >
+                redakti aŭ aldoni
+            </a>
+        </p>
+        -------
+
+        <p>
+            <b>Kvalita</b> <a href="" ng-click="downloadFile('kvalita')">elŝuti</a>
+            <a href=""
+                    type="file"
+                    ngf-select
+                    ng-model="newKvalita"
+                    name="kvalita"
+                    ngf-pattern=".pdf"
+                    accept="pdf/*"
+                    ngf-max-size="25MB">
+                redakti
+            </a>
+            <button class="btn btn-default" ng-show="newKvalita" ng-click="updateKvalita()">okay</button>
+            <i style="color: red" ng-show="newKvalita === null">max 25M kaj .pdf</i>
+        </p>
+
+        <p>
+            <b>Malpeza</b> <a href="" ng-click="downloadFile('malpeza')">elŝuti</a>
+            <a href=""
+               type="file"
+               ngf-select
+               ng-model="newMalpeza"
+               name="malpeza"
+               ngf-pattern=".pdf"
+               accept="pdf/*"
+               ngf-max-size="25MB">
+                redakti
+            </a>
+            <button class="btn btn-default" ng-show="newMalpeza" ng-click="updateMalpeza()">okay</button>
+            <i style="color: red" ng-show="newMalpeza === null">max 25M kaj .pdf</i>
+        </p>
+
+        -------
+
+        <p>
+            <div layout="row">
+                <b>Enhav listo</b>   <a style="padding-left: 5px" href="" ng-click="editEnhavListo()">redakti aŭ aldoni</a>
+            </div>
+
+            <div id="enhavlisto" ng-show="!editEnhavListoMode"></div>
+        </p>
+
+        <p ng-show="editEnhavListoMode">
+            <trix-editor class="trix-content" placeholder="Enhav listo" id="enhavlisto-edit"></trix-editor>
+            <button class="btn btn-danger" ng-click="cancelEditEnhavListo()">Malfari</button>
+            <button class="btn btn-default" ng-click="updateVolumon('undefined', 'enhavlisto')">Redakti</button>
+        </p>
+    </div>
+</div>
