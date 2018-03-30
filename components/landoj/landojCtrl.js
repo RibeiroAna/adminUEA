@@ -11,6 +11,7 @@ app.controller("landojCtrl", function ($scope, $rootScope, $window,
   }
 
   $scope.novaLando = function() {
+      $scope.lando.finajxoEo = "";
       landojService.postLandoj($scope.lando).then(function(sucess){
           $window.location.reload();
       }, errorService.error);

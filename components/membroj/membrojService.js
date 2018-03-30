@@ -67,7 +67,7 @@ app.service('membrojService', function ($http, config, $window) {
     function getAnecoj(idGrupo, aprobitaValue) {
         var req = {
             method: 'GET',
-            url: config.api_url + '/grupoj/anecoj?idGrupo=' + idGrupo + '&aprobita=' + aprobitaValue,
+            url: config.api_url + '/grupoj/' + idGrupo + '/anoj?aprobita=' + aprobitaValue,
             headers: {'x-access-token': $window.localStorage.getItem('token')}
         };
 
