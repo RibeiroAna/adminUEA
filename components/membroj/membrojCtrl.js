@@ -1,6 +1,6 @@
 app.controller("membrojCtrl", function ($scope, $rootScope, $window, $http,
                                         $routeParams, config, auth,
-                                        membrojService, errorService) {
+                                        membrojService, errorService, landojService) {
   $scope.init = function() {
     auth.ensalutita();
     $rootScope.menuo = true;
@@ -36,13 +36,25 @@ app.controller("membrojCtrl", function ($scope, $rootScope, $window, $http,
 
   $scope.init2 = function() {
       $scope.init();
-      membrojService.getAnecoj($routeParams.id, 1).then(function(response) {
-          $scope.membroj = response.data;
-      }, errorService.error);
 
-      membrojService.getGrupojById($routeParams.id).then(function(response) {
-          $scope.grupo = response.data[0];
-      }, errorService.error);
+      if (Number.isInteger(parseInt($routeParams.id))) {
+        membrojService.getAnecoj($routeParams.id, 1).then(function(response) {
+          $scope.membroj = response.data;
+        }, errorService.error);
+      } else {
+        membrojService.getUzantoj().then(function(response) {
+          $scope.membroj = response.data;
+          $scope.filtrilo = $routeParams.id;
+        }, errorService.error);
+      }
+
+      landojService.getLandoj().then(function(response) {
+        var landoj = response.data;
+        $scope.landoj =  {};
+        for (var i = 0; i < landoj.length; i++) {
+          $scope.landoj[landoj[i].id] = landoj[i].radikoEo;
+        }
+      });
   }
 
   $scope.filtri = function (){

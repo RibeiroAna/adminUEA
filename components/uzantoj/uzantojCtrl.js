@@ -80,19 +80,19 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $routeParam
   };
 
 
-    $scope.montriDetalojn = function(ev, grupo, element) {
-      $scope.elektitaGrupo = grupo;
-      $mdDialog.show({
-        contentElement: element,
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose: true
-      });
-    };
+  $scope.montriDetalojn = function(ev, grupo, element) {
+    $scope.elektitaGrupo = grupo;
+    $mdDialog.show({
+      contentElement: element,
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true
+    });
+  };
 
-    $scope.cancel = function() {
-       $mdDialog.cancel();
-     };
+  $scope.cancel = function() {
+     $mdDialog.cancel();
+   };
 
   $scope.updateUzantoj = function(valoro, kampo) {
     var data = {valoro: valoro, kampo: kampo};

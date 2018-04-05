@@ -22,6 +22,7 @@
   </span>
   </div>
 
+  <div class="clear"></div>
   <div class="menubar">
     <span class="menuo" onclick="openNav()">&#9776; Menuo</span>
     <span class="profilo" ng-click="elsaluti()">
@@ -30,5 +31,13 @@
     <span class="uzantnomo">
       <i class="fa fa-user" aria-hidden="true"></i> {{uzanto.uzantnomo}}
     </span>
+    <span class="sercxado">
+       <button class="btn btn-default" ng-click="sercxi()">Serĉi membrojn</button>
+    </span>
+    <span class="input-group col-md-2" style="float:right">
+      <input type="text"
+             class="form-control"
+             ng-model="teksto.sercxi" 
+             ng-keypress="sercxi_enter($event)">
+    </span>
   </div>
-</div>

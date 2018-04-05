@@ -4,11 +4,6 @@ app.controller("landojCtrl", function ($scope, $rootScope, $window,
   $scope.init = function() {
     auth.ensalutita();
 
-    if (($window.localStorage.getItem('token') == null) ||
-        ($window.localStorage.getItem('token') == 0)) {
-      $window.location.href = '#!/login';
-    }
-
     $rootScope.menuo = true;
     landojService.getLandoj().then(function(response) {
         $scope.landoj = response.data;
@@ -16,6 +11,7 @@ app.controller("landojCtrl", function ($scope, $rootScope, $window,
   }
 
   $scope.novaLando = function() {
+      $scope.lando.finajxoEo = "";
       landojService.postLandoj($scope.lando).then(function(sucess){
           $window.location.reload();
       }, errorService.error);
@@ -29,6 +25,16 @@ app.controller("landojCtrl", function ($scope, $rootScope, $window,
       }, errorService.error);
     }
   }
+
+  $scope.ignoreAccents = function (item) {
+    if (!$scope.search) return true;
+    var objects = [];
+    var jsonstr = JSON.stringify(item);
+    var parsejson = JSON.parse(jsonstr);
+    var searchterm = $scope.search.replace(/[!#$%&'()*+,-./:;?@[\\\]_`{|}~]/g, '');    // skip replace if not required (it removes special characters)
+    objects = getNoOfResults(parsejson, searchterm);
+    return objects.length > 0;
+};
 
   $scope.updateLando = function(id, valoro, kampo) {
     var data = {valoro: valoro, kampo: kampo};

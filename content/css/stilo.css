@@ -1,6 +1,9 @@
 body {
- font-family: 'Montserrat'  !important;
+ font-family: 'Montserrat' !important;
  max-height: 2000px;
+ color-adjust: exact !important;
+ -webkit-print-color-adjust: exact !important;
+ background-color: #fafafa;
 }
 
 h2 {
@@ -28,6 +31,11 @@ h2 {
   height:100px;
   margin-left: 10px;
   margin-top: 0px;
+}
+
+.sercxado {
+  float: right;
+  margin-right: 35px;
 }
 
 .nav-logoo img {
@@ -229,13 +237,13 @@ md-input-container.md-block {
 @media print {
   body * {
     visibility: hidden;
-    color-adjust: exact;
+    color-adjust: exact !important;
     -webkit-print-color-adjust: exact !important;
   }
   #membrkarto, #membrkarto * {
     visibility: visible;
     overflow: visible !important;
-    color-adjust: exact;
+    color-adjust: exact !important;;
     -webkit-print-color-adjust: exact !important;
   }
   #membrkarto {
@@ -243,6 +251,40 @@ md-input-container.md-block {
     left: 0;
     top: 0;
   }
+}
+
+#printejo-info-box {
+    border: 2px solid black;
+    width: 150%;
+    height: 500px;
+}
+
+.revuoj {
+    padding-top: 3%;
+    padding-left: 270px;
+    padding-bottom: 3%;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.revuoj a {
+    color: lightskyblue
+}
+
+.revuoj-list {
+    padding-top: 2%;
+    padding-left: 2%;
+}
+
+#aldoni-revuon{
+    padding-top: 0.5%;
+    color: lightskyblue
+}
+
+.revuon {
+    padding-top: 2%;
+    width: 100%;
 }
 
 @media screen and (max-width: 700px) {

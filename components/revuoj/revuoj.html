@@ -1,0 +1,13 @@
+<div class="revuoj">
+    <div class="row">
+        <h1 class="col-md-2">Revuoj</h1>
+        <h2 class="col-md-2" id="aldoni-revuon" ng-click="showAddRevuojDialog()">+Aldoni novan revuon</h2>
+    </div>
+
+    <div class="revuoj-list">
+        <div class="row revuon" ng-repeat="revuoj in revuejo">
+            <li class="col-md-6">{{revuoj.titolo}}</li>
+            <a class="col-md-6" href="#!/revuoj/{{revuoj.id}}/volumon?titolo={{revuoj.titolo}}">Vidi/Redakti/aldoni volumon >></a>
+        </div>
+    </div>
+</div>

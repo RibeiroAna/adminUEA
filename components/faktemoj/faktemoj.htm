@@ -1,0 +1,68 @@
+<div class="enhavo" data-ng-init="init()">
+  <h1>
+    Faktemoj en la sistemo
+  </h1>
+
+  <h2>
+    <a href="#!/faktemoj" ng-click="novaL = !novaL" ng-init="novaL = true">
+      + Aldoni novan faktemon
+    </a>
+  </h2>
+
+  <!--formularo por aldoni novan landon-->
+  <form ng-submit="novaFaktemo()" ng-hide="novaL">
+    <div class="form-group">
+      <label for="radiko">Nomo de la faktemo (Ekzemple: Edukado)</label>
+      <input type="text"
+             id="radiko"
+             ng-model="faktemo.nomo"
+             class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="finajxo">Priskribo de la faktemo</label>
+      <textarea
+             id="finajxo"
+             ng-model="faktemo.priskribo"
+             class="form-control">
+      </textarea>
+    </div>
+    <button id="submit" type="submit" class="btn btn-primary">Aldoni</button>
+    <br><br>
+  </form>
+
+  <label>Serĉi: <input ng-model="searchText" class="form-control"></label>
+
+  <!--Tabelo kun enhavo-->
+  <table class="table">
+    <thead>
+      <tr>
+        <td>Nomo</td>
+        <td>Priskribo</td>
+      </tr>
+    </thead>
+    <tr ng-repeat="f in faktemoj | filter:searchText">
+      <td>
+        {{f.nomo}}
+        <a href="#"
+           editable-text="f.nomo"
+           onbeforesave="updateFaktemo(f.id, $data, 'nomo')">
+           Redakti
+        </a>
+      </td>
+      <td>
+        {{f.priskribo}}
+        <a href="#"
+           editable-text="f.priskribo"
+           onbeforesave="updateFaktemo(f.id, $data, 'priskribo')">
+           Redakti
+         </a>
+       </td>
+      <td>
+        <a href="" ng-click="deleteFaktemo(f.id)">
+          <i class="fa fa-trash" aria-hidden="true"></i> Forviŝi
+        </a>
+      </td>
+    </tr>
+  </table>
+
+</div>

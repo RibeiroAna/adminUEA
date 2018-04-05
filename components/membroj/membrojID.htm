@@ -1,29 +1,25 @@
 <div class="enhavo" data-ng-init="init2()">
-  <h1>Membroj de {{grupo.nomo}}</h1>
     <label>Serĉi:
       <input class="form-control" ng-model="filtrilo">
     </label>
-    <p>Entuta membraro {{query.length}}</p>
-    <a href="" ng-click="filtri()">
-      Klaku por vidi nur novajn membrojn (sen UEA-kodo)
-    </a>
-
+    <p>Entute trovita {{query.length}}</p>
     <table class="table">
     <tdead>
       <tr>
         <td>Homo</td>
-        <td>Komencdato</td>
-        <td>Findato</td>
+        <td>Lando</td>
       </tr>
     </tdead>
     <tbody>
-      <tr ng-repeat="membro in membroj | orderBy:'personanomo' | filter: filtrilo as query">
+      <tr ng-repeat="membro in membroj | orderBy:'familinomo' | filter:ignoreAccents | filter: filtrilo as query ">
         <td>
-          {{membro.personanomo}} {{membro.familianomo}}
-          <a href="#!/uzantoj/{{membro.idAno}}">Vidi detalojn >></a>
+          {{membro.titolo}} {{membro.personanomo}} <strong>{{membro.familianomo}}</strong>
+          <a ng-if="membro.idAno" href="#!/uzantoj/{{membro.idAno}}">Vidi detalojn >></a>
+          <a ng-if="!membro.idAno" href="#!/uzantoj/{{membro.id}}">Vidi detalojn >></a>
         </td>
-        <td>{{strip(membro.komencdato)}}</td>
-        <td>{{strip(membro.findato) || "Dumviva"}}</td>
+        <td>
+          {{landoj[membro.idLando]}}
+        </td>
       </tr>
     </tbody>
   </table>

@@ -4,7 +4,7 @@
   $scope.init = function() {
     $scope.uzanto = JSON.parse($window.localStorage.getItem('uzanto'));
     $scope.alert = window.alert;
-
+    $scope.teksto = {};
     function getMenuoMembroj() {
       return   [
         {
@@ -41,12 +41,29 @@
           titolo: "Perantoj"
         },
         {
+          link: "#!/faktemoj",
+          titolo: "Faktemoj"
+        },
+        {
           link:"#!/membrecoj",
           titolo:"Kategorioj kaj kotizoj"
         },
         {
           link: "#!/laborgrupoj",
           titolo: "Laborgrupoj"
+        }
+      ];
+    }
+
+    function getMenuoKomunikado() {
+      return [
+        {
+          titolo: "Komunikado",
+          montri: true
+        },
+        {
+          link: "#!/revuoj",
+          titolo: "Revuoj"
         }
       ];
     }
@@ -58,9 +75,13 @@
       $scope.menuoBazaAgordoj = JSON.parse($window.localStorage.getItem('menuoBazaAgordoj'));
       if(!$scope.menuoBazaAgordoj)
         $scope.menuoBazaAgordoj = getMenuoBazaAgordoj();
+      $scope.menuoKomunikado = JSON.parse($window.localStorage.getItem('menuoKomunikado'));
+      if(!$scope.menuoKomunikado)
+        $scope.menuoKomunikado = getMenuoKomunikado();
     } catch(err) {
       $scope.menuoMembroj = getMenuoMembroj();
       $scope.menuoBazaAgordoj = getMenuoBazaAgordoj();
+      $scope.menuoKomunikado = getMenuoKomunikado();
     };
 
     $scope.menueroj = [];
@@ -68,6 +89,7 @@
       if($scope.uzanto.permesoj.indexOf(response.data.idAdministranto) > -1) {
         $scope.menueroj.push($scope.menuoBazaAgordoj);
         $scope.menueroj.push($scope.menuoMembroj);
+        $scope.menueroj.push($scope.menuoKomunikado);
       }
     }, errorService.error);
 
@@ -91,9 +113,19 @@
     auth.elsaluti();
   }
 
+  $scope.sercxi = function() {
+    $window.location.href = "#!/membroj/" + $scope.teksto.sercxi;
+  }
+
+  $scope.sercxi_enter = function(keyEvent) {
+    if (keyEvent.which === 13)
+      $scope.sercxi()
+  }
+
   window.onbeforeunload = function() {
     $window.localStorage.setItem('menuoMembroj', JSON.stringify($scope.menuoMembroj));
     $window.localStorage.setItem('menuoBazaAgordoj', JSON.stringify($scope.menuoBazaAgordoj));
+    $window.localStorage.setItem('menuoKomunikado', JSON.stringify($scope.menuoKomunikado));
   }
 
 });
