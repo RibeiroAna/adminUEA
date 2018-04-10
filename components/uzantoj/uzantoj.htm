@@ -5,7 +5,7 @@
   </h3>
   <h3 class="col-md-12">
     <button class="btn btn-default" onclick="window.print()">
-      <i class="fa fa-print" aria-hidden="true"></i> Printi membrkarton
+      <i class="fa fa-print" aria-hidden="true"></i> Printi membrokarton
     </button>
     <button class="btn btn-danger"  ng-click="forvisxiUzanton()">
       <i class="fa fa-trash" aria-hidden="true"></i> Forviŝi uzanton
@@ -69,10 +69,10 @@
          e-ui-mask="AAAA-A">redakti aŭ aldoni</a>
     </p>
     <p>
-      <b>Retpoŝtadreso kaj uzantnomo:</b> {{uzanto.retposxto}}
+      <b>Uzantnomo (por ensaluti en la retejo):</b> {{uzanto.uzantnomo}}
       <a href="#"
          onbeforesave="updateUzantoj($data, 'retposxto')"
-         editable-email="uzanto.retposxto">
+         editable-email="uzanto.uzantnomo">
         redakti aŭ aldoni
       </a>
     </p>
@@ -92,6 +92,14 @@
          onbeforesave="updateUzantoj($data, 'personanomo')">
          redakti aŭ aldoni
        </a>
+    </p>
+    <p>
+      <b>Retpoŝto:</b> {{uzanto.retposxto}}
+      <a href="#"
+         onbeforesave="updateUzantoj($data, 'retposxto')"
+         editable-email="uzanto.retposxto">
+        redakti aŭ aldoni
+      </a>
     </p>
     <p>
       <b>Familia nomo:</b> {{uzanto.familianomo}}
@@ -215,7 +223,7 @@
           <md-autocomplete
                 md-selected-item="aneco.grupo"
                 md-search-text="ctrl.searchText"
-                md-items="item in querySearch(ctrl.searchText)"
+                md-items="item in querySearch(ctrl.searchText, cxiujGrupoj)"
                 md-item-text="item.nomo"
                 md-min-length="0"
                 placeholder="Al kiu grupo vi ŝatus anigi tiun homon?">
@@ -251,23 +259,39 @@
            </md-input-container>
           </div>
 
-          <div layout="row" ng-show="opciaj">
+          <div ng-show="opciaj">
+            <md-contact-chips
+                ng-model="aneco.JSONfaktemoj"
+                md-contacts="querySearch($query, faktemojList)"
+                md-contact-name="nomo"
+                md-contact-image=""
+                md-contact-email=""
+                md-require-match="true"
+                md-highlight-flags="i"
+                filter-selected="true"
+                placeholder="Fakoj">
+            </md-contact-chips>
+            <p class="note">
+              Tajpu ekzistantaj fakoj, kaze iu fako ne ekzistas ankoraŭ en la sistemo, iru al
+              <a href="#!/faktemoj" style="color: blue">Faktemoj</a> kaj aldonu ĝin.
+            </p>
+
             <md-input-container class="md-block" flex-gt-sm>
               <label>Tasko:</label>
               <input name="Tasko" ng-model="aneco.rolo" />
-              <div class="hint">
-                Ĝenerale por estraranoj, oficistoj, ktp.
-                la tasko estas io kiel "Prezidanto", "Ĝenerala Direktoro", ktp
-              </div>
             </md-input-container>
+            <p class="note">
+              Ĝenerale por estraranoj, oficistoj, ktp.
+              la tasko estas io kiel "Prezidanto", "Ĝenerala Direktoro", ktp
+            </p>
 
             <md-input-container class="md-block" flex-gt-sm>
               <label>Respondeco:</label>
               <input name="Respondeco" ng-model="aneco.respondeco" />
-              <div class="hint">
-                Respondeco estas io kiel: "Faka Agado", "Rilatoj kun TEJO", ktp.
-              </div>
             </md-input-container>
+            <p class="note">
+              Respondeco estas io kiel: "Faka Agado", "Rilatoj kun TEJO", ktp.
+            </p>
           </div>
 
           <div layout="row">
@@ -316,7 +340,7 @@
           redakti aŭ aldoni
         </a>
         <button class="btn btn-default"
-           ng-show="elektitaGrupo.dumviva.data == 0"
+           ng-show="elektitaGrupo.dumviva == false"
            ng-click="updateAneco(elektitaGrupo.id, true, 'dumviva')">
           Farigi dumviva
         </button>
@@ -350,18 +374,18 @@
         </a>
       </p>
 
-      <p ng-if="elektitaGrupo.idUrbo">
-        <b>Respondeco:</b> {{elektitaGrupo.respondeco}}
-        <a href="#"
-           editable-text="elektitaGrupo.findato">
-          redakti aŭ aldoni
-        </a>
+      <p ng-if="elektitaGrupo.idFaktemo">
+        <b>Faktemoj:</b>
+        <span ng-repeat="faktemo in elektitaGrupo.faktemoj">
+          {{faktemoj[faktemo]}} //
+        </span>
       </p>
 
       <p>
         <b>Observoj:</b>
         <a href="#"
-           editable-textarea="elektitaGrupo.observoj">
+           editable-textarea="elektitaGrupo.observoj"
+           onbeforesave="updateAneco(elektitaGrupo.id, $data, 'observo')">
           redakti aŭ aldoni
         </a>
         <div ng-bind-html="elektitaGrupo.observoj" style="background-color: #D3D3D3;"></div>
@@ -377,15 +401,18 @@
 
 <div id="membrkarto">
   <div style="width:323px; border-style: dotted; height: 204px; padding: 10px 20px 0px 20px; border-width:1px;">
-    <div style="width:323px; padding-left:40px; padding-bottom:20px;">
+    <div style="width:323px; padding-left:10px; padding-bottom:5px;">
       <img src="content/img/logoo.png" style="width:30px;"></img>
-      <span style="font-size:15px;">UEA - Membrokarto</span>
+      <span style="font-size:15px;">Universala Esperanto-Asocio</span>
     </div>
-    <div style="padding-bottom: 20px;">
+    <div style="width:323px; padding-left:90px; padding-bottom:20px;">
+      <span style="font-size:15px;">Membrokarto</span>
+    </div>
+    <div style="padding-bottom: 25px;">
       <span style="float:left;">
         <img src="{{bildo}}" alt="profilbildo" style="width:80px;"></img>
       </span>
-      <span style="width:180px; float:right;">
+      <span style="width:180px; float:right; font-size:12px;">
         {{uzanto.titolo}} {{uzanto.personanomo}} {{uzanto.familianomo}}
         <br>
         UEA-kodo: {{uzanto.ueakodo}}
@@ -396,7 +423,4 @@
         <img src="{{landInformoj.flag}}" alt="flago" width="20"></img>
       </span>
     </div>
-    <span style="font-size:9px;">
-      Universala Esperanto-Asocio: En oficialaj rilatoj kun UN kaj UNESKO - UEA.org
-    </span>
   </div>

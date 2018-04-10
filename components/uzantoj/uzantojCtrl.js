@@ -1,10 +1,16 @@
 app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $routeParams, $sanitize, $mdDialog,
-                                        config, uzantojService, landojService, membrojService,
+                                        config, uzantojService, landojService, membrojService, faktemojService,
                                         errorService, auth) {
   $scope.init = function() {
     auth.ensalutita();
 
     $rootScope.menuo = true;
+
+    faktemojService.getFaktemoj().then(function(response){
+      $scope.faktemoj = {}
+      $scope.faktemojList = response.data;
+      response.data.map(function(elem){$scope.faktemoj[elem.id] = elem.nomo;});
+    });
 
     uzantojService.getUzantoj($routeParams.id).then(function(response) {
       if(response.data[0]) {
@@ -18,25 +24,41 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $routeParam
         }, errorService.error);
 
         uzantojService.getGrupoj($routeParams.id).then(function(response) {
-          $scope.grupoj = response.data;
-          for (var i = 0; i < $scope.grupoj.length; i++) {
-            $scope.grupoj[i].komencdato = $scope.grupoj[i].komencdato.slice(0,10);
-            if($scope.grupoj[i].findato)
-                $scope.grupoj[i].findato = $scope.grupoj[i].findato.slice(0,10);
-          }
+          $scope.grupoj = {};
+          response.data.map(function (elem) {
+            elem.komencdato = elem.komencdato.slice(0,10);
+            if (elem.findato) {
+              elem.findato = elem.findato.slice(0,10);
+            }
+            if (!$scope.grupoj[elem.id]) {
+              if(elem.idFaktemo) {
+                elem.faktemoj = [];
+                elem.faktemoj.push(elem.idFaktemo);
+              }
+              $scope.grupoj[elem.id]  = elem;
+             } else {
+               if(elem.idFaktemo) {
+                 $scope.grupoj[elem.id].faktemoj.push(elem.idFaktemo);
+               }
+              }
+            });
         }, errorService.error);
 
         config.getConfig("idMembrecgrupo").then(function(response) {
           $scope.idMembrecgrupo = response.data.idMembrecgrupo;
           membrojService.getGrupKat($scope.idMembrecgrupo).then(function(response){
-            $scope.membrecgrupo  = $scope.grupoj.slice().filter(function(grupo){
-              return response.data.map(function(e){return e.id;}).indexOf(grupo.idGrupo) > -1;
+            var membrArr = response.data.map(function(elem) {return elem.id})
+            $scope.membrecgrupo  = {};
+            Object.keys($scope.grupoj).forEach(function(key,index) {
+              if(membrArr.indexOf($scope.grupoj[key].idGrupo) > -1){
+                $scope.membrecgrupo = $scope.grupoj[key];
+              }
             });
-            if($scope.membrecgrupo.length > 0) {
-              if($scope.membrecgrupo[0].findato == null) {
+            if($scope.membrecgrupo) {
+              if($scope.membrecgrupo.findato == null) {
                 $scope.gxis = "Dumviva membro";
               } else {
-                var finjaro = parseInt($scope.membrecgrupo[0].findato.slice(0, 4)) - 1;
+                var finjaro = parseInt($scope.membrecgrupo.findato.slice(0, 4)) - 1;
                 $scope.gxis = "Membro ĝis " +  finjaro;
               }
             }
@@ -82,6 +104,7 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $routeParam
 
   $scope.montriDetalojn = function(ev, grupo, element) {
     $scope.elektitaGrupo = grupo;
+    $scope.aneco.JSONfaktemoj = [];
     $mdDialog.show({
       contentElement: element,
       parent: angular.element(document.body),
@@ -92,25 +115,14 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $routeParam
 
   $scope.cancel = function() {
      $mdDialog.cancel();
-   };
+  };
 
   $scope.updateUzantoj = function(valoro, kampo) {
     var data = {valoro: valoro, kampo: kampo};
-    if(kampo == 'retposxto') {
-      var data2 = {valoro: valoro, kampo: "uzantnomo"};
-      uzantojService.updateUzantoj($routeParams.id, data2).then(
-        function(sucess){
-          uzantojService.updateUzantoj($routeParams.id, data).then(
-            function(sucess){
-              $window.location.reload();
-            }, errorService.error);
-        }, errorService.error);
-    } else {
       uzantojService.updateUzantoj($routeParams.id, data).then(
         function(sucess){
           $window.location.reload();
         }, errorService.error);
-    }
   }
 
   $scope.forvisxiAnecon = function(peto) {
@@ -151,15 +163,16 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $routeParam
     membrojService.updateAneco(id, data).then(function(sucess){
       $window.location.reload();
     }, errorService.error);
+    $window.location.reload();
   }
 
-  $scope.querySearch  = function (query) {
-    var results = $scope.cxiujGrupoj.filter(function(obj) {
-        // console.log(obj);
-        // return
+  $scope.querySearch  = function (query, element) {
+    var results = element.filter(function(obj) {
         if(obj.nomo != null && obj.mallongigilo != null) {
           return obj.nomo.toLowerCase().indexOf(query.toLowerCase()) != -1 ||
           obj.mallongigilo.toLowerCase().indexOf(query.toLowerCase()) != -1;
+        } if(obj.nomo != null) {
+          return obj.nomo.toLowerCase().indexOf(query.toLowerCase()) != -1;
         } else {
           return obj.id == query;
         }
@@ -178,6 +191,10 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $routeParam
         window.alert("Bonvole, enmetu findaton!");
         return;
       }
+    }
+    $scope.aneco.faktemoj = [];
+    for (var i = 0; i < $scope.aneco.JSONfaktemoj.length; i++) {
+      $scope.aneco.faktemoj.push($scope.aneco.JSONfaktemoj[i].id);
     }
 
     if($scope.aneco.komencdato) {
