@@ -1,6 +1,7 @@
-app.controller('volumonCtrl', function ($scope, auth, $rootScope, $routeParams, $mdDialog, errorService, revuojService) {
+app.controller('volumonCtrl', function ($scope, auth, $rootScope, $routeParams, $mdDialog, $window, errorService, revuojService) {
     $scope.revuonTitolo = $routeParams.titolo;
     $scope.revuonId = $routeParams.id;
+
 
     $scope.volumoj = [];
 
@@ -10,6 +11,10 @@ app.controller('volumonCtrl', function ($scope, auth, $rootScope, $routeParams, 
         };
 
         revuojService.getRevuoVolumoj($routeParams.id).then(success, errorService.error);
+
+        revuojService.getMp3($scope.revuonId).then(function (response) {
+            $scope.mp3Dosiero = response.data;
+        }, errorService.error);
     };
 
     $scope.showAddVolumonDialog = function() {
@@ -27,6 +32,13 @@ app.controller('volumonCtrl', function ($scope, auth, $rootScope, $routeParams, 
         }, function (result) {
             // Function for when cancel() of mdDialog is called
         });
+    };
+
+    $scope.updateMp3Dosiero = function () {
+        revuojService.postMp3($scope.revuonId, $scope.mySong).then(function (response) {
+            $scope.mySong = undefined;
+            $window.location.reload();
+        })
     };
 
     var init = function () {

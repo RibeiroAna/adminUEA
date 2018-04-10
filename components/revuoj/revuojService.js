@@ -12,6 +12,8 @@ app.service('revuojService', function ($http, $window, config) {
     service.getVolumonKvalita = getVolumonKvalita;
     service.getVolumonMalpeza = getVolumonMalpeza;
     service.updateVolumon = updateVolumon;
+    service.postMp3 = postMp3;
+    service.getMp3 = getMp3;
 
 
     function getRevuoj() {
@@ -82,6 +84,22 @@ app.service('revuojService', function ($http, $window, config) {
             headers: {'Content-Type': undefined, 'x-access-token': $window.localStorage.getItem('token')}
         });
     }
+
+    function postMp3(revuonId, mp3) {
+        var file = mp3;
+        var uploadUrl = config.api_url + '/revuoj/' + revuonId + '/mp3';
+        var fd = new FormData();
+        fd.append('file', file);
+
+        return $http.post(uploadUrl,fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined, 'x-access-token': $window.localStorage.getItem('token')}
+        });
+    };
+
+    function getMp3(revuonId) {
+        return $http.get(config.api_url + '/revuoj/' + revuonId + '/mp3');
+    };
 
     function getVolumonKovrilbildo(volumonId) {
         return $http.get(config.api_url + '/revuoj/volumoj/' + volumonId + '/bildo');
