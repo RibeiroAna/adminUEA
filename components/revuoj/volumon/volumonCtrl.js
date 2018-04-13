@@ -13,7 +13,9 @@ app.controller('volumonCtrl', function ($scope, auth, $rootScope, $routeParams, 
         revuojService.getRevuoVolumoj($routeParams.id).then(success, errorService.error);
 
         revuojService.getMp3($scope.revuonId).then(function (response) {
-            $scope.mp3Dosiero = response.data;
+            if(response.data !== 'No file found'){
+                $scope.mp3Dosiero = response.data;
+            }
         }, errorService.error);
     };
 
