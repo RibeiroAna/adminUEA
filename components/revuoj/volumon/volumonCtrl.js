@@ -11,12 +11,6 @@ app.controller('volumonCtrl', function ($scope, auth, $rootScope, $routeParams, 
         };
 
         revuojService.getRevuoVolumoj($routeParams.id).then(success, errorService.error);
-
-        revuojService.getMp3($scope.revuonId).then(function (response) {
-            if(response.data !== 'No file found'){
-                $scope.mp3Dosiero = response.data;
-            }
-        }, errorService.error);
     };
 
     $scope.showAddVolumonDialog = function() {
@@ -34,13 +28,6 @@ app.controller('volumonCtrl', function ($scope, auth, $rootScope, $routeParams, 
         }, function (result) {
             // Function for when cancel() of mdDialog is called
         });
-    };
-
-    $scope.updateMp3Dosiero = function () {
-        revuojService.postMp3($scope.revuonId, $scope.mySong).then(function (response) {
-            $scope.mySong = undefined;
-            $window.location.reload();
-        })
     };
 
     var init = function () {

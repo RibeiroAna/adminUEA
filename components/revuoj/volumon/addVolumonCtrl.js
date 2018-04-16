@@ -12,6 +12,7 @@ app.controller('addVolumonCtrl', function ($scope, $window, config, $rootScope, 
             revuojService.postVolumonKovrilbildo(response.data.insertId, $scope.getFile('input-kovrilbildo-id'));
             revuojService.postVolumonKvalita(response.data.insertId, $scope.getFile('input-kvalita-id'));
             revuojService.postVolumonMalpeza(response.data.insertId, $scope.getFile('input-malpeza-id'));
+            revuojService.postMp3(response.data.insertId, $scope.getFile('input-mp3-id'));
         };
 
         revuojService.addVolumon(revuonId, $scope.volumon).then(success, errorService.error);

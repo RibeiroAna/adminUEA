@@ -46,6 +46,13 @@ app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootSco
         revuojService.updateVolumon($scope.volumon.id, data).then(success, errorService.error);
     };
 
+    $scope.updateMp3Dosiero = function () {
+        revuojService.postMp3($scope.volumon.id, $scope.mySong).then(function (response) {
+            $scope.mySong = undefined;
+            $window.location.reload();
+        })
+    };
+
 
     $scope.updateMalpeza = function () {
         function success(response) {
@@ -92,6 +99,12 @@ app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootSco
                     document.getElementById('enhavlisto').innerHTML = $scope.volumon.enhavlisto;
                 }
             })
+        }, errorService.error);
+
+        revuojService.getMp3($routeParams.id).then(function (response) {
+            if(response.data !== 'No file found'){
+                $scope.mp3Dosiero = response.data;
+            }
         }, errorService.error);
 
         revuojService.getVolumonKovrilbildo($routeParams.id).then(function (response) {

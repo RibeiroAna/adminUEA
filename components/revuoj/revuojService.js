@@ -85,9 +85,9 @@ app.service('revuojService', function ($http, $window, config) {
         });
     }
 
-    function postMp3(revuonId, mp3) {
+    function postMp3(volumonId, mp3) {
         var file = mp3;
-        var uploadUrl = config.api_url + '/revuoj/' + revuonId + '/mp3';
+        var uploadUrl = config.api_url + '/revuoj/volumoj/' + volumonId + '/mp3';
         var fd = new FormData();
         fd.append('file', file);
 
@@ -97,8 +97,8 @@ app.service('revuojService', function ($http, $window, config) {
         });
     };
 
-    function getMp3(revuonId) {
-        return $http.get(config.api_url + '/revuoj/' + revuonId + '/mp3');
+    function getMp3(volumonId) {
+        return $http.get(config.api_url + '/revuoj/volumoj/' + volumonId + '/mp3');
     };
 
     function getVolumonKovrilbildo(volumonId) {

@@ -30,6 +30,21 @@
     <div class="col-md-8">
         <h2>Pri la volumon</h2>
         <p>
+            <audio controls src="{{mp3Dosiero}}">
+            </audio>
+            <p>
+                <a href=""
+                   type="file"
+                   ngf-select
+                   ng-model="mySong"
+                   name="mySong"
+                   ngf-max-size="25MB" style="padding-top: -35px">
+                    redakti aŭ aldoni mp3 dosiero
+                </a>
+                <button class="btn btn-default" ng-show="mySong" ng-click="updateMp3Dosiero()">okay</button>
+            </p>
+        </p>
+        <p>
             <b>Numero relative al jaro:</b> {{volumon.numeroJaro}}
             <a href="#"
                onbeforesave="updateVolumon($data, 'numeroJaro')"
