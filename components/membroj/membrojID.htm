@@ -11,7 +11,7 @@
       </tr>
     </tdead>
     <tbody>
-      <tr ng-repeat="membro in membroj | orderBy:'familinomo' | filter:ignoreAccents | filter: filtrilo as query ">
+      <tr ng-repeat="membro in membroj | orderBy:'familianomo' | filter:ignoreAccents | filter: filtrilo as query ">
         <td>
           {{membro.titolo}} {{membro.personanomo}} <strong>{{membro.familianomo}}</strong>
           <a ng-if="membro.idAno" href="#!/uzantoj/{{membro.idAno}}">Vidi detalojn >></a>

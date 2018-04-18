@@ -71,8 +71,8 @@
     <p>
       <b>Uzantnomo (por ensaluti en la retejo):</b> {{uzanto.uzantnomo}}
       <a href="#"
-         onbeforesave="updateUzantoj($data, 'retposxto')"
-         editable-email="uzanto.uzantnomo">
+         onbeforesave="updateUzantoj($data, 'uzantnomo')"
+         editable-text="uzanto.uzantnomo">
         redakti aŭ aldoni
       </a>
     </p>
@@ -278,7 +278,7 @@
 
             <md-input-container class="md-block" flex-gt-sm>
               <label>Tasko:</label>
-              <input name="Tasko" ng-model="aneco.rolo" />
+              <input name="Tasko" ng-model="aneco.tasko" />
             </md-input-container>
             <p class="note">
               Ĝenerale por estraranoj, oficistoj, ktp.
@@ -332,7 +332,7 @@
       </p>
 
       <p>
-        <b>Findato</b> {{elektitaGrupo.findato || "Dumviva"}}
+        <b>Findato</b> {{elektitaGrupo.findato || "Dumvive"}}
         <a href="#"
            editable-text="elektitaGrupo.findato"
            e-ui-mask="9999-99-99"
@@ -424,3 +424,4 @@
       </span>
     </div>
   </div>
+</div>

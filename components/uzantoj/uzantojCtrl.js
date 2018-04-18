@@ -50,8 +50,10 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $routeParam
             var membrArr = response.data.map(function(elem) {return elem.id})
             $scope.membrecgrupo  = {};
             Object.keys($scope.grupoj).forEach(function(key,index) {
-              if(membrArr.indexOf($scope.grupoj[key].idGrupo) > -1){
-                $scope.membrecgrupo = $scope.grupoj[key];
+              if(membrArr.indexOf($scope.grupoj[key].idGrupo) > -1) {
+                if (($scope.grupoj[key].findato == null) || (new Date($scope.grupoj[key].findato) > new Date())) {
+                  $scope.membrecgrupo = $scope.grupoj[key];
+                }
               }
             });
             if($scope.membrecgrupo) {
