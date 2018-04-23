@@ -95,9 +95,16 @@
 
    config.getConfig("idJunaAdministranto").then(function(response){
       if($scope.uzanto.permesoj.indexOf(response.data.idJunaAdministranto) > -1) {
-         $scope.menueroj.push($scope.menuoMembroj);
+         $scope.menueroj.push([{titolo: "Membroj", montri: true },
+                               {link: "#!/membroj", titolo: "Membroj"}]);
       }
     }, errorService.error);
+
+    config.getConfig("idKomunikisto").then(function(response){
+       if($scope.uzanto.permesoj.indexOf(response.data.idKomunikisto) > -1) {
+          $scope.menueroj.push($scope.menuoKomunikado);
+       }
+     }, errorService.error);
   }
 
   $scope.selektita = function(index, menuo) {

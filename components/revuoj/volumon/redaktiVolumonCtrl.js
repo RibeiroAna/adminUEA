@@ -15,7 +15,6 @@ app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootSco
         $scope.file = '';
     };
 
-
     $scope.downloadFile = function (kampo) {
         if(kampo === 'malpeza'){
             window.open($scope.malpeza);
@@ -23,7 +22,6 @@ app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootSco
             window.open($scope.kvalita);
         }
     };
-
 
     $scope.updateVolumon = function (valoro, kampo) {
 
@@ -53,7 +51,6 @@ app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootSco
         })
     };
 
-
     $scope.updateMalpeza = function () {
         function success(response) {
             $window.location.reload();
@@ -69,7 +66,6 @@ app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootSco
 
         revuojService.postVolumonKvalita($scope.volumon.id, $scope.newKvalita).then(success, errorService.error);
     }
-
 
     $scope.editEnhavListo = function () {
         $scope.editEnhavListoMode = true;
@@ -113,13 +109,11 @@ app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootSco
                 $scope.bildo = ''
         });
 
-
         revuojService.getVolumonKvalita($routeParams.id).then(function (response) {
             $scope.kvalita = response.data;
         }, function(err) {
                 $scope.kvalita = ''
         });
-
 
         revuojService.getVolumonMalpeza($routeParams.id).then(function (response) {
             $scope.malpeza = response.data;

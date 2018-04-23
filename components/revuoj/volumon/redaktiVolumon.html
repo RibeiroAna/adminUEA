@@ -28,7 +28,7 @@
         </p>
     </div>
     <div class="col-md-8">
-        <h2>Pri la volumon</h2>
+        <h2>Pri la volumo</h2>
         <p>
             <audio controls src="{{mp3Dosiero}}">
             </audio>
@@ -59,7 +59,7 @@
             </a>
         </p>
         <p>
-            <b>Eldon Dato:</b> {{volumon.eldondato | date}}
+            <b>Eldondato:</b> {{volumon.eldondato | date}}
             <a href="#"
                onbeforesave="updateVolumon($data, 'eldondato')"
                editable-date="volumon.eldondato"
@@ -112,8 +112,8 @@
         </p>
 
         <p ng-show="editEnhavListoMode">
-            <trix-editor class="trix-content" placeholder="Enhav listo" id="enhavlisto-edit"></trix-editor>
-            <button class="btn btn-danger" ng-click="cancelEditEnhavListo()">Malfari</button>
+            <trix-editor class="trix-content" placeholder="Enhavlisto" id="enhavlisto-edit"></trix-editor>
+            <button class="btn btn-danger" ng-click="cancelEditEnhavListo()">Rezigni</button>
             <button class="btn btn-default" ng-click="updateVolumon('undefined', 'enhavlisto')">Redakti</button>
         </p>
     </div>

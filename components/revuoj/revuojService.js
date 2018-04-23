@@ -20,7 +20,6 @@ app.service('revuojService', function ($http, $window, config) {
         return $http.get(config.api_url + '/revuoj');
     };
 
-
     function postRevuon(data) {
         var req = {
             method: 'POST',
@@ -39,15 +38,17 @@ app.service('revuojService', function ($http, $window, config) {
             headers: {'x-access-token': $window.localStorage.getItem('token')},
             data: data
         };
-
         return $http(req);
     }
 
-
     function getRevuoVolumoj(revuonId) {
-        return $http.get(config.api_url + '/revuoj/' + revuonId + '/volumoj');
+      var req = {
+          method: 'GET',
+          url: config.api_url + '/revuoj/' + revuonId + '/volumoj',
+          headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+      return $http(req);
     }
-
 
     function postVolumonMalpeza(volumonId, malpeza) {
         var file = malpeza;
@@ -98,20 +99,39 @@ app.service('revuojService', function ($http, $window, config) {
     };
 
     function getMp3(volumonId) {
-        return $http.get(config.api_url + '/revuoj/volumoj/' + volumonId + '/mp3');
+      var req = {
+          method: 'GET',
+          url: config.api_url + '/revuoj/volumoj/' + volumonId + '/mp3',
+          headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+      return $http(req);
     };
 
     function getVolumonKovrilbildo(volumonId) {
-        return $http.get(config.api_url + '/revuoj/volumoj/' + volumonId + '/bildo');
+      var req = {
+          method: 'GET',
+          url: config.api_url + '/revuoj/volumoj/' + volumonId + '/bildo',
+          headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+      return $http(req);
     }
 
-
     function getVolumonKvalita(volumonId) {
-        return $http.get(config.api_url + '/revuoj/volumoj/' + volumonId + '/kvalita');
+      var req = {
+          method: 'GET',
+          url: config.api_url + '/revuoj/volumoj/' + volumonId + '/kvalita',
+          headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+      return $http(req);
     }
 
     function getVolumonMalpeza(volumonId) {
-        return $http.get(config.api_url + '/revuoj/volumoj/' + volumonId + '/malpeza');
+      var req = {
+          method: 'GET',
+          url: config.api_url + '/revuoj/volumoj/' + volumonId + '/malpeza',
+          headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+        return $http(req);
 
     }
 
