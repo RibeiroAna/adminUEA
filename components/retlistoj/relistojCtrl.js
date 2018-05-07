@@ -1,4 +1,4 @@
-app.controller('retlistojCtrl', function ($scope, $window, $rootScope, auth, retlistojService, errorService) {
+app.controller('retlistojCtrl', function ($scope, $window, $rootScope, $mdDialog, auth, retlistojService, errorService) {
     $scope.title = "Retlistoj";
 
     $scope.retlistoj = [];
@@ -6,6 +6,24 @@ app.controller('retlistojCtrl', function ($scope, $window, $rootScope, auth, ret
 
     $scope.goToAddRetliston = function () {
         $window.location.href = '#!/retlistoj/new';
+    };
+
+
+    $scope.showConfirm = function(ev, nomo, retlistonIndex, retlistonId) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('Forviŝi retliston ' + nomo + '?')
+            .targetEvent(ev)
+            .ok('Forviŝi')
+            .cancel('Nuligi');
+
+        $mdDialog.show(confirm).then(function() {
+            retlistojService.deleteRetliston(retlistonId).then(function (response) {
+                $scope.retlistoj.splice(retlistonIndex, 1)
+            }, errorService.error);
+
+        }, function() {
+        });
     };
 
     function getRetlistoj() {
