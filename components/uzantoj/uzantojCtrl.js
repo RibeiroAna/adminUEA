@@ -16,6 +16,14 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $routeParam
       if(response.data[0]) {
         $scope.uzanto = response.data[0];
         $scope.uzanto.naskigxtago = $scope.uzanto.naskigxtago.slice(0,10);
+        try {
+          $scope.uzanto.familianomo = decodeURIComponent(escape($scope.uzanto.familianomo));
+          $scope.uzanto.personanomo = decodeURIComponent(escape($scope.uzanto.personanomo));
+          $scope.uzanto.adreso = decodeURIComponent(escape($scope.uzanto.adreso));
+        } catch(error) {
+          console.error(error);
+        }
+
         landojService.getLandoj($scope.uzanto.idLando).then(function(response){
           $scope.lando = response.data[0];
           landojService.getInfoPriLanda(response.data[0].landkodo).then(function(response) {
@@ -78,7 +86,11 @@ app.controller("uzantojCtrl", function ($scope, $rootScope, $window, $routeParam
 
     uzantojService.elsxutiBildon($routeParams.id).then(
       function(response) {
-        $scope.bildo = response.data;
+        if(response.data.indexOf("No file found") > -1) {
+          $scope.bildo = 'content/img/profilo.png'
+        } else {
+          $scope.bildo = response.data;
+        }
       },
       function(err) {
         $scope.bildo = 'content/img/profilo.png'

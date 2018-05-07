@@ -2,7 +2,11 @@
     <label>Serĉi:
       <input class="form-control" ng-model="filtrilo">
     </label>
-    <p>Entute trovita {{query.length}}</p>
+
+    <p ng-if="!membroj">
+      Serĉas: <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+    </p>
+    <p>Entute trovita {{membroj.length}}</p>
     <table class="table">
     <tdead>
       <tr>
@@ -11,9 +15,9 @@
       </tr>
     </tdead>
     <tbody>
-      <tr ng-repeat="membro in membroj | orderBy:'familianomo' | filter:ignoreAccents | filter: filtrilo as query ">
+      <tr ng-repeat="membro in membroj | filter:ignoreAccents | filter: filter">
         <td>
-          {{membro.titolo}} {{membro.personanomo}} <strong>{{membro.familianomo}}</strong>
+          {{membro.titolo}} {{escape(membro.personanomo)}} <strong>{{escape(membro.familianomo)}}</strong>
           <a ng-if="membro.idAno" href="#!/uzantoj/{{membro.idAno}}">Vidi detalojn >></a>
           <a ng-if="!membro.idAno" href="#!/uzantoj/{{membro.id}}">Vidi detalojn >></a>
         </td>

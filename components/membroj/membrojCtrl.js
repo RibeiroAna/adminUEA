@@ -37,14 +37,16 @@ app.controller("membrojCtrl", function ($scope, $rootScope, $window, $http,
   $scope.init2 = function() {
       $scope.init();
 
-      if (Number.isInteger(parseInt($routeParams.id))) {
+      if($routeParams.id.indexOf("q=") == -1) {
         membrojService.getAnecoj($routeParams.id, 1).then(function(response) {
           $scope.membroj = response.data;
         }, errorService.error);
       } else {
         membrojService.getUzantoj().then(function(response) {
-          $scope.membroj = response.data;
-          $scope.filtrilo = $routeParams.id;
+          // membroj = response.data;
+          $scope.filtrilo = $routeParams.id.substring(2, $routeParams.id.length);
+          $scope.membroj = response.data.filter($scope.filter);
+          console.log($scope.membroj);
         }, errorService.error);
       }
 
@@ -57,21 +59,44 @@ app.controller("membrojCtrl", function ($scope, $rootScope, $window, $http,
       });
   }
 
-  $scope.filtri = function (){
-      $scope.membroj = $scope.membroj.filter(function (obj, index){
-        return obj.ueakodo == undefined;
-      });
+  $scope.filter = function(element) {
+    element.tutaNomo = element.personanomo + element.familianomo;
+    try {
+      var string =
+      decodeURIComponent(escape(element.tutaNomo)).normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    } catch(error) {
+      var string = element.tutaNomo.toString().normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
     }
 
-  $scope.aprobi = function(peto) {
-    var data = {
-      anecnomo: $scope.grupo.nomo,
-      retposxto: peto.retposxto
-    };
+    var filter = $scope.filtrilo.split(" ");
+    var isTrue = true;
+    for (var i = 0; i < filter.length; i++) {
+       var f = filter[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+       if(string.indexOf(f) > -1){
+         isTrue = isTrue && true;
+       } else {
+         isTrue = false;
+       }
+     }
+     if(isTrue){
+       return isTrue;
+     } else {
+       var f = $scope.filtrilo.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+       string = Object.values(element).toString().normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+       if(string.indexOf(f) > -1){
+         return true;
+       } else {
+         return false;
+       }
+     }
+  }
 
-    membrojService.postAprobi(peto.id, data).then(function(response) {
-        $window.location.reload();
-    }, errorService.error);
+  $scope.escape = function(string) {
+   try {
+     return decodeURIComponent(escape(string));
+   } catch(error) {
+     return string;
+   }
   }
 
   $scope.strip = function(string) {

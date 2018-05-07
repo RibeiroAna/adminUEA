@@ -1,7 +1,7 @@
 <div class="enhavo" data-ng-init="init()">
   <h3 class="col-md-12">
     Uzantprofilo por: {{uzanto.titolo}} {{uzanto.personanomo}}
-    <b>{{uzanto.familianomo}}</b>
+    <b ng-bind-html="uzanto.familianomo"></b>
   </h3>
   <h3 class="col-md-12">
     <button class="btn btn-default" onclick="window.print()">
@@ -86,10 +86,18 @@
     </p>
     -------
     <p>
-      <b>Personana nomo:</b> {{uzanto.personanomo}}
+      <b>Persona nomo:</b> {{uzanto.personanomo}}
       <a href="#"
          editable-text="uzanto.personanomo"
          onbeforesave="updateUzantoj($data, 'personanomo')">
+         redakti aŭ aldoni
+       </a>
+    </p>
+    <p>
+      <b>Familia nomo:</b> {{uzanto.familianomo}}
+      <a href="#"
+         editable-text="uzanto.familianomo"
+         onbeforesave="updateUzantoj($data, 'familianomo')">
          redakti aŭ aldoni
        </a>
     </p>
@@ -100,14 +108,6 @@
          editable-email="uzanto.retposxto">
         redakti aŭ aldoni
       </a>
-    </p>
-    <p>
-      <b>Familia nomo:</b> {{uzanto.familianomo}}
-      <a href="#"
-         editable-text="uzanto.familianomo"
-         onbeforesave="updateUzantoj($data, 'familianomo')">
-         redakti aŭ aldoni
-       </a>
     </p>
     <p>
       <b>Naskiĝtago (JJJJ-MM-TT):</b> {{uzanto.naskigxtago}}
