@@ -1,0 +1,43 @@
+<md-dialog style="width: auto" flex="50">
+    <md-toolbar class="md-toolbar-tools">
+        <h2>Abonantoji de {{nomo}}</h2>
+        <span flex></span>
+        <a href="" ng-click="cancel()">
+            <i class="fa fa-window-close" aria-hidden="true"></i>
+        </a>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <h5>Nova Abonanto:</h5>
+        <div class="row">
+            <div class="col-md-3">
+                <label>Nomo:</label>
+                <input placeholder="Nomo" id="abonanto" type="text" ng-model="abonanto.nomo" />
+            </div>
+
+            <div class="col-md-3">
+                <label>Retadreso:</label>
+                <input placeholder="Retadreso" type="email" ng-model="abonanto.retadreso"/>
+            </div>
+
+            <div class="col-md-3" style="padding-top: 20px">
+                <button class="btn btn-primary" ng-click="postAbonanto(abonanto)" ng-disabled="!abonanto.retadreso">Aldoni</button>
+            </div>
+        </div>
+
+
+        <div style="padding-top: 5%">
+            <div class="row" style="padding-top: 2%" ng-repeat="abonanton in abonantoj" flex>
+                <li class="col-md-3">{{abonanton.retadreso}}</li>
+                <a style="color: #4da6ff" class="col-md-3" href="">Forviŝi abonanton</a>
+            </div>
+        </div>
+
+    </md-content>
+
+<!--    <md-dialog-actions layout-align="end">
+        <span flex></span>
+        <md-button ng-disabled="" class="md-raised" ng-click="addRevuon()" type="submit">
+            Aldoni Revuon
+        </md-button>
+    </md-dialog-actions>-->
+</md-dialog>
