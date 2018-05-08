@@ -26,6 +26,25 @@ app.controller('retlistojCtrl', function ($scope, $window, $rootScope, $mdDialog
         });
     };
 
+
+    $scope.showAbonantojDialog = function (retlistonId, retlistonNomo) {
+        $mdDialog.show({
+            controller: 'abonantojCtrl',
+            templateUrl: 'components/retlistoj/Abonantoj.html',
+            bindToController: true,
+            locals: {
+                retlistonId: retlistonId,
+                retlistonNomo: retlistonNomo
+            }
+        }).then(function (result) {
+            // Function for when hide() of mdDialog is called
+            $scope.volumoj.push(result);
+
+        }, function (result) {
+            // Function for when cancel() of mdDialog is called
+        });
+    };
+
     function getRetlistoj() {
         var success = function (response) {
             $scope.retlistoj = response.data;
