@@ -39,14 +39,16 @@ app.controller("membrojCtrl", function ($scope, $rootScope, $window, $http,
 
       if($routeParams.id.indexOf("q=") == -1) {
         membrojService.getAnecoj($routeParams.id, 1).then(function(response) {
-          $scope.membroj = response.data;
+          $scope.cxiujMembroj = response.data.map(function(e){return e.id;});
+          console.log($scope.cxiujMembroj);
+          membrojService.getUzantoj().then(function(response) {
+            $scope.membroj = response.data.filter($scope.filterMembroj);
+          }, errorService.error);
         }, errorService.error);
       } else {
         membrojService.getUzantoj().then(function(response) {
-          // membroj = response.data;
           $scope.filtrilo = $routeParams.id.substring(2, $routeParams.id.length);
           $scope.membroj = response.data.filter($scope.filter);
-          console.log($scope.membroj);
         }, errorService.error);
       }
 
@@ -57,9 +59,26 @@ app.controller("membrojCtrl", function ($scope, $rootScope, $window, $http,
           $scope.landoj[landoj[i].id] = landoj[i].radikoEo;
         }
       });
+
+      landojService.getInfoPriCxiujLandoj().then(function(response){
+        $scope.infoLandoj = {};
+        response.data.map(function(e){$scope.infoLandoj[e.alpha2Code.toLowerCase()] = e;});
+      });
+  }
+
+  $scope.filterMembroj = function(element) {
+    if($scope.cxiujMembroj.indexOf(element.id) > -1) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   $scope.filter = function(element) {
+    if(!$scope.filtrilo) {
+      return true;
+    }
+
     element.tutaNomo = element.personanomo + element.familianomo;
     try {
       var string =
@@ -105,4 +124,25 @@ app.controller("membrojCtrl", function ($scope, $rootScope, $window, $http,
     return string.slice(0,10);
   }
 
+  $scope.toCSV = function () {
+      var element = angular.element(document.getElementById("membrotablo"));
+    	var table = element[0];
+    	var csvString = '';
+    	for(var i=0; i<table.rows.length;i++){
+    		var rowData = table.rows[i].cells;
+    		for(var j=0; j<rowData.length;j++){
+    			csvString = csvString + rowData[j].innerText + ",";
+    		}
+    		csvString = csvString.substring(0,csvString.length - 1);
+    		csvString = csvString + "\n";
+       }
+     	csvString = csvString.substring(0, csvString.length - 1);
+
+      var link = document.createElement('a');
+      link.href = 'data:application/octet-stream;base64,'+ btoa(unescape(encodeURIComponent(csvString)));
+      link.download = 'membroj.csv';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+   }
 });

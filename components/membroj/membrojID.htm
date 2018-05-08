@@ -6,25 +6,65 @@
     <p ng-if="!membroj">
       Serĉas: <md-progress-linear md-mode="indeterminate"></md-progress-linear>
     </p>
-    <p>Entute trovita {{membroj.length}}</p>
-    <table class="table">
-    <tdead>
-      <tr>
-        <td>Homo</td>
-        <td>Lando</td>
-      </tr>
-    </tdead>
-    <tbody>
-      <tr ng-repeat="membro in membroj | filter:ignoreAccents | filter: filter">
-        <td>
-          {{membro.titolo}} {{escape(membro.personanomo)}} <strong>{{escape(membro.familianomo)}}</strong>
-          <a ng-if="membro.idAno" href="#!/uzantoj/{{membro.idAno}}">Vidi detalojn >></a>
-          <a ng-if="!membro.idAno" href="#!/uzantoj/{{membro.id}}">Vidi detalojn >></a>
-        </td>
-        <td>
-          {{landoj[membro.idLando]}}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <p ng-if="membroj">Entute trovita {{membroj.length}}</p>
+    <span ng-show="membroj">
+      <div class="col-md-2">
+        <label class="form-check-label" for="inlineCheckbox1">Montri je la tabelo:</label>
+      </div>
+      <div class="col-md-2">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" ng-model="naskigxtago">
+        <label class="form-check-label" for="inlineCheckbox1">Naskiĝitago</label>
+      </div>
+      <div class="col-md-2">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" ng-model="adreso">
+        <label class="form-check-label" for="inlineCheckbox2">Poŝtadreso</label>
+      </div>
+      <div class="col-md-2">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" ng-model="retadreso">
+        <label class="form-check-label" for="inlineCheckbox2">Retadreso</label>
+      </div>
+      <div class="col-md-2">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" ng-model="telefono">
+        <label class="form-check-label" for="inlineCheckbox1">Telefono</label>
+      </div>
+      <div class="col-md-2">
+        <a href="" ng-click="toCSV()">Elŝulti tabelon kiel CSV</a>
+      </div>
+    </span>
+    <table class="table" id="membrotablo" ng-show="membroj">
+      <thead>
+        <tr>
+          <th>UEA-kodo</th>
+          <th>Homo</th>
+          <th ng-if="naskigxtago">Naskiĝtago</th>
+          <th ng-if="adreso">Adreso</th>
+          <th ng-if="retadreso">Retadreso</th>
+          <th ng-if="telefono">Telefono</th>
+          <th>Lando</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="membro in membroj | filter:ignoreAccents | filter: filter">
+          <td>
+            <a href="#!/uzantoj/{{membro.id}}">{{membro.ueakodo}}</a>
+          </td>
+          <td>
+            {{membro.titolo}} {{escape(membro.personanomo)}} <strong>{{escape(membro.familianomo)}}</strong>
+          </td>
+          <td ng-if="naskigxtago">{{membro.naskigxtago.slice(0, 10)}}</td>
+          <td ng-if="adreso">
+            {{escape(membro.adreso)}}
+            {{escape(membro.urbo)}}
+            {{membro.posxtkodo}}
+            {{infoLandoj[membro.landkodo].translations.nl}} /
+            {{infoLandoj[membro.landkodo].translations.fr}}
+          </td>
+          <td ng-if="retadreso">{{membro.retposxto}}</td>
+          <td ng-if="telefono">{{membro.telhejmo}}</td>
+          <td>
+            {{landoj[membro.idLando]}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
 </div>
