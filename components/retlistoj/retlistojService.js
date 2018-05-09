@@ -6,6 +6,7 @@ app.service('retlistojService', function ($http, $window, config) {
     service.deleteRetliston = deleteRetliston;
     service.postAbonanto = postAbonanto;
     service.getAbonantoj = getAbonantoj;
+    service.removeAbonanto = removeAbonanto;
 
     function postRetliston(data) {
         var req = {
@@ -44,6 +45,16 @@ app.service('retlistojService', function ($http, $window, config) {
 
         return $http(req);
     };
+
+    function removeAbonanto(retlistonId, abonantonId) {
+        var req = {
+            method: 'DELETE',
+            url: config.api_url + '/dissendoj/retlistoj/' + retlistonId + '/abonantoj/' + abonantonId,
+            headers: {'x-access-token': $window.localStorage.getItem('token')}
+        };
+
+        return $http(req);
+    }
 
     function getAbonantoj(retlistonId) {
         return $http.get(config.api_url + '/dissendoj/retlistoj/' + retlistonId + '/abonantoj');

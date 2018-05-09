@@ -11,6 +11,15 @@ app.controller('abonantojCtrl', function ($scope, $rootScope, $mdDialog, auth, r
     };
 
 
+    $scope.removeAbonanton = function (abonantonId, abonantonIndex) {
+        function success(response) {
+            $scope.abonantoj.splice(abonantonIndex, 1);
+        }
+
+        retlistojService.removeAbonanto(retlistonId, abonantonId).then(success, errorService.error);
+    };
+
+
     $scope.postAbonanto = function (abonanto) {
         function success(response) {
             abonanto.id = response.data.insertId;

@@ -30,7 +30,7 @@ app.controller('retlistojCtrl', function ($scope, $window, $rootScope, $mdDialog
     $scope.showAbonantojDialog = function (retlistonId, retlistonNomo) {
         $mdDialog.show({
             controller: 'abonantojCtrl',
-            templateUrl: 'components/retlistoj/Abonantoj.html',
+            templateUrl: 'components/retlistoj/abonantoj.html',
             bindToController: true,
             locals: {
                 retlistonId: retlistonId,
