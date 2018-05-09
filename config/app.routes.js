@@ -73,5 +73,8 @@ angular.module('admin').config(function($routeProvider){
     }).when("/retlistoj/new", {
         templateUrl: "components/retlistoj/addRetliston.html",
         controller: "addRetlistojCtrl"
+    }).when("/dissendoj", {
+        templateUrl: "components/dissendoj/dissendoj.html",
+        controller: "dissendojCtrl"
     });
 });

@@ -67,6 +67,10 @@
         {
           link: "#!/revuoj",
           titolo: "Revuoj"
+        },
+        {
+          link: "#!/dissendoj",
+          titolo: "Dissendoj"
         }
       ];
     }
