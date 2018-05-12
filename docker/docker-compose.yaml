@@ -2,7 +2,7 @@ version: '2'
 services:
     web:
         image: httpd:2.4
-	container_name: "uea-admin"
+        container_name: "uea-admin"
         restart: always
         volumes:
             - ../:/usr/local/apache2/htdocs/
