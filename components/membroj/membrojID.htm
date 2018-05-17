@@ -1,4 +1,9 @@
 <div class="enhavo" data-ng-init="init2()">
+    <h3 ng-if="membrgrupo">
+      Montrante: {{membrgrupo.nomo}} por
+      <b ng-if="membrecjaro != -1">{{membrecjaro}}</b>
+      <b ng-if="membrecjaro == -1"> dumvivaj membroj</b>
+      </h3>
     <label>Serĉi:
       <input class="form-control" ng-model="filtrilo">
     </label>
@@ -7,10 +12,62 @@
       Serĉas: <md-progress-linear md-mode="indeterminate"></md-progress-linear>
     </p>
     <p ng-if="membroj">Entute trovita {{membroj.length}}</p>
-    <span ng-show="membroj">
+    <label ng-show="membroj">
+      <input type="checkbox" ng-model="filtroj">
+      Montri aldonajn filtrilojn
+    </label>
+    <label ng-show="membroj">
+      <input type="checkbox" ng-model="opcioj">
+      Montri aldonajn kampojn por la tabelo
+    </label>
+    <div ng-show="filtroj" class="col-md-12">
       <div class="col-md-2">
-        <label class="form-check-label" for="inlineCheckbox1">Montri je la tabelo:</label>
+        <label>Laŭ lando</label>
+        <select class="form-control" ng-model="landoSelect" ng-change="aldonajFiltriloj()">
+          <option value="" selected>Ĉiuj</option>
+          <option ng-repeat="lando in landoj | localeOrderBy:'radikoEo'"
+                  ng-value="lando.id">
+            {{lando.radikoEo}}
+          </option>
+        </select>
       </div>
+      <div class="col-md-3">
+        <label>Laŭ naskiĝijaro</label>
+        <select class="form-control"
+                ng-model="naskigxjaro"
+                ng-change="aldonajFiltriloj()">
+          <option value="" selected>Ĉiuj</option>
+          <option ng-value="1859">Sen naskiĝitago</option>
+          <option ng-repeat="n in [].constructor(120) track by $index"
+                  ng-value="jaro - $index">
+            {{jaro - $index}}
+          </option>
+        </select>
+        <label ng-show="naskigxjaro && naskigxjaro != '' && naskigxjaro != 1859">
+          <input type="checkbox" ng-model="ekde" ng-change="aldonajFiltriloj()">
+          Montri ĉiujn homojn kiuj naskiĝis ekde {{naskigxjaro}}
+        </label>
+      </div>
+      <div class="col-md-3" ng-show="membrgrupo">
+        <label>Laŭ anecjaro</label>
+        <select class="form-control"
+                ng-model="membrecjaro"
+                ng-change="aldonajFiltriloj()">
+          <option value="" selected>Ĉiuj</option>
+          <option ng-value="-1">Nur dumvivaj membroj</option>
+          <option ng-repeat="n in [].constructor(10) track by $index"
+                  ng-value="jaro + 3 - $index">
+            {{jaro + 3 - $index}}
+          </option>
+        </select>
+        <small class="form-text text-muted">
+          La anecjaro estas por la kategorio elektita,
+          ne por ĝenerala membreco en UEA
+        </small>
+      </div>
+    </div>
+    <br>
+    <div ng-show="opcioj" class="col-md-12">
       <div class="col-md-2">
         <input class="form-check-input" type="checkbox" id="inlineCheckbox1" ng-model="naskigxtago">
         <label class="form-check-label" for="inlineCheckbox1">Naskiĝitago</label>
@@ -27,11 +84,13 @@
         <input class="form-check-input" type="checkbox" id="inlineCheckbox1" ng-model="telefono">
         <label class="form-check-label" for="inlineCheckbox1">Telefono</label>
       </div>
-      <div class="col-md-2">
-        <a href="" ng-click="toCSV()">Elŝulti tabelon kiel CSV</a>
-      </div>
-    </span>
-    <table class="table" id="membrotablo" ng-show="membroj">
+    </div>
+
+    <div class="col-md-2" ng-show="membroj">
+      <a href="" ng-click="toCSV()">Elŝulti tabelon kiel CSV</a>
+    </div>
+
+    <table class="table-striped table" id="membrotablo" ng-show="membroj">
       <thead>
         <tr>
           <th>UEA-kodo</th>
@@ -62,7 +121,7 @@
           <td ng-if="retadreso">{{membro.retposxto}}</td>
           <td ng-if="telefono">{{membro.telhejmo}}</td>
           <td>
-            {{landoj[membro.idLando]}}
+            {{landoj[membro.idLando].radikoEo}}
           </td>
         </tr>
       </tbody>

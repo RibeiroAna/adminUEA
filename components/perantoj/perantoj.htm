@@ -42,7 +42,7 @@
   </form>
 
   <label>Serĉi: <input ng-model="searchText" class="form-control"></label>
-  <table class="table">
+  <table class="table table-striped">
     <thead>
       <tr>
         <td><b>Publika nomo de la Peranto</b></td>
@@ -54,17 +54,19 @@
     <tbody>
       <tr ng-repeat="peranto in perantoj | orderBy:'publikaNomo' | filter:searchText">
         <td>
+          {{peranto.publikaNomo}}
           <a href=""
              editable-text="peranto.publikaNomo"
              onbeforesave="updatePeranto(peranto.id, $data, 'publikaNomo')">
-           {{peranto.publikaNomo}}
+             Redakti
          </a>
        </td>
         <td>
+          {{peranto.retadreso}}
           <a href=""
              editable-text="peranto.retadreso"
              onbeforesave="updatePeranto(peranto.id, $data, 'retadreso')">
-             {{peranto.retadreso}}</td>
+             Redakti aŭ aldoni</td>
         <td>
           <a href="" ng-click="deletePeranto(peranto.id)">
             <i class="fa fa-trash" aria-hidden="true"></i>
@@ -74,5 +76,4 @@
       <tr>
     </tbody>
   </table>
-  <p>* klaku en la kampoj por redakti</p>
 </div>

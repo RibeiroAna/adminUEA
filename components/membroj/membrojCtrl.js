@@ -4,11 +4,6 @@ app.controller("membrojCtrl", function ($scope, $rootScope, $window, $http,
   $scope.init = function() {
     auth.ensalutita();
     $rootScope.menuo = true;
-    $scope.renovigtempo = [
-      {value:1, text:"por 1 jaro"},
-      {value:2, text:"por 2 jaroj"},
-      {value: 5, text:"por 5 jaroj"},
-      {value: null, text:"dumvive"}];
   }
 
   $scope.init1 = function() {
@@ -36,19 +31,39 @@ app.controller("membrojCtrl", function ($scope, $rootScope, $window, $http,
 
   $scope.init2 = function() {
       $scope.init();
-
       if($routeParams.id.indexOf("q=") == -1) {
         membrojService.getAnecoj($routeParams.id, 1).then(function(response) {
-          $scope.cxiujMembroj = response.data.map(function(e){return e.id;});
-          console.log($scope.cxiujMembroj);
+          $scope.cxiujMembroj = {};
+          response.data.map(function(e){
+                              if($scope.cxiujMembroj[e.id]){
+                                $scope.cxiujMembroj[e.id].push(e);
+                              } else {
+                                $scope.cxiujMembroj[e.id] = [e];}
+                            });
           membrojService.getUzantoj().then(function(response) {
-            $scope.membroj = response.data.filter($scope.filterMembroj);
+            var filterMembroj = function(element) {
+              if($scope.cxiujMembroj[element.id]) {
+                return true;
+              } else {
+                return false;
+              }
+            }
+            $scope.membroj = response.data.filter(filterMembroj);
+            $scope.copyMembroj = Object.assign($scope.membroj);
+            var date = new Date();
+            $scope.membrecjaro = date.getFullYear();
+            $scope.aldonajFiltriloj();
           }, errorService.error);
+        }, errorService.error);
+
+        membrojService.getGrupojById($routeParams.id).then(function(response){
+          $scope.membrgrupo = response.data[0];
         }, errorService.error);
       } else {
         membrojService.getUzantoj().then(function(response) {
           $scope.filtrilo = $routeParams.id.substring(2, $routeParams.id.length);
           $scope.membroj = response.data.filter($scope.filter);
+          $scope.copyMembroj = Object.assign($scope.membroj);
         }, errorService.error);
       }
 
@@ -56,22 +71,17 @@ app.controller("membrojCtrl", function ($scope, $rootScope, $window, $http,
         var landoj = response.data;
         $scope.landoj =  {};
         for (var i = 0; i < landoj.length; i++) {
-          $scope.landoj[landoj[i].id] = landoj[i].radikoEo;
+          $scope.landoj[landoj[i].id] = landoj[i];
         }
-      });
+    });
 
-      landojService.getInfoPriCxiujLandoj().then(function(response){
-        $scope.infoLandoj = {};
-        response.data.map(function(e){$scope.infoLandoj[e.alpha2Code.toLowerCase()] = e;});
-      });
-  }
+    var date = new Date();
+    $scope.jaro = date.getFullYear();
 
-  $scope.filterMembroj = function(element) {
-    if($scope.cxiujMembroj.indexOf(element.id) > -1) {
-      return true;
-    } else {
-      return false;
-    }
+    landojService.getInfoPriCxiujLandoj().then(function(response){
+      $scope.infoLandoj = {};
+      response.data.map(function(e){$scope.infoLandoj[e.alpha2Code.toLowerCase()] = e;});
+    });
   }
 
   $scope.filter = function(element) {
@@ -122,6 +132,69 @@ app.controller("membrojCtrl", function ($scope, $rootScope, $window, $http,
     if(string == null)
       return string;
     return string.slice(0,10);
+  }
+
+  $scope.aldonajFiltriloj = function() {
+    $scope.membroj = Object.assign($scope.copyMembroj);
+
+    if($scope.membrecjaro) {
+        $scope.membroj = $scope.membroj.filter(function(e){
+          var membreco =  $scope.cxiujMembroj[e.id];
+          for (var i = 0; i < membreco.length; i++) {
+            if($scope.membrecjaro == -1) {
+              if(!membreco[i].findato) {
+                return true;
+              }
+            } else {
+                var findato = new Date(membreco[i].findato);
+                var komencdato = new Date(membreco[i].komencdato);
+                var membrecjaro = new Date($scope.membrecjaro + "-12-31");
+                if(membreco[i].findato) {
+                  if ((findato > membrecjaro) && (komencdato <= membrecjaro)) {
+                    return true;
+                  }
+                } else {
+                  if(komencdato <= membrecjaro) {
+                    return true;
+                  }
+               }
+            }
+            return false;
+        }
+      });
+    }
+
+    if (($scope.landoSelect) && ($scope.landoSelect != "")) {
+      var idLando = parseInt($scope.landoSelect);
+      $scope.membroj = $scope.membroj.filter(function(e){
+        if(e.idLando == idLando){
+          return true;
+        } else {
+          return false;
+        }
+      });
+    }
+
+    if ($scope.naskigxjaro) {
+      var naskigxjaro = parseInt($scope.naskigxjaro);
+      $scope.membroj = $scope.membroj.filter(function(e){
+        var naskigxitago = new Date(e.naskigxtago);
+        var eNaskigxjaro = parseInt(naskigxitago.getFullYear());
+        if($scope.ekde) {
+          if(eNaskigxjaro >= naskigxjaro){
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          if(eNaskigxjaro == naskigxjaro){
+            return true;
+          } else {
+            return false;
+          }
+        }
+      });
+    }
   }
 
   $scope.toCSV = function () {
