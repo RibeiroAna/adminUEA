@@ -1,3 +1,36 @@
 <div class="enhavo">
-    <h2>{{title}}</h2>
+    <div class="row">
+        <h1 class="col-md-2">{{title}}</h1>
+    </div>
+
+    <div style="padding: 2% 0 0 5%">
+        <div style="padding-left: 1%">
+            <label>Elekti retliston</label>
+            <select style="width: 20%;" ng-model="selectedRetliston">
+                <option value="{{retliston.id}}" ng-repeat="retliston in retlistoj">{{retliston.nomo}}</option>
+            </select>
+        </div>
+
+        <div style="padding-top: 2%">
+            <div class="form-group">
+                <input style="width: 28%" type="text"
+                   id="emailTemo"
+                   ng-model="email.temo"
+                   class="form-control" placeholder="Temo">
+            </div>
+
+            <div style="width: 70%; position: relative">
+                <trix-editor id="dissendoEmail"></trix-editor>
+                <div style="padding-top: 8%">
+                    <md-button class="md-raised" style="position: absolute; bottom: 0; right: 0;" ng-click="sendEmail()">Sendi</md-button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
 </div>
