@@ -1,4 +1,4 @@
-app.controller('dissendojCtrl', function ($scope, $rootScope, $window, auth, retlistojService, dissendoService, errorService) {
+app.controller('dissendojCtrl', function ($scope, $rootScope, $window, auth, retlistojService, dissendoService, errorService, $mdDialog) {
     $scope.title = 'Dissendoj';
 
     function getRetlistoj() {
@@ -7,6 +7,24 @@ app.controller('dissendojCtrl', function ($scope, $rootScope, $window, auth, ret
         }
 
         retlistojService.getRetlistoj().then(success, errorService.error)
+    };
+
+
+    $scope.showLastEmails = function () {
+        $mdDialog.show({
+            controller: 'showMessagesCtrl',
+            templateUrl: 'components/dissendoj/showMessages.html',
+            bindToController: true,
+            locals: {
+                idRetlisto: $scope.selectedRetliston
+            }
+        }).then(function (result) {
+            // Function for when the hide() function of mdDialog is called
+            console.log(result);
+
+        }, function (result) {
+            // Function for when cancel() function of mdDialog is called
+        });
     };
 
 
