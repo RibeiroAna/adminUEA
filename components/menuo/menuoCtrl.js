@@ -128,7 +128,7 @@
   }
 
   $scope.sercxi = function() {
-    $window.location.href = "#!/membroj/" + $scope.teksto.sercxi;
+    $window.location.href = "#!/membroj/q=" + $scope.teksto.sercxi;
   }
 
   $scope.sercxi_enter = function(keyEvent) {

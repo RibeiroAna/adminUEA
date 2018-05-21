@@ -67,6 +67,9 @@ angular.module('admin').config(function($routeProvider){
     }).when("/revuoj/:revuonId/volumon/:id", {
         templateUrl: "components/revuoj/volumon/redaktiVolumon.html",
         controller: "redaktiVolumonCtrl"
+    }).when("/aliajgrupojCtrl", {
+        templateUrl: "comoponents/aliajgrupoj/aliajgrupoj.htm",
+        controller: "aliajgrupojCtrl"
     }).when("/retlistoj", {
         templateUrl: "components/retlistoj/retlistoj.html",
         controller: "retlistojCtrl"

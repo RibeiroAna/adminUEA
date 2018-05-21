@@ -6,6 +6,7 @@ app.service('landojService', function ($http, config, $window) {
     service.updateLandoj = updateLandoj;
     service.deleteLandoj = deleteLandoj;
     service.getInfoPriLanda = getInfoPriLanda;
+    service.getInfoPriCxiujLandoj = getInfoPriCxiujLandoj;
 
     function getLandoj(id) {
       var url = config.api_url + '/landoj';
@@ -17,6 +18,10 @@ app.service('landojService', function ($http, config, $window) {
 
     function getInfoPriLanda(landkodo) {
        return $http.get("https://restcountries.eu/rest/v2/alpha/" + landkodo);
+    };
+
+    function getInfoPriCxiujLandoj() {
+       return $http.get("https://restcountries.eu/rest/v2/all");
     };
 
     function postLandoj(data) {
