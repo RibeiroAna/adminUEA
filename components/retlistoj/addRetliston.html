@@ -1,0 +1,21 @@
+<div class="enhavo">
+    <form ng-submit="addRetliston()" ng-hide="novaL">
+        <div class="form-group">
+            <label for="retlistonNomo">Nomo de la retliston</label>
+            <input type="text"
+                   id="retlistonNomo"
+                   ng-model="retliston.nomo"
+                   class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="retlistonPriskribo">Priskribo</label>
+            <textarea type="text"
+                   id="retlistonPriskribo"
+                   ng-model="retliston.priskribo"
+                   class="form-control"></textarea>
+        </div>
+
+        <button id="submit" type="submit" class="btn btn-primary">Aldoni</button>
+        <br><br>
+    </form>
+</div>

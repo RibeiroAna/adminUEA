@@ -1,0 +1,15 @@
+<md-dialog style="width: auto" flex="60">
+    <md-toolbar class="md-toolbar-tools">
+        <h2>Lastajn dissendojn</h2>
+        <span flex></span>
+        <a href="" ng-click="cancel()">
+            <i class="fa fa-window-close" aria-hidden="true"></i>
+        </a>
+    </md-toolbar>
+    <md-content class="md-padding">
+        <md-card ng-model-options="{timezone: 'utc'}" md-theme="{{ showDarkTheme ? 'dark-orange' : 'default' }}" md-theme-watch ng-repeat="message in messages">
+            <md-card-header class="md-headline"><span style="font-weight: bold; padding-right: 2%">{{message.temo}}</span> {{message.dato | date}}</md-card-header>
+            <md-card-content ng-bind-html="message.teksto"></md-card-content>
+        </md-card>
+    </md-content>
+</md-dialog>

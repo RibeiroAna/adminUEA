@@ -70,5 +70,14 @@ angular.module('admin').config(function($routeProvider){
     }).when("/aliajgrupojCtrl", {
         templateUrl: "comoponents/aliajgrupoj/aliajgrupoj.htm",
         controller: "aliajgrupojCtrl"
+    }).when("/retlistoj", {
+        templateUrl: "components/retlistoj/retlistoj.html",
+        controller: "retlistojCtrl"
+    }).when("/retlistoj/new", {
+        templateUrl: "components/retlistoj/addRetliston.html",
+        controller: "addRetlistojCtrl"
+    }).when("/dissendoj", {
+        templateUrl: "components/dissendoj/dissendoj.html",
+        controller: "dissendojCtrl"
     });
 });

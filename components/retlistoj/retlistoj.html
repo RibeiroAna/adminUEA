@@ -1,0 +1,15 @@
+<div class="enhavo">
+    <div class="row">
+        <h1 class="col-md-2">Retlistoj</h1>
+        <h2 class="col-md-2" id="aldoni-retliston" ng-click="goToAddRetliston()">+Aldoni novan retliston</h2>
+    </div>
+
+
+    <div class="revuoj-list">
+        <div class="row revuon" ng-repeat="retliston in retlistoj">
+            <li class="col-md-3">{{retliston.nomo}}</li>
+            <a class="col-md-3" href="" ng-click="showAbonantojDialog(retliston.id, retliston.nomo)">Agordi abonantoj</a>
+            <a class="col-md-3" href="" ng-click="showConfirm($event, retliston.nomo, $index, retliston.id)">Forviŝi retliston</a>
+        </div>
+    </div>
+</div>

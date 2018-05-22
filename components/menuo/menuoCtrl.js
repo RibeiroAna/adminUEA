@@ -51,6 +51,9 @@
         {
           link: "#!/laborgrupoj",
           titolo: "Laborgrupoj"
+        },{
+          link: "#!/retlistoj",
+          titolo: "Retlistoj"
         }
       ];
     }
@@ -64,6 +67,10 @@
         {
           link: "#!/revuoj",
           titolo: "Revuoj"
+        },
+        {
+          link: "#!/dissendoj",
+          titolo: "Dissendoj"
         }
       ];
     }
