@@ -27,7 +27,6 @@ app.controller('abonantojCtrl', function ($scope, $rootScope, $mdDialog, auth, r
             $scope.abonanto = {};
         };
 
-        $scope.abonanto.ekde = new Date();
         $scope.abonanto.formato_html = true;
         $scope.abonanto.kodigxo_utf8 = true;
 
@@ -41,7 +40,5 @@ app.controller('abonantojCtrl', function ($scope, $rootScope, $mdDialog, auth, r
         $mdDialog.cancel();
     };
 
-
     getAbonantoj();
-
 });

@@ -57,7 +57,12 @@ app.service('retlistojService', function ($http, $window, config) {
     }
 
     function getAbonantoj(retlistonId) {
-        return $http.get(config.api_url + '/dissendoj/retlistoj/' + retlistonId + '/abonantoj');
+      var req = {
+          method: 'GET',
+          url: config.api_url + '/dissendoj/retlistoj/' + retlistonId + '/abonantoj/',
+          headers: {'x-access-token': $window.localStorage.getItem('token')}
+      };
+      return $http(req);
     }
 
     return service;

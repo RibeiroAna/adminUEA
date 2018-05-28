@@ -9,7 +9,6 @@ app.controller('dissendojCtrl', function ($scope, $rootScope, $window, auth, ret
         retlistojService.getRetlistoj().then(success, errorService.error)
     };
 
-
     $scope.showLastEmails = function () {
         $mdDialog.show({
             controller: 'showMessagesCtrl',
@@ -19,9 +18,7 @@ app.controller('dissendojCtrl', function ($scope, $rootScope, $window, auth, ret
                 idRetlisto: $scope.selectedRetliston
             }
         }).then(function (result) {
-            // Function for when the hide() function of mdDialog is called
             console.log(result);
-
         }, function (result) {
             // Function for when cancel() function of mdDialog is called
         });
@@ -42,9 +39,7 @@ app.controller('dissendojCtrl', function ($scope, $rootScope, $window, auth, ret
 
             $scope.email.teksto = getTrixInputContent();
             $scope.email.dissendanto = uzanto.id;
-            $scope.email.dato = new Date();
             $scope.email.idRetlisto = parseInt($scope.selectedRetliston);
-            console.log($scope.email);
 
             dissendoService.sendEmail($scope.email).then(success, errorService.error);
         }
