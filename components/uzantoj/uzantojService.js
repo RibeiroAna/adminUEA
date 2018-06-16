@@ -30,7 +30,7 @@ app.service('uzantojService', function ($http, $window, Upload, config) {
       return Upload.upload({
           url: config.api_url + '/uzantoj/admin/' + id + '/bildo',
           headers: {'x-access-token': $window.localStorage.getItem('token')},
-          data:{file: file}
+          data: {file: file}
       });
     }
 

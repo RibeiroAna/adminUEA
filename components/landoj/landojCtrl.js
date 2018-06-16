@@ -19,7 +19,7 @@ app.controller("landojCtrl", function ($scope, $rootScope, $window,
 
   $scope.deleteLando = function(idLando) {
     if(confirm("Ĉu vi certas ke vi volas forviŝi tiun landon?" +
-               " Tiu ago ne povos esti malfarita!")) {
+               " Tiu ago ne povos esti Nuligita!")) {
       landojService.deleteLandoj(idLando).then(function(response){
          $window.location.reload();
       }, errorService.error);

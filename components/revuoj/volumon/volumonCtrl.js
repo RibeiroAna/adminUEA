@@ -30,6 +30,14 @@ app.controller('volumonCtrl', function ($scope, auth, $rootScope, $routeParams, 
         });
     };
 
+    $scope.deleteVolumo = function (idVolumo) {
+        if(confirm("Ĉu vi certas ke vi volas fari forviŝi tiun volumon? Tio ne povos esti nuligita")) {
+            revuojService.deleteVolumo(idVolumo).then(function(result){
+                window.location.reload();
+            }, errorService.error);
+        }
+    }
+
     var init = function () {
         auth.ensalutita();
         getVolumoj();

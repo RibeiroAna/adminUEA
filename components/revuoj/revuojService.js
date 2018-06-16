@@ -1,9 +1,10 @@
-app.service('revuojService', function ($http, $window, config) {
+app.service('revuojService', function ($http, $window, Upload, config) {
     var service = this;
 
     service.getRevuoj = getRevuoj;
     service.postRevuon = postRevuon;
     service.getRevuoVolumoj = getRevuoVolumoj;
+    service.deleteVolumo = deleteVolumo;
     service.addVolumon = addVolumon;
     service.postVolumonKovrilbildo = postVolumonKovrilbildo;
     service.postVolumonKvalita = postVolumonKvalita;
@@ -50,51 +51,48 @@ app.service('revuojService', function ($http, $window, config) {
       return $http(req);
     }
 
-    function postVolumonMalpeza(volumonId, malpeza) {
-        var file = malpeza;
+    function deleteVolumo(volumoID) {
+        var req = {
+            method: 'DELETE',
+            url: config.api_url + '/revuoj/volumoj/' + volumoID,
+            headers: {'x-access-token': $window.localStorage.getItem('token')}
+        };
+        return $http(req);
+    }
+
+    function postVolumonMalpeza(volumonId, file) {
         var uploadUrl = config.api_url + '/revuoj/volumoj/' + volumonId + '/malpeza';
-        var fd = new FormData();
-        fd.append('file', file);
-
-       return $http.post(uploadUrl,fd, {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined, 'x-access-token': $window.localStorage.getItem('token')}
+        return Upload.upload({
+            url: uploadUrl,
+            headers: {'x-access-token': $window.localStorage.getItem('token')},
+            data: {file: file}
         });
     }
 
-    function postVolumonKvalita(volumonId, kvalita) {
-        var file = kvalita;
+    function postVolumonKvalita(volumonId, file) {
         var uploadUrl = config.api_url + '/revuoj/volumoj/' + volumonId + '/kvalita';
-        var fd = new FormData();
-        fd.append('file', file);
-
-        return $http.post(uploadUrl,fd, {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined, 'x-access-token': $window.localStorage.getItem('token')}
+        return Upload.upload({
+            url: uploadUrl,
+            headers: {'x-access-token': $window.localStorage.getItem('token')},
+            data: {file: file}
         });
     }
 
-    function postVolumonKovrilbildo(volumonId, kovrilbildo) {
-        var file = kovrilbildo;
+    function postVolumonKovrilbildo(volumonId, file) {
         var uploadUrl = config.api_url + '/revuoj/volumoj/' + volumonId + '/bildo';
-        var fd = new FormData();
-        fd.append('file', file);
-
-        return $http.post(uploadUrl,fd, {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined, 'x-access-token': $window.localStorage.getItem('token')}
+        return Upload.upload({
+            url: uploadUrl,
+            headers: {'x-access-token': $window.localStorage.getItem('token')},
+            data: {file: file}
         });
     }
 
     function postMp3(volumonId, mp3) {
-        var file = mp3;
         var uploadUrl = config.api_url + '/revuoj/volumoj/' + volumonId + '/mp3';
-        var fd = new FormData();
-        fd.append('file', file);
-
-        return $http.post(uploadUrl,fd, {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined, 'x-access-token': $window.localStorage.getItem('token')}
+        return Upload.upload({
+            url: uploadUrl,
+            headers: {'x-access-token': $window.localStorage.getItem('token')},
+            data: {file: file}
         });
     };
 

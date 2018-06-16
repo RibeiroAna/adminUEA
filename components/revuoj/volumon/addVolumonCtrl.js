@@ -6,13 +6,9 @@ app.controller('addVolumonCtrl', function ($scope, $window, config, $rootScope, 
         $scope.volumon.eldondato = new Date();
 
         var success = function (response) {
-            $scope.volumon.id = response.data.insertId;
-            $mdDialog.hide($scope.volumon);
-
-            revuojService.postVolumonKovrilbildo(response.data.insertId, $scope.getFile('input-kovrilbildo-id'));
-            revuojService.postVolumonKvalita(response.data.insertId, $scope.getFile('input-kvalita-id'));
-            revuojService.postVolumonMalpeza(response.data.insertId, $scope.getFile('input-malpeza-id'));
-            revuojService.postMp3(response.data.insertId, $scope.getFile('input-mp3-id'));
+            $scope.volumon.id = response.data.insertId.toString();
+            $window.location.href = '#!/revuoj/' + revuonId + '/volumon/' + $scope.volumon.id;
+            $window.location.reload();
         };
 
         revuojService.addVolumon(revuonId, $scope.volumon).then(success, errorService.error);

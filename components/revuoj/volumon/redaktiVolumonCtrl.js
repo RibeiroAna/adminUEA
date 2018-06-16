@@ -6,9 +6,14 @@ app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootSco
         function success(response) {
             $scope.bildo = $scope.file;
             $scope.file = '';
+            $scope.bildoprogressPercentage = null;
         };
 
-        revuojService.postVolumonKovrilbildo($scope.volumon.id, $scope.file).then(success, errorService.error);
+        function event (evt) {
+            $scope.bildoprogressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        }
+
+        revuojService.postVolumonKovrilbildo($scope.volumon.id, $scope.file).then(success, errorService.error, event);
     };
 
     $scope.cancel = function () {
@@ -23,8 +28,11 @@ app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootSco
         }
     };
 
-    $scope.updateVolumon = function (valoro, kampo) {
+    $scope.deleteVolumo = function (idVolumo) {
+        revuojService.deleteVolumon(idVolumo);
+    }
 
+    $scope.updateVolumon = function (valoro, kampo) {
         if(kampo === 'enhavlisto'){
             valoro = document.getElementById('enhavlisto-edit').innerHTML;
         }
@@ -45,26 +53,37 @@ app.controller('redaktiVolumonCtrl', function ($scope, $window, config, $rootSco
     };
 
     $scope.updateMp3Dosiero = function () {
-        revuojService.postMp3($scope.volumon.id, $scope.mySong).then(function (response) {
+        function success(response) {
             $scope.mySong = undefined;
+            $scope.mp3progressPercentage = null;
             $window.location.reload();
-        })
+        }
+        function event (evt) {
+            $scope.mp3progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        }
+        revuojService.postMp3($scope.volumon.id, $scope.mySong).then(sucess, errorService.error, event);
     };
 
     $scope.updateMalpeza = function () {
         function success(response) {
             $window.location.reload();
+            $scope.malpezaprogressPercentage = null;
         }
-
-        revuojService.postVolumonMalpeza($scope.volumon.id, $scope.newMalpeza).then(success, errorService.error);
+        function event (evt) {
+            $scope.malpezaprogressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        }
+        revuojService.postVolumonMalpeza($scope.volumon.id, $scope.newMalpeza).then(success, errorService.error, event);
     };
 
     $scope.updateKvalita = function () {
         function success(response) {
             $window.location.reload();
+            $scope.kvalitaprogressPercentage = null;
         }
-
-        revuojService.postVolumonKvalita($scope.volumon.id, $scope.newKvalita).then(success, errorService.error);
+        function event (evt) {
+            $scope.kvalitaprogressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        }
+        revuojService.postVolumonKvalita($scope.volumon.id, $scope.newKvalita).then(success, errorService.error, event);
     }
 
     $scope.editEnhavListo = function () {

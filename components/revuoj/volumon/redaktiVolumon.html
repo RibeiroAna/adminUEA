@@ -15,16 +15,19 @@
             Redakti aŭ aldoni krovilbildo
         </button>
 
+
         <p ng-show="file">
-            <button ng-click="cancel()" class="btn btn-danger">
-                Malfari
+            <button ng-click="cancel()" class="btn btn-danger" ng-show="!bildoprogressPercentage">
+                Nuligi
             </button>
-            <button
+            <button ng-show="!bildoprogressPercentage"
                     type="submit"
                     class="btn btn-default"
                     ng-click="upload()">
                 Konfirmi alŝuton
             </button>
+            <p ng-show="bildoprogressPercentage">Alŝutas: {{bildoprogressPercentage}}%</p>
+
         </p>
     </div>
     <div class="col-md-8">
@@ -41,17 +44,18 @@
                    ngf-max-size="25MB" style="padding-top: -35px">
                     redakti aŭ aldoni mp3 dosiero
                 </a>
-                <button class="btn btn-default" ng-show="mySong" ng-click="updateMp3Dosiero()">okay</button>
+                <button class="btn btn-default" ng-show="mySong && !mp3progressPercentage" ng-click="updateMp3Dosiero()">konfirmi</button>
+                <p ng-show="mp3progressPercentage">Alŝutas: {{mp3progressPercentage}}%</p>
             </p>
         </p>
         <p>
-            <b>Numero relative al jaro:</b> {{volumon.numeroJaro}}
+            <b>Numero relative al jaro (ekzemple, "2" - sen citiloj- por la dua numero de 2018):</b> {{volumon.numeroJaro}}
             <a href="#"
                onbeforesave="updateVolumon($data, 'numeroJaro')"
                editable-number="volumon.numeroJaro">redakti aŭ aldoni</a>
         </p>
         <p>
-            <b>Numero entute:</b> {{volumon.numeroEntute}}
+            <b>Numero entute (ekzemple, "1934" -sen citiloj- por la 1934-a revuo Esperanto):</b> {{volumon.numeroEntute}}
             <a href="#"
                onbeforesave="updateVolumon($data, 'numeroEntute')"
                editable-number="volumon.numeroEntute">
@@ -81,7 +85,8 @@
                     ngf-max-size="25MB">
                 redakti
             </a>
-            <button class="btn btn-default" ng-show="newKvalita" ng-click="updateKvalita()">okay</button>
+            <button class="btn btn-default" ng-show="newKvalita && !kvalitaprogressPercentage" ng-click="updateKvalita()">konfirmi</button>
+            <p ng-show="kvalitaprogressPercentage">Alŝutas: {{kvalitaprogressPercentage}}%</p>
             <i style="color: red" ng-show="newKvalita === null">max 25M kaj .pdf</i>
         </p>
 
@@ -97,7 +102,9 @@
                ngf-max-size="25MB">
                 redakti
             </a>
-            <button class="btn btn-default" ng-show="newMalpeza" ng-click="updateMalpeza()">okay</button>
+            <button class="btn btn-default" ng-show="newMalpeza && !malpezaprogressPercentage" ng-click="updateMalpeza()">Konfirmi</button>
+            <p ng-show="malpezaprogressPercentage">Alŝutas: {{malpezaprogressPercentage}}%</p>
+
             <i style="color: red" ng-show="newMalpeza === null">max 25M kaj .pdf</i>
         </p>
 
@@ -114,7 +121,7 @@
         <p ng-show="editEnhavListoMode">
             <trix-editor class="trix-content" placeholder="Enhavlisto" id="enhavlisto-edit"></trix-editor>
             <button class="btn btn-danger" ng-click="cancelEditEnhavListo()">Rezigni</button>
-            <button class="btn btn-default" ng-click="updateVolumon('undefined', 'enhavlisto')">Redakti</button>
+            <button class="btn btn-default" ng-click="updateVolumon('undefined', 'enhavlisto')">Konfirmi</button>
         </p>
     </div>
 </div>

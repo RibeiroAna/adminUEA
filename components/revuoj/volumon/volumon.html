@@ -5,9 +5,10 @@
     </div>
 
     <div class="revuoj-list">
-        <div class="row revuon" ng-repeat="volumon in volumoj">
-            <li class="col-md-6">{{volumon.eldondato | date}}</li>
-            <a class="col-md-6" href="#!/revuoj/{{revuonId}}/volumon/{{volumon.id}}">Redakti</a>
+        <div class="row revuon" ng-repeat="volumo in volumoj">
+            <li class="col-md-6">Volumo {{volumo.numeroJaro}}/{{volumo.eldondato.slice(0, 4)}}</li>
+            <a class="col-md-3" href="#!/revuoj/{{revuonId}}/volumon/{{volumo.id}}">Redakti</a>
+            <a class="col-md-3" href="" ng-click="deleteVolumo(volumo.id)">Forviŝi volumon</a>
         </div>
     </div>
 </div>

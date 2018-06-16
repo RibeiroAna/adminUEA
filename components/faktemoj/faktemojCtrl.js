@@ -18,7 +18,7 @@ app.controller("faktemojCtrl", function ($scope, $rootScope, $window,
 
   $scope.deleteFaktemo = function(idFaktemo) {
     if(confirm("Ĉu vi certas ke vi volas forviŝi tiun landon?" +
-               " Tiu ago ne povos esti malfarita!")) {
+               " Tiu ago ne povos esti Nuligita!")) {
       faktemojService.deleteFaktemoj(idFaktemo).then(function(response){
          $window.location.reload();
       }, errorService.error);
