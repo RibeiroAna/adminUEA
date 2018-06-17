@@ -3,8 +3,6 @@ app.service('dissendoService', function ($http, $window, config) {
     service.sendEmail = sendEmail;
     service.getEmails = getEmails;
 
-
-
     function getEmails(idRetlisto) {
         var req = {
             method: 'GET',
@@ -16,7 +14,6 @@ app.service('dissendoService', function ($http, $window, config) {
         return $http(req);
     };
 
-
     function sendEmail(data) {
         var req = {
             method: 'POST',
@@ -27,7 +24,6 @@ app.service('dissendoService', function ($http, $window, config) {
 
         return $http(req);
     };
-
 
     return service;
 });
