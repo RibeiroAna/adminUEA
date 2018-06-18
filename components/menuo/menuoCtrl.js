@@ -94,6 +94,7 @@
     $scope.menueroj = [];
     config.getConfig("idAdministranto").then(function(response){
       if($scope.uzanto.permesoj.indexOf(response.data.idAdministranto) > -1) {
+        $scope.sercxi = true;
         $scope.menueroj.push($scope.menuoBazaAgordoj);
         $scope.menueroj.push($scope.menuoMembroj);
         $scope.menueroj.push($scope.menuoKomunikado);
@@ -102,14 +103,16 @@
 
    config.getConfig("idJunaAdministranto").then(function(response){
       if($scope.uzanto.permesoj.indexOf(response.data.idJunaAdministranto) > -1) {
-         $scope.menueroj.push([{titolo: "Membroj", montri: true },
-                               {link: "#!/membroj", titolo: "Membroj"}]);
+        $scope.sercxi = true;
+        $scope.menueroj.push([{titolo: "Membroj", montri: true }, 
+        {link: "#!/membroj", titolo: "Membroj"}]);
       }
     }, errorService.error);
 
     config.getConfig("idKomunikisto").then(function(response){
        if($scope.uzanto.permesoj.indexOf(response.data.idKomunikisto) > -1) {
-          $scope.menueroj.push($scope.menuoKomunikado);
+        $scope.sercxi = false;
+        $scope.menueroj.push($scope.menuoKomunikado);
        }
      }, errorService.error);
   }

@@ -17,7 +17,7 @@ app.controller("loginCtrl", function ($scope, $rootScope, $window,
                      "Tajpu ajnan uzantnomon kaj pasvorton, kaj ili estos uzataj" +
                      " por ensaluti kiel ĉefa administranto estontece";
       } else {
-          $scope.msg = "Ensalutu kun la datumoj antaŭdonitaj";
+          $scope.msg = null;
       }
     }, errorService.error);
   }
@@ -26,7 +26,7 @@ app.controller("loginCtrl", function ($scope, $rootScope, $window,
       loginService.doEnsaluti($scope.uzanto).then(function(response) {
           $window.localStorage.setItem('token', response.data.token);
           $window.localStorage.setItem('uzanto', JSON.stringify(response.data.administranto));
-          $window.location.href = '#!/membroj';
+          $window.location.href = '#!/helpo';
           $window.location.reload();
         }, function(response) {
           $scope.msg = response.data.message;

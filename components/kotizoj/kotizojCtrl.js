@@ -1,6 +1,5 @@
 app.controller("kotizojCtrl", function ($scope, $routeParams, $rootScope, $window,
-                                        config, auth, errorService,
-                                        kotizojService, landojService) {
+    config, auth, errorService, kotizojService, landojService) {
 
   $scope.init = function() {
       auth.ensalutita();

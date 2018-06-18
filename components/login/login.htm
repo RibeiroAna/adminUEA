@@ -2,14 +2,16 @@
    <div class="row">
     <div class="col-sm-6">
        <img src="content/img/logoo.png" class="logoo" alt="logoo"></img>
-       <h1> Universala Esperanto-Asocio - <b>Admnistra sistemo</b></h1>
+       <h1> Universala Esperanto-Asocio - <b>Administra sistemo</b></h1>
     </div>
   </div>
 </div>
 
 <div class="container login">
  <div class="row form">
-  <h4>{{msg}}</h4>
+  <div ng-if="msg" class="alert alert-danger" role="alert">
+      <h4>{{msg}}</h4>
+  </div>
   <form ng-submit="ensaluti()">
       <div class="form-group">
         <label for="uzantnomo">Uzantnomo:</label>

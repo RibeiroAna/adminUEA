@@ -79,5 +79,9 @@ angular.module('admin').config(function($routeProvider){
     }).when("/dissendoj", {
         templateUrl: "components/dissendoj/dissendoj.html",
         controller: "dissendojCtrl"
+    })
+    .when('/helpo', {
+      templateUrl: "components/helpo/helpo.htm",
+      controller: "helpoCtrl"
     });
 });
