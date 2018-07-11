@@ -31,8 +31,8 @@
     <span class="uzantnomo">
       <i class="fa fa-user" aria-hidden="true"></i> {{uzanto.uzantnomo}}
     </span>
-    <span class="sercxado" ng-if="sercxi">
-       <button class="btn btn-default" ng-click="sercxi()">Serĉi membrojn</button>
+    <span class="sercxado" ng-show="sercxi">
+       <button class="btn btn-default" ng-click="sercxiFunc()">Serĉi membrojn</button>
     </span>
     <span class="input-group col-md-2" style="float:right" ng-if="sercxi">
       <input type="text"

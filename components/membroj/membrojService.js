@@ -4,6 +4,7 @@ app.service('membrojService', function ($http, config, $window) {
     service.getGrupKat = getGrupKat;
     service.getAnecoj = getAnecoj;
     service.getGrupojById = getGrupojById;
+    service.getGrupojKat = getGrupojKat;
     service.getGrupoj = getGrupoj;
     service.postGrupoj = postGrupoj;
     service.deleteGrupoj = deleteGrupoj;
@@ -21,6 +22,10 @@ app.service('membrojService', function ($http, config, $window) {
     function getGrupKat(idKat) {
       return $http.get(config.api_url + "/grupoj/kategorioj/" + idKat + "/sub");
     }
+
+    function getGrupojKat() {
+        return $http.get(config.api_url + "/grupoj/kategorioj/");
+      }
 
     function getUzantoj(){
       var req = {

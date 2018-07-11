@@ -130,13 +130,13 @@
     auth.elsaluti();
   }
 
-  $scope.sercxi = function() {
+  $rootScope.sercxiFunc = function() {
     $window.location.href = "#!/membroj/q=" + $scope.teksto.sercxi;
   }
 
-  $scope.sercxi_enter = function(keyEvent) {
+  $rootScope.sercxi_enter = function(keyEvent) {
     if (keyEvent.which === 13)
-      $scope.sercxi()
+      $scope.sercxiFunc()
   }
 
   window.onbeforeunload = function() {
