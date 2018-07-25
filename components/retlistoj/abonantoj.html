@@ -7,24 +7,46 @@
         </a>
     </md-toolbar>
     <md-content class="md-padding" flex>
+<!--        <h5>Nova Abonanto:</h5>
+        <div class="row">
+            <div class="col-md-3">
+                <label>Nomo:</label>
+                <input placeholder="Nomo" id="abonanto" type="text" ng-model="abonanto.nomo" />
+            </div>
+
+            <div class="col-md-3">
+                <label>Retadreso:</label>
+                <input placeholder="Retadreso" type="email" ng-model="abonanto.retadreso"/>
+            </div>
+
+            <div class="col-md-3" style="padding-top: 20px">
+                <button class="btn btn-primary" ng-click="postAbonanto(abonanto)" ng-disabled="!abonanto.retadreso">Aldoni</button>
+            </div>
+        </div>
+
+
+        <div style="padding-top: 5%">
+            <div class="row" style="padding-top: 2%" ng-repeat="abonanton in abonantoj" flex>
+                <li class="col-md-3">{{abonanton.retadreso}}</li>
+                <a style="color: #4da6ff" class="col-md-3" href="" ng-click="removeAbonanton(abonanton.id, $index)">Forviŝi abonanton</a>
+            </div>
+        </div>-->
         <h5>Nova Abonanto:</h5>
         <div class="row">
-            <div class="form-group">
+            <div class="form-group col-md-3">
                 <label>Retadreso:</label>
                 <input placeholder="Retadreso"  class="form-controll"
                        type="email" ng-model="abonanto.retadreso"/>
             </div>
 
-            <button class="btn btn-primary" ng-click="postAbonanto(abonanto)" ng-disabled="!abonanto.retadreso">Aldoni</button>
+            <div class="col-md-3" style="padding-top: 20px">
+                <button class="btn btn-primary" ng-click="postAbonanto(abonanto)" ng-disabled="!abonanto.retadreso">Aldoni</button>
+            </div>
         </div>
         <div style="padding-top: 5%">
             <div class="row" style="padding-top: 2%" ng-repeat="abonanton in abonantoj" flex>
-                <li class="col-md-3">
-                  {{abonanton.retadreso}}
-                  <a style="color: #4da6ff" href="" ng-click="removeAbonanton(abonanton.id, $index)">
-                    Forviŝi abonanton
-                  </a>
-                </li>
+                <li class="col-md-3">{{abonanton.retadreso}}</li>
+                <a style="color: #4da6ff" class="col-md-3" href="" ng-click="removeAbonanton(abonanton.id, $index)">Forviŝi abonanton</a>
             </div>
         </div>
 
