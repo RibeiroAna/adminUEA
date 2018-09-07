@@ -44,9 +44,6 @@ app.controller("kotizojCtrl", function ($scope, $routeParams, $rootScope, $windo
     if(kampo == 'prezo') {
       valoro = valoro * 100;
     }
-    if(kampo == 'junaRabato') {
-        valoro = valoro * 100;
-    }
     var data = {id: id, valoro: valoro, kampo: kampo};
 
     kotizojService.putKotizoj($routeParams.id, data).then(function(sucess){}, errorService.error);

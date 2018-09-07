@@ -6,7 +6,6 @@
       <tr>
         <td>Lando</td>
         <td>Prezo</td>
-        <td>Rabato por junuloj</td>
         <td>Valuto</td>
       </tr>
     </thead>
@@ -21,15 +20,6 @@
                e-step="any"
                onbeforesave="updateKotizo(kotizo.id, $data, 'prezo')">
                {{kotizo.prezo}}
-            </a>
-          </td>
-
-          <td ng-if="kotizo">
-            <a href="#"
-               editable-number="kotizo.junaRabato"
-               e-step="any"
-               onbeforesave="updateKotizo(kotizo.id, $data, 'junaRabato')">
-               {{kotizo.junaRabato || 0}}
             </a>
           </td>
 
