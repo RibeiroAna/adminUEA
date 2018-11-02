@@ -13,11 +13,20 @@
         },
         {
           link: "#!/membroj",
-          titolo: "Membroj"
+          titolo: "Membrlistoj"
+        }
+      ];
+    }
+
+    function getMenuoFinancoj() {
+      return [
+        {
+          titolo: "Financoj",
+          montri: true
         },
         {
-          link: "#!/membrecpetoj",
-          titolo: "Membrecpetoj"
+          link: "#!/aligxoj",
+          titolo: "Retaj aliĝoj"
         }
       ];
     }
@@ -75,6 +84,21 @@
       ];
     }
 
+    function getMenuoFinancoj() {
+      return [
+        {
+          titolo: "Financoj",
+          montri: true
+        },
+        {
+          link: "#!/membrecpetoj",
+          titolo: "Reta Aliĝilo"
+        }
+      ]
+    }
+    
+
+
     try {
       $scope.menuoMembroj = JSON.parse($window.localStorage.getItem('menuoMembroj'));
       if(!scope.menuoMembroj)
@@ -85,10 +109,13 @@
       $scope.menuoKomunikado = JSON.parse($window.localStorage.getItem('menuoKomunikado'));
       if(!$scope.menuoKomunikado)
         $scope.menuoKomunikado = getMenuoKomunikado();
+      $scope.menuoKomunikado = JSON.parse($window.localStorage.getItem('menuoFinancoj'));
+
     } catch(err) {
       $scope.menuoMembroj = getMenuoMembroj();
       $scope.menuoBazaAgordoj = getMenuoBazaAgordoj();
       $scope.menuoKomunikado = getMenuoKomunikado();
+      $scope.menuoFinancoj = getMenuoFinancoj();
     };
 
     $scope.menueroj = [];
@@ -98,6 +125,7 @@
         $scope.menueroj.push($scope.menuoBazaAgordoj);
         $scope.menueroj.push($scope.menuoMembroj);
         $scope.menueroj.push($scope.menuoKomunikado);
+        $scope.menueroj.push($scope.menuoFinancoj)
       }
     }, errorService.error);
 
@@ -114,7 +142,16 @@
         $scope.sercxi = false;
         $scope.menueroj.push($scope.menuoKomunikado);
        }
-     }, errorService.error);
+    }, errorService.error);
+
+    config.getConfig("idFinancoj").then(function(response){
+      console.log($scope.uzanto.permesoj);
+      if($scope.uzanto.permesoj.indexOf(response.data.idFinancoj) > -1) {
+       $scope.sercxi = true;
+       $scope.menueroj.push($scope.menuoFinancoj);
+      }
+   }, errorService.error);
+    
   }
 
   $scope.selektita = function(index, menuo) {
@@ -143,6 +180,8 @@
     $window.localStorage.setItem('menuoMembroj', JSON.stringify($scope.menuoMembroj));
     $window.localStorage.setItem('menuoBazaAgordoj', JSON.stringify($scope.menuoBazaAgordoj));
     $window.localStorage.setItem('menuoKomunikado', JSON.stringify($scope.menuoKomunikado));
+    $window.localStorage.setItem('menuoFinancoj', JSON.stringify($scope.menuoFinancoj));
+
   }
 
 });

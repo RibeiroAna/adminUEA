@@ -27,11 +27,13 @@ app.controller("adminCtrl", function ($scope, $rootScope, $window, $q,
            if($scope.rajtoj[i].elektita) {
              promises.push(
                adminService.postRajto(sucess.data.insertId, $scope.rajtoj[i].id));
+             console.log(promises);
           }
-          $q.all(promises).then(function(success) {
-            $window.location.reload();
-          }, errorService.error);
         }
+
+        $q.all(promises).then(function(data) {
+         $window.location.reload();
+        }, errorService.error);
      }, errorService.error);
   }
 

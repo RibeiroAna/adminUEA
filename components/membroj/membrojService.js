@@ -18,7 +18,6 @@ app.service('membrojService', function ($http, config, $window) {
     service.postAneco = postAneco;
     service.getUzantoj = getUzantoj;
 
-
     function getGrupKat(idKat) {
       return $http.get(config.api_url + "/grupoj/kategorioj/" + idKat + "/sub");
     }
@@ -115,17 +114,6 @@ app.service('membrojService', function ($http, config, $window) {
       };
       return $http(req);
     };
-
-    function postAprobi(idPeto, data) {
-        var req = {
-            method: 'POST',
-            data: data,
-            url: config.api_url + '/grupoj/anecoj/' + idPeto + '/aprobi',
-            headers: {'x-access-token': $window.localStorage.getItem('token')}
-        };
-
-        return $http(req);
-    }
 
     function postGrupKat(idKat, idGrupo) {
       var req = {

@@ -1,75 +1,57 @@
 app.controller("membrecpetojCtrl",
-function ($scope, $rootScope, $window, $http, $routeParams, $sanitize, config,
-          auth, membrojService, errorService) {
+function ($scope, $rootScope, $q, auth, membrecpetojService, membrojService, errorService) {
   $scope.init = function() {
     auth.ensalutita();
     $rootScope.menuo = true;
-  }
 
-  $scope.init1 = function() {
-    $scope.init();
-    $scope.bazaMembreco = config.idBazaMembreco;
-
-    config.getConfig("idAldonaMembrecgrupo").then(function(response) {
-      $scope.idAldonaMembrecgrupo = response.data.idAldonaMembrecgrupo;
-      membrojService.getGrupKat($scope.idAldonaMembrecgrupo).then(function(response) {
-        $scope.krommembrecoj = response.data;
+    membrecpetojService.getAnecoj().then(function(success){
+      $scope.anecoj = success.data;
+      membrecpetojService.getGxiroj('?aligxo=1').then(function(success) {
+        $scope.gxiroj = success.data;
       }, errorService.error);
-    });
-
-    config.getConfig("idMembrecgrupo").then(function(response) {
-      $scope.idMembrecgrupo = response.data.idMembrecgrupo;
-      membrojService.getGrupKat($scope.idMembrecgrupo).then(function(response) {
-        $scope.membrecgrupoj = response.data;
+      
+      membrojService.getGrupoj().then(function(success){
+        $scope.grupoj = {};
+        success.data.map(function(e){$scope.grupoj[e.id] = e;});
       }, errorService.error);
-    });
 
-    //idJunajGrupoj
-    config.getConfig("idJunajGrupoj").then(function(response) {
-      $scope.idJunajGrupoj = response.data.idJunajGrupoj;
     }, errorService.error);
-  };
+    $scope.idGxirpropono = 0;
+  }
 
-  $scope.init2 = function() {
-    $scope.init();
+  $scope.trakti = function(gxiro) {
+    var data = {kampo: 'traktita', valoro: true};
+    membrecpetojService.updateGxiroj(gxiro.id, data).then(function(success){
+      var promises = [];
+      var data = {kampo: 'aprobita', valoro: true};
 
-    membrojService.getAnecoj($routeParams.id, 0).then(function(response) {
-      $scope.anecpetoj = response.data;
-    }, errorService.error);
+      for(var i = 0; i < gxiro.anecoj.length; i++) {
+        promises.push(membrojService.updateAneco(gxiro.anecoj[i].id, data));
+      }
 
-    membrojService.getGrupojById($routeParams.id).then(function(response) {
-      $scope.grupo = response.data[0];
+      $q.all(promises).then(function(success){
+        window.alert("Ĝiro sukcese traktita");
+        window.location.reload();
+      }, errorService.error);
+
     }, errorService.error);
   }
 
-  $scope.aprobi = function(peto) {
-    var data = {
-      anecnomo: $scope.grupo.nomo,
-      retposxto: peto.retposxto
-    };
-
-    membrojService.postAprobi(peto.id, data).then(function(response) {
-        $window.location.reload();
-    }, errorService.error);
-  }
-
-  $scope.forvisxiAnecon = function(peto) {
-    if(confirm("Ĉu vi vere volas forviŝi tiun anecon?" +
-               " Tiu ago ne povos esti nuligita")) {
-         var data = {
-           anecnomo: $scope.grupo.nomo,
-           retposxto: peto.retposxto
-         };
-
-         membrojService.deleteAneco(peto.id, data).then(function(response) {
-           $window.location.reload();
-         }, errorService.error);
+  $scope.montriTraktitaj = function() {
+    var filterGxiroj = function(gxiro) {
+      return gxiro.traktita == false;
     }
+
+    $scope.neTraktitaj = true;
+
+    $scope.gxiroj = $scope.gxiroj.filter(filterGxiroj);
   }
 
-  $scope.strip = function(string) {
-    if(string == null)
-      return string;
-    return string.slice(0,10);
+  $scope.getFilteredAnecoj = function(gxiro) {
+    var filterAnecoj = function(aneco) {
+      return aneco.idGxirpropono ==  $scope.idGxirpropono;
+    }  
+    $scope.idGxirpropono = gxiro.id;
+    gxiro.anecoj = $scope.anecoj.filter(filterAnecoj);
   }
 });

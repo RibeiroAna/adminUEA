@@ -1,13 +1,71 @@
-<div class="enhavo" data-ng-init="init1()">
-  <h3>Elektu grupon por vidi membrecpetojn al tiu grupo</h3>
+<div class="enhavo" data-ng-init="init()">
+  <h3>Retaj Aliĝoj</h3>
+  <a href="" ng-click="montriTraktitaj()" ng-if="!neTraktitaj">
+    Montri nur ne trakitajn petojn
+  </a>
+
+  <a href="" onClick="window.location.reload()" ng-if="neTraktitaj">
+    Montri ĉiujn petojn
+  </a>
+  <div class="form-group">
+    Serĉi: <input ng-model="searchText" class="form-control">
+  </div>
+  <div>
+    Pagmaniero:
+    <a href="" ng-click="searchText = 'ueakonto'">UEA-konto</a>, 
+    <a href="" ng-click="searchText = 'paypal'">Paypal</a>, 
+    <a href="" ng-click="searchText = 'cxeko'">Ĉeko</a>, 
+    <a href="" ng-click="searchText = 'banko'">Banko kaj poŝtbankoj</a>, 
+    <a href="" ng-click="searchText = 'kreditkarto'">Kreditkarto</a>, 
+    <a href="" ng-click="searchText = 'peranto'">Perantoj</a>
+  </div>
   <h2>
-      <ul>
-        <li ng-repeat="mem in membrecgrupoj">
-          {{mem.nomo}} - <a href="#!/membrecpetoj/{{mem.id}}">Vidi membrecpetojn >></a>
-        </li>
-        <li ng-repeat="krom in krommembrecoj">
-          {{krom.nomo}} - <a href="#!/membrecpetoj/{{krom.id}}">Vidi membrecpetojn >></a>
-        </li>
-      </ul>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Pagmaniero</td>
+          <td>Dato</td>
+          <td>Homo</td>
+          <td>Kvanto paginda</td>
+          <td>Traktita</td>
+          <td>Observoj</td>
+        </tr>
+      </thead>
+      <tbody ng-repeat="gxiro in gxiroj  | filter:searchText  | orderBy:'-date'" ng-init = "getFilteredAnecoj(gxiro)">
+        <tr>
+          <td>{{gxiro.pagmaniero}}</td>
+          <td>{{gxiro.date.slice(0, 10)}}</td>
+          <td>
+            <a ng-href="#!/uzantoj/{{gxiro.anecoj[0].idAno}}">
+                {{gxiro.anecoj[0].personanomo}} {{gxiro.anecoj[0].familianomo}}
+            </a>
+          </td>
+          <td>{{gxiro.kvanto}} {{gxiro.valuto}}</td>  
+          <td>
+            <b ng-if = "gxiro.traktita">Jes</b>
+            <b ng-if = "!gxiro.traktita">
+              Ne
+              <button class="btn btn-default" ng-click="trakti(gxiro)">Marki kiel traktita</button>
+            </b>
+          </td>
+          <td>
+            <a href="" ng-show="!gxiro.kialoShow" ng-click="gxiro.kialoShow = true">
+              Vidi detalojn
+            </a>
+            <a href="" ng-show="gxiro.kialoShow" ng-click="gxiro.kialoShow = false">
+              Kaŝi detalojn
+            </a>
+          </td>
+        </tr>
+        <tr ng-show="gxiro.kialoShow">
+          <td>Membreckategorioj:</td>
+          <td ng-repeat="grupo in gxiro.anecoj">{{grupoj[grupo.idGrupo].nomo}}</td>
+        </tr>
+        <tr ng-show="gxiro.kialoShow">
+          <td>Aliaj detaloj:</td>
+          <td ng-bind-html="gxiro.kialo"></td>
+        </tr>
+      </tbody>
+    </table>
   </h2>
 </div>
